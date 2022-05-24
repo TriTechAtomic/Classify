@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 class TextDecor {
   static const TextStyle titleTextDecoration = TextStyle(
     fontSize: 24,
-    fontWeight: FontWeight.bold,
     color: Colors.black,
   );
 }
