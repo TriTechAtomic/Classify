@@ -16,9 +16,12 @@ class FormHeading extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              width: ss.width * 0.20,
+              height: ss.height * 0.25,
+              width: ss.width * 0.35,
               child: Image.asset(
                 AssetRegister.logoImg,
+                scale: 10,
+                fit: BoxFit.contain,
                 filterQuality: FilterQuality.high,
                 isAntiAlias: true,
               ),
