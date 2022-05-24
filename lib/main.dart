@@ -1,3 +1,12 @@
+import 'package:classify/screens/admin/admin_home.dart';
+import 'package:classify/screens/admin/signup.dart';
+import 'package:classify/screens/common/role_selection.dart';
+import 'package:classify/screens/common/signin.dart';
+import 'package:classify/screens/parent/parent_home.dart';
+import 'package:classify/screens/student/signup.dart';
+import 'package:classify/screens/student/student_home.dart';
+import 'package:classify/screens/teacher/signup.dart';
+import 'package:classify/screens/teacher/teacher_home.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -8,15 +17,30 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+          primaryColor: Colors.deepPurple[300],
+          colorScheme: ColorScheme.fromSwatch()
+              .copyWith(secondary: Colors.deepPurple[300])),
       title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
+      home: const RoleSelection(),
+      routes: {
+        // home Screens
+        '/adminHome': (context) => const AdminHome(),
+        '/teacherHome': (context) => const TeacherHome(),
+        '/parentHome': (context) => const ParentHome(),
+        '/studentHome': (context) => const StudentHome(),
+
+        // signup Screens
+        '/adminSignup': (context) => const AdminSignup(),
+        '/studentSignup': (context) => const StudentSignup(),
+        '/teacherSignup': (context) => const TeacherSignup(),
+
+        // common Signin Screen
+        '/signin': (context) => const Signin(),
+
+        // role selection Screen
+        '/roleSelection': (context) => const RoleSelection(),
+      },
     );
   }
 }
