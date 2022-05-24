@@ -18,9 +18,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          primaryColor: Colors.deepPurple[300],
-          colorScheme: ColorScheme.fromSwatch()
-              .copyWith(secondary: Colors.deepPurple[300])),
+          primarySwatch: Colors.deepPurple,
+          scaffoldBackgroundColor: Colors.white),
       title: 'Material App',
       home: const RoleSelection(),
       routes: {
