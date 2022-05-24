@@ -10,33 +10,22 @@ class AdminSignup extends StatefulWidget {
 }
 
 class _AdminSignupState extends State<AdminSignup> {
-  TFmeta username = TFmeta("Enter User Name");
-  TFmeta instituteName = TFmeta("Enter Institute Name");
-  TFmeta email = TFmeta("Enter Email");
-  TFmeta password = TFmeta("Enter Password", ispass: true);
-  TFmeta contact = TFmeta("enter Contact");
-  TFmeta area = TFmeta("Enter Area");
-  TFmeta city = TFmeta("Enter City");
-  TFmeta state = TFmeta("Enter State");
-  TFmeta pincode = TFmeta("Enter pincode");
-  TFmeta instituteEmail = TFmeta("Enter Institute Email");
-  List<TFmeta> controllers = [];
+  List<TFmeta> controllers = [
+    TFmeta("Enter User Name"),
+    TFmeta("Enter Institute Name"),
+    TFmeta("Enter Email"),
+    TFmeta("Enter Password", ispass: true),
+    TFmeta("enter Contact"),
+    TFmeta("Enter Area"),
+    TFmeta("Enter City"),
+    TFmeta("Enter State"),
+    TFmeta("Enter pincode"),
+    TFmeta("Enter Institute Email"),
+  ];
 
   @override
   void initState() {
     super.initState();
-    controllers = [
-      username,
-      instituteName,
-      email,
-      password,
-      contact,
-      area,
-      city,
-      state,
-      pincode,
-      instituteEmail,
-    ];
     for (var ele in controllers) {
       ele.controller.addListener(() {
         setState(() {});
@@ -45,9 +34,16 @@ class _AdminSignupState extends State<AdminSignup> {
   }
 
   @override
+  void dispose() {
+    for (var ele in controllers) {
+      ele.controller.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -66,6 +62,7 @@ class _AdminSignupState extends State<AdminSignup> {
                         padding: const EdgeInsets.all(8.0),
                         child: TextField(
                           controller: ele.controller,
+                          obscureText: ele.ispass,
                           decoration: InputDecoration(
                             labelText: ele.hint,
                             border: OutlineInputBorder(
