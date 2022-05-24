@@ -70,16 +70,16 @@ class _AdminSignupState extends State<AdminSignup> {
                           ),
                         ),
                       ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text('Proceed'),
+                    )
                   ],
                 ),
               ),
             ),
           ],
         ),
-      ),
-      floatingActionButton: ElevatedButton(
-        onPressed: () {},
-        child: const Text('Proceed'),
       ),
     );
   }
