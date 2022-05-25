@@ -4,5 +4,7 @@ class TFmeta {
   String hint;
   TextEditingController controller = TextEditingController();
   bool ispass;
-  TFmeta(this.hint, {this.ispass = false});
+  int lineCount;
+
+  TFmeta(this.hint, {this.ispass = false, this.lineCount = 1});
 }
