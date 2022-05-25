@@ -1,3 +1,5 @@
+import 'package:classify/assets/asset_register.dart';
+import 'package:classify/screens/widgets/form_heading.dart';
 import 'package:flutter/material.dart';
 
 class TeacherSignup extends StatelessWidget {
@@ -5,6 +7,12 @@ class TeacherSignup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SafeArea(
+        child: Scaffold(
+            body: Container(
+      child: Column(
+        children: const [FormHeading(name: "For\nTeachers")],
+      ),
+    )));
   }
 }
