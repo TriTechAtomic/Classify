@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.deepPurple,
           scaffoldBackgroundColor: Colors.white),
       title: 'Material App',
-      home: const RoleSelection(),
+      home: Signin(),
       routes: {
         // home Screens
         '/adminHome': (context) => const AdminHome(),
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         '/teacherSignup': (context) => const TeacherSignup(),
 
         // common Signin Screen
-        '/signin': (context) => const Signin(),
+        '/signin': (context) => Signin(),
 
         // role selection Screen
         '/roleSelection': (context) => const RoleSelection(),

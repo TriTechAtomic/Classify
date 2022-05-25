@@ -1,3 +1,4 @@
+import 'package:classify/screens/widgets/proceed_button.dart';
 import 'package:flutter/material.dart';
 import 'package:classify/models/textfield_meta.dart';
 import 'package:classify/screens/widgets/form_heading.dart';
@@ -21,6 +22,24 @@ class _StudentSignupState extends State<StudentSignup> {
     TFmeta("Enter age"),
     TFmeta("Enter address"),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    for (var ele in controllers) {
+      ele.controller.addListener(() {
+        setState(() {});
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    for (var ele in controllers) {
+      ele.controller.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,16 +70,16 @@ class _StudentSignupState extends State<StudentSignup> {
                           ),
                         ),
                       ),
+                    ProceedButton(
+                      ss: MediaQuery.of(context).size,
+                      text: "Proceed",
+                    )
                   ],
                 ),
               ),
             ),
           ],
         ),
-      ),
-      floatingActionButton: ElevatedButton(
-        onPressed: () {},
-        child: const Text('Proceed'),
       ),
     );
   }

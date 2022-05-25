@@ -1,5 +1,6 @@
 import 'package:classify/models/textfield_meta.dart';
 import 'package:classify/screens/widgets/form_heading.dart';
+import 'package:classify/screens/widgets/proceed_button.dart';
 import 'package:flutter/material.dart';
 
 class TeacherSignup extends StatefulWidget {
@@ -68,9 +69,9 @@ class _TeacherSignupState extends State<TeacherSignup> {
                           ),
                         ),
                       ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Proceed'),
+                    ProceedButton(
+                      ss: MediaQuery.of(context).size,
+                      text: "Proceed",
                     )
                   ],
                 ),

@@ -1,5 +1,6 @@
 import 'package:classify/models/textfield_meta.dart';
 import 'package:classify/screens/widgets/form_heading.dart';
+import 'package:classify/screens/widgets/proceed_button.dart';
 import 'package:flutter/material.dart';
 
 class AdminSignup extends StatefulWidget {
@@ -15,7 +16,7 @@ class _AdminSignupState extends State<AdminSignup> {
     TFmeta("Enter Institute Name"),
     TFmeta("Enter Email"),
     TFmeta("Enter Password", ispass: true),
-    TFmeta("enter Contact"),
+    TFmeta("Enter Contact"),
     TFmeta("Enter Area"),
     TFmeta("Enter City"),
     TFmeta("Enter State"),
@@ -43,6 +44,7 @@ class _AdminSignupState extends State<AdminSignup> {
 
   @override
   Widget build(BuildContext context) {
+    Size ss = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10),
@@ -54,7 +56,7 @@ class _AdminSignupState extends State<AdminSignup> {
             Expanded(
               flex: 5,
               child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
+                width: ss.width * 0.8,
                 child: ListView(
                   children: [
                     for (var ele in controllers)
@@ -70,9 +72,9 @@ class _AdminSignupState extends State<AdminSignup> {
                           ),
                         ),
                       ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Proceed'),
+                    ProceedButton(
+                      ss: ss,
+                      text: "Proceed",
                     )
                   ],
                 ),
