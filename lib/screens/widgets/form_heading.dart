@@ -20,7 +20,6 @@ class FormHeading extends StatelessWidget {
               width: ss.width * 0.35,
               child: Image.asset(
                 AssetRegister.logoImg,
-                scale: 10,
                 fit: BoxFit.contain,
                 filterQuality: FilterQuality.high,
                 isAntiAlias: true,
