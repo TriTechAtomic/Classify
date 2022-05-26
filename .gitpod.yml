@@ -4,8 +4,9 @@ image:
 tasks:
 
   - name: Flutter 
-    init: echo "flutter pub get"
-    command: echo "flutter run -d web-server --web-port=8080 --web-hostname=0.0.0.0"
+    before: sudo chown -R $(whoami) /
+    init: flutter pub get
+    command: echo flutter run -d web-server --web-port=8080 --web-hostname=0.0.0.0
 
 
 ports:
