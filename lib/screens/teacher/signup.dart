@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 class TeacherSignup extends StatefulWidget {
   const TeacherSignup({Key? key}) : super(key: key);
+  static const String routeName = '/teacherSignup';
 
   @override
   State<TeacherSignup> createState() => _TeacherSignupState();

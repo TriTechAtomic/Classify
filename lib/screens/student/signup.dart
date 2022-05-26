@@ -7,6 +7,7 @@ import 'package:classify/screens/widgets/form_heading.dart';
 
 class StudentSignup extends StatefulWidget {
   const StudentSignup({Key? key}) : super(key: key);
+  static const String routeName = '/studentSignup';
 
   @override
   State<StudentSignup> createState() => _StudentSignupState();

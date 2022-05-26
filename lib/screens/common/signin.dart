@@ -1,4 +1,5 @@
 import 'package:classify/models/textfield_meta.dart';
+import 'package:classify/screens/common/role_selection.dart';
 import 'package:classify/screens/widgets/form_heading.dart';
 import 'package:classify/screens/widgets/proceed_button.dart';
 import 'package:classify/screens/widgets/tf_flow.dart';
@@ -6,6 +7,8 @@ import 'package:classify/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class Signin extends StatelessWidget {
+  static const routename = '/signin';
+
   Signin({Key? key}) : super(key: key);
   final List<TFmeta> controllers = [
     TFmeta("Enter User Name / Email"),
@@ -63,7 +66,7 @@ class Signin extends StatelessWidget {
                           ),
                           TextButton(
                               onPressed: () => Navigator.pushNamed(
-                                  context, '/roleSelection'),
+                                  context, RoleSelection.routeName),
                               child: Text("Signup ?",
                                   style: TextDecor.titleTextDecoration.copyWith(
                                       fontSize: 20, color: Colors.deepPurple))),
