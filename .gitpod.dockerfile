@@ -1,8 +1,6 @@
 FROM ubuntu:18.04
 
-USER gitpod
-
-RUN sudo su 
+USER root 
 
 RUN apt update -y && apt upgrade -y  && apt install -y mysql-server
 
