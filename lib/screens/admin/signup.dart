@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 class AdminSignup extends StatefulWidget {
   const AdminSignup({Key? key}) : super(key: key);
+  static const String routename = '/adminSignup';
 
   @override
   State<AdminSignup> createState() => _AdminSignupState();

@@ -24,13 +24,13 @@ class MyApp extends StatelessWidget {
       home: Signin(),
       routes: {
         // home Screens
-        '/adminHome': (context) => const AdminHome(),
-        '/teacherHome': (context) => const TeacherHome(),
+        AdminHome.routename: (context) => const AdminHome(),
+        TeacherHome.routeName: (context) => const TeacherHome(),
         '/parentHome': (context) => const ParentHome(),
         '/studentHome': (context) => const StudentHome(),
 
         // signup Screens
-        '/adminSignup': (context) => const AdminSignup(),
+        AdminSignup.routename: (context) => const AdminSignup(),
         '/studentSignup': (context) => const StudentSignup(),
         '/teacherSignup': (context) => const TeacherSignup(),
 
