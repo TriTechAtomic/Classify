@@ -1,9 +1,8 @@
-FROM ubuntu:18.04
+FROM cirrusci/flutter:latest
 
-USER root 
+RUN sudo apt-get update \
+    && sudo apt-get install -y \
+    && sudo apt-get install -y mysql-server \
+    && sudo apt install -y python3 python3-pip \
+    && pip3 install fastapi uvicorn sqlalchemy 
 
-RUN apt update -y && apt upgrade -y  && apt install -y mysql-server
-
-RUN apt install -y python3 python3-pip
-
-RUN pip3 install fastapi uvicorn  

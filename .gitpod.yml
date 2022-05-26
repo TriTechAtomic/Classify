@@ -1,2 +1,13 @@
 image: 
   file: .gitpod.dockerfile
+
+tasks:
+
+  - name: Flutter 
+    init: echo "flutter pub get"
+    command: echo "flutter run -d web-server --web-port=8080 --web-hostname=0.0.0.0"
+
+
+ports:
+  - port: 8080
+    onOpen: open-preview
