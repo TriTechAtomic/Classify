@@ -1,7 +1,11 @@
-FROM ubuntu/mysql
+FROM ubuntu:18.04
+
+USER gitpod
 
 RUN sudo su 
 
-RUN apt install -y python3 python3-pip 
+RUN apt update -y && apt upgrade -y  && apt install -y mysql-server
 
-RUN pip3 install fastapi uvicorn sqlalchemy
+RUN apt install -y python3 python3-pip
+
+RUN pip3 install fastapi uvicorn  
