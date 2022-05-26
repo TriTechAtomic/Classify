@@ -6,8 +6,14 @@ tasks:
     before: sudo 
 
   # TODO setup the api server start 
-  # - name: Flutter 
-    # before:  flutter pub get && flutter run -d web-server --web-port=8080 --web-hostname=0.0.0.0
+  - name: Flutter 
+    before:
+      >
+        git config --global --add safe.directory /sdks/flutter/ &&
+        sudo chown -R $(whoami) /sdks/flutter/ &&  
+        sudo chown -R $(whoami) /root/ && 
+        flutter pub get &&
+        flutter run -d web-server --web-port=8080 --web-hostname=0.0.0.0
     
 
 
