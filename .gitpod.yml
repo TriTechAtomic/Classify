@@ -2,9 +2,12 @@ image:
   file: .gitpod.dockerfile
 
 tasks:
+  - name: sqlserver and api server starter
+    before: sudo 
 
-  - name: Flutter 
-    before: sudo chown -R $(whoami) /  && flutter pub get && flutter run -d web-server --web-port=8080 --web-hostname=0.0.0.0
+  # TODO setup the api server start 
+  # - name: Flutter 
+    # before:  flutter pub get && flutter run -d web-server --web-port=8080 --web-hostname=0.0.0.0
     
 
 
