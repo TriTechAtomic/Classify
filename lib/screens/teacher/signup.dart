@@ -1,6 +1,8 @@
 import 'package:classify/models/textfield_meta.dart';
 import 'package:classify/screens/widgets/form_heading.dart';
 import 'package:classify/screens/widgets/proceed_button.dart';
+import 'package:classify/screens/widgets/tf_flow.dart';
+import 'package:classify/screens/widgets/transperent_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class TeacherSignup extends StatefulWidget {
@@ -43,6 +45,7 @@ class _TeacherSignupState extends State<TeacherSignup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: transperentAppBar(context: context),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -51,27 +54,16 @@ class _TeacherSignupState extends State<TeacherSignup> {
           children: [
             const FormHeading(name: "For\nTeacher Signup"),
             Expanded(
-              flex: 5,
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: ListView(
                   children: [
                     for (var ele in controllers)
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          controller: ele.controller,
-                          obscureText: ele.ispass,
-                          decoration: InputDecoration(
-                            labelText: ele.hint,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(13)),
-                          ),
-                        ),
-                      ),
+                      TFrow(data: ele, ss: MediaQuery.of(context).size),
                     ProceedButton(
                       ss: MediaQuery.of(context).size,
                       text: "Proceed",
+                      onPressed: () {},
                     )
                   ],
                 ),

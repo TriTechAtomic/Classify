@@ -1,4 +1,5 @@
 import 'package:classify/assets/asset_register.dart';
+import 'package:classify/screens/widgets/transperent_app_bar.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +35,8 @@ class _RoleSelectionState extends State<RoleSelection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: transperentAppBar(context: context),
       body: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(

@@ -1,6 +1,8 @@
 import 'package:classify/models/textfield_meta.dart';
 import 'package:classify/screens/widgets/form_heading.dart';
 import 'package:classify/screens/widgets/proceed_button.dart';
+import 'package:classify/screens/widgets/tf_flow.dart';
+import 'package:classify/screens/widgets/transperent_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class AdminSignup extends StatefulWidget {
@@ -46,38 +48,23 @@ class _AdminSignupState extends State<AdminSignup> {
   Widget build(BuildContext context) {
     Size ss = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: transperentAppBar(context: context),
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const FormHeading(name: "For\nAdmin Signup"),
             Expanded(
-              flex: 5,
-              child: SizedBox(
-                width: ss.width * 0.8,
-                child: ListView(
-                  children: [
-                    for (var ele in controllers)
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          controller: ele.controller,
-                          obscureText: ele.ispass,
-                          decoration: InputDecoration(
-                            labelText: ele.hint,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(13)),
-                          ),
-                        ),
-                      ),
-                    ProceedButton(
-                      ss: ss,
-                      text: "Proceed",
-                    )
-                  ],
-                ),
+              child: ListView(
+                children: [
+                  for (var ele in controllers) TFrow(data: ele, ss: ss),
+                  ProceedButton(
+                    ss: ss,
+                    text: "Proceed",
+                    onPressed: () {},
+                  )
+                ],
               ),
             ),
           ],
