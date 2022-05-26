@@ -1,9 +1,7 @@
 FROM ubuntu/mysql
 
-USER gitpod
+RUN sudo su 
 
-# update repos
-RUN sudo apt-get update -y && sudo apt-get upgrade -y
+RUN apt install -y python3 python3-pip 
 
-# installing python dependencies
-RUN sudo apt install -y python3 python3-pip && sudo  pip3 install fastapi && sudo pip3 install uvicorn && sudo  pip3 install sqlalchemy 
+RUN pip3 install fastapi uvicorn sqlalchemy
