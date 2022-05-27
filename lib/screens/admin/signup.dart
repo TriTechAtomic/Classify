@@ -71,7 +71,9 @@ class _AdminSignupState extends State<AdminSignup> {
                         ),
                       ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/adminHome');
+                      },
                       child: const Text('Proceed'),
                     )
                   ],

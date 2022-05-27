@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         // common Signin Screen
         '/signin': (context) => const Signin(),
 
-        // role selection Screen
+        //roleSelection'/ role selection Screen
         '/roleSelection': (context) => const RoleSelection(),
       },
     );
