@@ -3,7 +3,7 @@ image:
 
 tasks:
   - name: sqlserver and api server starter
-    before: chmod +x ./sqlstarter.sh && sudo ./sqlstarter.sh 
+    before: cd sqlstarter && chmod +x ./sqlstarter.sh && sudo ./sqlstarter.sh 
 
 
   # TODO setup the api server start 
