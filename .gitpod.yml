@@ -1,0 +1,22 @@
+image: 
+  file: .gitpod.dockerfile
+
+tasks:
+  - name: sqlserver and api server starter
+    before: sudo 
+
+  # TODO setup the api server start 
+  - name: Flutter 
+    before:
+      >
+        git config --global --add safe.directory /sdks/flutter/ &&
+        sudo chown -R $(whoami) /sdks/flutter/ &&  
+        sudo chown -R $(whoami) /root/ && 
+        flutter pub get &&
+        flutter run -d web-server --web-port=8080 --web-hostname=0.0.0.0
+    
+
+
+ports:
+  - port: 8080
+    onOpen: open-browser

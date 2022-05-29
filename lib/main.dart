@@ -1,4 +1,5 @@
 import 'package:classify/screens/admin/admin_home.dart';
+import 'package:classify/screens/admin/features/manage_courses.dart';
 import 'package:classify/screens/admin/signup.dart';
 import 'package:classify/screens/common/role_selection.dart';
 import 'package:classify/screens/common/signin.dart';
@@ -21,24 +22,27 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.deepPurple,
           scaffoldBackgroundColor: Colors.white),
       title: 'Material App',
-      home: const RoleSelection(),
+      home: Signin(),
       routes: {
         // home Screens
-        '/adminHome': (context) => const AdminHome(),
-        '/teacherHome': (context) => const TeacherHome(),
-        '/parentHome': (context) => const ParentHome(),
-        '/studentHome': (context) => const StudentHome(),
+        AdminHome.routeName: (context) => const AdminHome(),
+        TeacherHome.routeName: (context) => const TeacherHome(),
+        ParentHome.routeName: (context) => const ParentHome(),
+        StudentHome.routeName: (context) => const StudentHome(),
 
         // signup Screens
-        '/adminSignup': (context) => const AdminSignup(),
-        '/studentSignup': (context) => const StudentSignup(),
-        '/teacherSignup': (context) => const TeacherSignup(),
+        AdminSignup.routename: (context) => const AdminSignup(),
+        StudentSignup.routeName: (context) => const StudentSignup(),
+        TeacherSignup.routeName: (context) => const TeacherSignup(),
 
         // common Signin Screen
-        '/signin': (context) => const Signin(),
+        Signin.routename: (context) => Signin(),
 
-        //roleSelection'/ role selection Screen
-        '/roleSelection': (context) => const RoleSelection(),
+        // role selection Screen
+        RoleSelection.routeName: (context) => const RoleSelection(),
+
+        //For admin Home
+        '/ManageCourses' :(context) => const ManageCourses(),
       },
     );
   }
