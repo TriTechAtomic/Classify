@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       routes: {
         // home Screens
         AdminHome.routeName: (context) => const AdminHome(),
-        TeacherHome.routeName: (context) => const TeacherHome(),
+        TeacherHome.routeName: (context) => TeacherHome(),
         ParentHome.routeName: (context) => const ParentHome(),
         StudentHome.routeName: (context) => StudentHome(),
 
