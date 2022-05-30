@@ -1,10 +1,8 @@
 
 
-from backend.models.institute import Signup
-
 
 class DbController:
-    
+
     def __init__(self):
             # Database credentials 
         conData  = {
@@ -27,8 +25,10 @@ class DbController:
         )
         self.engine.connect()
     
-    def create_user_in_db(self, userdata:Signup):
-        pass
+
+
+
+
         
 
         
