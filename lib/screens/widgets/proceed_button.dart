@@ -15,17 +15,21 @@ class ProceedButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ElevatedButton(
-          style: ButtonStyle(
-            fixedSize: MaterialStateProperty.all(Size(ss.width * 0.5, 40)),
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.all(10),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ElevatedButton(
+            style: ButtonStyle(
+              fixedSize: MaterialStateProperty.all(Size(ss.width * 0.5, 40)),
+              padding: MaterialStateProperty.all(
+                const EdgeInsets.all(10),
+              ),
             ),
-          ),
-          onPressed: onPressed,
-          child: Text(
-            text,
-            style: TextDecor.titleTextDecoration.copyWith(color: Colors.white),
+            onPressed: onPressed,
+            child: Text(
+              text,
+              style:
+                  TextDecor.titleTextDecoration.copyWith(color: Colors.white),
+            ),
           ),
         ),
       ],
