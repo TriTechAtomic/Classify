@@ -32,6 +32,7 @@ class _CustomButtonsState extends State<CustomButtons> {
       },
       child: Text(
         widget.text,
+        textAlign: TextAlign.center,
         style: TextStyle(
             color: hovered ? Colors.white : Colors.black,
             fontWeight: FontWeight.bold),
