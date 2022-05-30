@@ -14,9 +14,14 @@ class AdminHome extends StatefulWidget {
 }
 
 class _AdminHomeState extends State<AdminHome> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
+        drawer: MediaQuery.of(context).size.width <= 1100
+            ? const AdminSideDrawer()
+            : null,
         backgroundColor: adminBackground,
         body: Padding(
           padding: const EdgeInsets.all(0),
@@ -39,7 +44,7 @@ class _AdminHomeState extends State<AdminHome> {
                             if (!Responsive.isDesktop(context))
                               IconButton(
                                   onPressed: () {
-                                    const AdminSideDrawer();
+                                    _scaffoldKey.currentState!.openDrawer();
                                   },
                                   icon: const Icon(Icons.menu)),
                             Image.asset(
