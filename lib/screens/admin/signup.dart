@@ -1,4 +1,5 @@
 import 'package:classify/models/textfield_meta.dart';
+import 'package:classify/screens/admin/admin_home.dart';
 import 'package:classify/screens/widgets/form_heading.dart';
 import 'package:classify/screens/widgets/proceed_button.dart';
 import 'package:classify/screens/widgets/tf_flow.dart';
@@ -57,15 +58,32 @@ class _AdminSignupState extends State<AdminSignup> {
           children: [
             const FormHeading(name: "For\nAdmin Signup"),
             Expanded(
-              child: ListView(
-                children: [
-                  for (var ele in controllers) TFrow(data: ele, ss: ss),
-                  ProceedButton(
-                    ss: ss,
-                    text: "Proceed",
-                    onPressed: () {},
-                  )
-                ],
+              flex: 5,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: ListView(
+                  children: [
+                    for (var ele in controllers)
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: ele.controller,
+                          obscureText: ele.ispass,
+                          decoration: InputDecoration(
+                            labelText: ele.hint,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(13)),
+                          ),
+                        ),
+                      ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, AdminHome.routeName);
+                      },
+                      child: const Text('Proceed'),
+                    )
+                  ],
+                ),
               ),
             ),
           ],
