@@ -15,6 +15,7 @@ class AdminHome extends StatefulWidget {
 
 class _AdminHomeState extends State<AdminHome> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  bool searchIcon = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,34 +24,34 @@ class _AdminHomeState extends State<AdminHome> {
             ? const AdminSideDrawer()
             : null,
         backgroundColor: adminBackground,
-        body: Padding(
-          padding: const EdgeInsets.all(0),
-          child: Row(
-            children: [
-              if (Responsive.isDesktop(context))
-                const Expanded(
-                  child: AdminSideDrawer(),
-                ),
-              Expanded(
-                flex: 5,
-                child: SizedBox(
-                  height: double.infinity,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            if (!Responsive.isDesktop(context))
-                              IconButton(
-                                  onPressed: () {
-                                    _scaffoldKey.currentState!.openDrawer();
-                                  },
-                                  icon: const Icon(Icons.menu)),
+        body: Row(
+          children: [
+            if (Responsive.isDesktop(context))
+              const Expanded(
+                child: AdminSideDrawer(),
+              ),
+            Expanded(
+              flex: 5,
+              child: SizedBox(
+                height: double.infinity,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          if (!Responsive.isDesktop(context))
+                            IconButton(
+                                onPressed: () {
+                                  _scaffoldKey.currentState!.openDrawer();
+                                },
+                                icon: const Icon(Icons.menu)),
+                          if (!searchIcon)
                             Image.asset(
                               AssetRegister.logoImg,
-                              width: 200,
+                              width: MediaQuery.of(context).size.width * 0.2,
                             ),
+                          if (Responsive.isDesktop(context) || searchIcon)
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.35,
                               child: TextField(
@@ -66,6 +67,26 @@ class _AdminHomeState extends State<AdminHome> {
                                 ),
                               ),
                             ),
+                          if (searchIcon)
+                            IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    searchIcon = false;
+                                  });
+                                },
+                                icon: const Icon(Icons.close)),
+                          if (!Responsive.isDesktop(context) && !searchIcon)
+                            IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    searchIcon = true;
+                                  });
+                                },
+                                icon: const Icon(
+                                  Icons.search,
+                                  color: Colors.black,
+                                )),
+                          if (!searchIcon)
                             ElevatedButton(
                                 style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(
@@ -77,140 +98,117 @@ class _AdminHomeState extends State<AdminHome> {
                                   color: Colors.red,
                                   size: 35,
                                 ))
-                          ],
-                        ),
-                        Wrap(
-                          children: const [
-                            Padding(
-                              padding: EdgeInsets.all(15),
-                              child: CustomButtons(
-                                text: "Hello",
-                                height: 90,
-                                width: 150,
-                                screen: '/ManageCourses',
-                              ),
+                        ],
+                      ),
+                      Wrap(
+                        children: const [
+                          Padding(
+                            padding: EdgeInsets.all(15),
+                            child: CustomButtons(
+                              text: "Hello",
+                              height: 90,
+                              width: 150,
+                              screen: '/ManageCourses',
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Hello",
-                                height: 90,
-                                width: 150,
-                                screen: '/ManageCourses',
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: CustomButtons(
+                              text: "Hello",
+                              height: 90,
+                              width: 150,
+                              screen: '/ManageCourses',
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Hello",
-                                height: 90,
-                                width: 150,
-                                screen: '/ManageCourses',
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: CustomButtons(
+                              text: "Hello",
+                              height: 90,
+                              width: 150,
+                              screen: '/ManageCourses',
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Hello",
-                                height: 90,
-                                width: 150,
-                                screen: '/ManageCourses',
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: CustomButtons(
+                              text: "Hello",
+                              height: 90,
+                              width: 150,
+                              screen: '/ManageCourses',
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Hello",
-                                height: 90,
-                                width: 150,
-                                screen: '/ManageCourses',
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: CustomButtons(
+                              text: "Hello",
+                              height: 90,
+                              width: 150,
+                              screen: '/ManageCourses',
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Hello",
-                                height: 90,
-                                width: 150,
-                                screen: '/ManageCourses',
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: CustomButtons(
+                              text: "Hello",
+                              height: 90,
+                              width: 150,
+                              screen: '/ManageCourses',
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Hello",
-                                height: 90,
-                                width: 150,
-                                screen: '/ManageCourses',
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: CustomButtons(
+                              text: "Hello",
+                              height: 90,
+                              width: 150,
+                              screen: '/ManageCourses',
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Hello",
-                                height: 90,
-                                width: 150,
-                                screen: '/ManageCourses',
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: CustomButtons(
+                              text: "Hello",
+                              height: 90,
+                              width: 150,
+                              screen: '/ManageCourses',
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Hello",
-                                height: 90,
-                                width: 150,
-                                screen: '/ManageCourses',
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: CustomButtons(
+                              text: "Hello",
+                              height: 90,
+                              width: 150,
+                              screen: '/ManageCourses',
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Hello",
-                                height: 90,
-                                width: 150,
-                                screen: '/ManageCourses',
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: CustomButtons(
+                              text: "Hello",
+                              height: 90,
+                              width: 150,
+                              screen: '/ManageCourses',
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Hello",
-                                height: 90,
-                                width: 150,
-                                screen: '/ManageCourses',
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: CustomButtons(
+                              text: "Hello",
+                              height: 90,
+                              width: 150,
+                              screen: '/ManageCourses',
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ));
-  }
-}
-
-class MenuItem extends StatelessWidget {
-  final String title;
-  final Icon icon;
-  final VoidCallback press;
-
-  const MenuItem({
-    Key? key,
-    required this.title,
-    required this.icon,
-    required this.press,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      onTap: press,
-      leading: icon,
-      title: Text(title),
-    );
   }
 }
