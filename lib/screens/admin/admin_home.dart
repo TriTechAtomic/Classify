@@ -105,7 +105,7 @@ class _AdminHomeState extends State<AdminHome> {
                           Padding(
                             padding: EdgeInsets.all(15),
                             child: CustomButtons(
-                              text: "Hello",
+                              text: "Manage Courses",
                               height: 90,
                               width: 150,
                               screen: '/ManageCourses',
@@ -114,7 +114,7 @@ class _AdminHomeState extends State<AdminHome> {
                           Padding(
                             padding: EdgeInsets.all(15.0),
                             child: CustomButtons(
-                              text: "Hello",
+                              text: "Manage Students",
                               height: 90,
                               width: 150,
                               screen: '/ManageCourses',
@@ -123,7 +123,7 @@ class _AdminHomeState extends State<AdminHome> {
                           Padding(
                             padding: EdgeInsets.all(15.0),
                             child: CustomButtons(
-                              text: "Hello",
+                              text: "Manage Teachers",
                               height: 90,
                               width: 150,
                               screen: '/ManageCourses',
@@ -132,7 +132,7 @@ class _AdminHomeState extends State<AdminHome> {
                           Padding(
                             padding: EdgeInsets.all(15.0),
                             child: CustomButtons(
-                              text: "Hello",
+                              text: "Update Fees",
                               height: 90,
                               width: 150,
                               screen: '/ManageCourses',
@@ -141,7 +141,7 @@ class _AdminHomeState extends State<AdminHome> {
                           Padding(
                             padding: EdgeInsets.all(15.0),
                             child: CustomButtons(
-                              text: "Hello",
+                              text: "TimeTables",
                               height: 90,
                               width: 150,
                               screen: '/ManageCourses',
@@ -150,7 +150,7 @@ class _AdminHomeState extends State<AdminHome> {
                           Padding(
                             padding: EdgeInsets.all(15.0),
                             child: CustomButtons(
-                              text: "Hello",
+                              text: "Complaints",
                               height: 90,
                               width: 150,
                               screen: '/ManageCourses',
@@ -159,7 +159,7 @@ class _AdminHomeState extends State<AdminHome> {
                           Padding(
                             padding: EdgeInsets.all(15.0),
                             child: CustomButtons(
-                              text: "Hello",
+                              text: "Analytics",
                               height: 90,
                               width: 150,
                               screen: '/ManageCourses',
@@ -168,7 +168,7 @@ class _AdminHomeState extends State<AdminHome> {
                           Padding(
                             padding: EdgeInsets.all(15.0),
                             child: CustomButtons(
-                              text: "Hello",
+                              text: "Announcements",
                               height: 90,
                               width: 150,
                               screen: '/ManageCourses',
@@ -177,25 +177,7 @@ class _AdminHomeState extends State<AdminHome> {
                           Padding(
                             padding: EdgeInsets.all(15.0),
                             child: CustomButtons(
-                              text: "Hello",
-                              height: 90,
-                              width: 150,
-                              screen: '/ManageCourses',
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                            child: CustomButtons(
-                              text: "Hello",
-                              height: 90,
-                              width: 150,
-                              screen: '/ManageCourses',
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                            child: CustomButtons(
-                              text: "Hello",
+                              text: "Teacher's Attendance",
                               height: 90,
                               width: 150,
                               screen: '/ManageCourses',
