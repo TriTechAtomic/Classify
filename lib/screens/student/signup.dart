@@ -1,10 +1,13 @@
 import 'package:classify/screens/widgets/proceed_button.dart';
+import 'package:classify/screens/widgets/tf_flow.dart';
+import 'package:classify/screens/widgets/transperent_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:classify/models/textfield_meta.dart';
 import 'package:classify/screens/widgets/form_heading.dart';
 
 class StudentSignup extends StatefulWidget {
   const StudentSignup({Key? key}) : super(key: key);
+  static const String routeName = '/studentSignup';
 
   @override
   State<StudentSignup> createState() => _StudentSignupState();
@@ -44,6 +47,7 @@ class _StudentSignupState extends State<StudentSignup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: transperentAppBar(context: context),
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(10),
@@ -59,20 +63,11 @@ class _StudentSignupState extends State<StudentSignup> {
                 child: ListView(
                   children: [
                     for (var ele in controllers)
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          controller: ele.controller,
-                          decoration: InputDecoration(
-                            labelText: ele.hint,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(13)),
-                          ),
-                        ),
-                      ),
+                      TFrow(data: ele, ss: MediaQuery.of(context).size),
                     ProceedButton(
                       ss: MediaQuery.of(context).size,
                       text: "Proceed",
+                      onPressed: () {},
                     )
                   ],
                 ),

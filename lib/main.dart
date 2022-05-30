@@ -24,21 +24,21 @@ class MyApp extends StatelessWidget {
       home: Signin(),
       routes: {
         // home Screens
-        '/adminHome': (context) => const AdminHome(),
-        '/teacherHome': (context) => const TeacherHome(),
-        '/parentHome': (context) => const ParentHome(),
-        '/studentHome': (context) => const StudentHome(),
+        AdminHome.routeName: (context) => const AdminHome(),
+        TeacherHome.routeName: (context) => const TeacherHome(),
+        ParentHome.routeName: (context) => const ParentHome(),
+        StudentHome.routeName: (context) => const StudentHome(),
 
         // signup Screens
-        '/adminSignup': (context) => const AdminSignup(),
-        '/studentSignup': (context) => const StudentSignup(),
-        '/teacherSignup': (context) => const TeacherSignup(),
+        AdminSignup.routename: (context) => const AdminSignup(),
+        StudentSignup.routeName: (context) => const StudentSignup(),
+        TeacherSignup.routeName: (context) => const TeacherSignup(),
 
         // common Signin Screen
-        '/signin': (context) => Signin(),
+        Signin.routename: (context) => Signin(),
 
         // role selection Screen
-        '/roleSelection': (context) => const RoleSelection(),
+        RoleSelection.routeName: (context) => const RoleSelection(),
       },
     );
   }
