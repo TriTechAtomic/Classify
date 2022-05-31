@@ -2,8 +2,18 @@ import 'package:classify/utils/buttons.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-class ManageCourses extends StatelessWidget {
+import 'create_class.dart';
+
+class ManageCourses extends StatefulWidget {
   const ManageCourses({Key? key}) : super(key: key);
+
+  @override
+  State<ManageCourses> createState() => _ManageCoursesState();
+}
+
+class _ManageCoursesState extends State<ManageCourses> {
+  bool createClass = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -24,21 +34,51 @@ class ManageCourses extends StatelessWidget {
                     ],
                   ),
                 ),
-                body: const TabBarView(
+                body:
+                    // createClass
+                    //     ? CreateCustomClass():
+                    TabBarView(
                   children: [
-                    Scaffold(
+                    createClass
+                        ? const CreateCustomClass()
+                        : Scaffold(
+                            backgroundColor: adminBackground,
+                            body: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CustomButtons(
+                                    text: "User Template",
+                                    height: 200,
+                                    width: 200,
+                                    callback: () {},
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  CustomButtons(
+                                    text: "Create Custom",
+                                    height: 200,
+                                    width: 200,
+                                    callback: () {
+                                      setState(() {
+                                        createClass = true;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                    const Scaffold(
                       body: CustomButtons(
                           text: "User Template", height: 250, width: 250),
                     ),
-                    Scaffold(
+                    const Scaffold(
                       body: CustomButtons(
                           text: "User Template", height: 250, width: 250),
                     ),
-                    Scaffold(
-                      body: CustomButtons(
-                          text: "User Template", height: 250, width: 250),
-                    ),
-                    Scaffold(
+                    const Scaffold(
                       body: CustomButtons(
                           text: "User Template", height: 250, width: 250),
                     ),
