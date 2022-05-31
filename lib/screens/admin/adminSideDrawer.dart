@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'admin_home.dart';
-
 class AdminSideDrawer extends StatelessWidget {
   const AdminSideDrawer({
     Key? key,
   }) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +43,29 @@ class AdminSideDrawer extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+
+class MenuItem extends StatelessWidget {
+  final String title;
+  final Icon icon;
+  final VoidCallback press;
+
+  const MenuItem({
+    Key? key,
+    required this.title,
+    required this.icon,
+    required this.press,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: press,
+      leading: icon,
+      title: Text(title),
     );
   }
 }

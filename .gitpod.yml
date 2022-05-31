@@ -3,7 +3,11 @@ image:
 
 tasks:
   - name: sqlserver and api server starter
-    before: sudo 
+    before: cd sqlstarter && chmod +x ./sqlstarter.sh && sudo ./sqlstarter.sh 
+
+  - name: python webserver
+    before: cd backend && uvicorn main:app --reload --host 0.0.0.0 --port 6969
+
 
   # TODO setup the api server start 
   - name: Flutter 
@@ -20,3 +24,7 @@ tasks:
 ports:
   - port: 8080
     onOpen: open-browser
+  
+  - port: 6969
+    onOpen:  open-preview
+  

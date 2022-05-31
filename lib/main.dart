@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primarySwatch: Colors.deepPurple,
           scaffoldBackgroundColor: Colors.white),
@@ -26,9 +27,9 @@ class MyApp extends StatelessWidget {
       routes: {
         // home Screens
         AdminHome.routeName: (context) => const AdminHome(),
-        TeacherHome.routeName: (context) => const TeacherHome(),
+        TeacherHome.routeName: (context) => TeacherHome(),
         ParentHome.routeName: (context) => const ParentHome(),
-        StudentHome.routeName: (context) => const StudentHome(),
+        StudentHome.routeName: (context) => StudentHome(),
 
         // signup Screens
         AdminSignup.routename: (context) => const AdminSignup(),
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
         RoleSelection.routeName: (context) => const RoleSelection(),
 
         //For admin Home
-        '/ManageCourses' :(context) => const ManageCourses(),
+        '/ManageCourses': (context) => const ManageCourses(),
       },
     );
   }
