@@ -6,7 +6,7 @@ class StudentHome extends StatelessWidget {
   static const String routeName = '/studentHome';
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-  List<String> drawerWidgets = [
+  final List<String> drawerWidgets = [
     "Rate us",
     "Share",
     "Contact us",
