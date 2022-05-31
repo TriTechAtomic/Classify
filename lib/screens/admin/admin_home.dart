@@ -18,179 +18,185 @@ class _AdminHomeState extends State<AdminHome> {
   bool searchIcon = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        key: _scaffoldKey,
-        drawer: MediaQuery.of(context).size.width <= 1100
-            ? const AdminSideDrawer()
-            : null,
-        backgroundColor: adminBackground,
-        body: Row(
-          children: [
-            if (Responsive.isDesktop(context))
-              const Expanded(
-                child: AdminSideDrawer(),
-              ),
-            Expanded(
-              flex: 5,
-              child: SizedBox(
-                height: double.infinity,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          if (!Responsive.isDesktop(context))
-                            IconButton(
-                                onPressed: () {
-                                  _scaffoldKey.currentState!.openDrawer();
-                                },
-                                icon: const Icon(Icons.menu)),
-                          if (!searchIcon)
-                            Image.asset(
-                              AssetRegister.logoImg,
-                              width: MediaQuery.of(context).size.width * 0.2,
-                            ),
-                          if (Responsive.isDesktop(context) || searchIcon)
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.35,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  hintText: "Search Here",
-                                  suffixIcon: const Icon(Icons.search),
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: const BorderSide(
-                                          color: adminBackground)),
+    return SafeArea(
+      child: Scaffold(
+          key: _scaffoldKey,
+          drawer: MediaQuery.of(context).size.width <= 1100
+              ? const AdminSideDrawer()
+              : null,
+          backgroundColor: adminBackground,
+          body: Row(
+            children: [
+              if (Responsive.isDesktop(context))
+                const Expanded(
+                  child: AdminSideDrawer(),
+                ),
+              Expanded(
+                flex: 5,
+                child: SizedBox(
+                  height: double.infinity,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            if (!Responsive.isDesktop(context))
+                              IconButton(
+                                  onPressed: () {
+                                    _scaffoldKey.currentState!.openDrawer();
+                                  },
+                                  icon: const Icon(Icons.menu)),
+                            if (!searchIcon)
+                              Image.asset(
+                                AssetRegister.logoImg,
+                                width: MediaQuery.of(context).size.width * 0.2,
+                              ),
+                            if (Responsive.isDesktop(context) || searchIcon)
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    hintText: "Search Here",
+                                    suffixIcon: const Icon(Icons.search),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: adminBackground)),
+                                  ),
                                 ),
                               ),
-                            ),
-                          if (searchIcon)
-                            IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    searchIcon = false;
-                                  });
+                            if (searchIcon)
+                              IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      searchIcon = false;
+                                    });
+                                  },
+                                  icon: const Icon(Icons.close)),
+                            if (!Responsive.isDesktop(context) && !searchIcon)
+                              IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      searchIcon = true;
+                                    });
+                                  },
+                                  icon: const Icon(
+                                    Icons.search,
+                                    color: Colors.black,
+                                  )),
+                            if (!searchIcon)
+                              ElevatedButton(
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              adminBackground),
+                                      elevation: MaterialStateProperty.all(0)),
+                                  onPressed: () {},
+                                  child: const Icon(
+                                    Icons.notifications,
+                                    color: Colors.red,
+                                    size: 35,
+                                  ))
+                          ],
+                        ),
+                        Wrap(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: CustomButtons(
+                                text: "Manage Courses",
+                                height: 90,
+                                width: 150,
+                                callback: () {
+                                  Navigator.pushNamed(
+                                      context, '/ManageCourses');
                                 },
-                                icon: const Icon(Icons.close)),
-                          if (!Responsive.isDesktop(context) && !searchIcon)
-                            IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    searchIcon = true;
-                                  });
-                                },
-                                icon: const Icon(
-                                  Icons.search,
-                                  color: Colors.black,
-                                )),
-                          if (!searchIcon)
-                            ElevatedButton(
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                        adminBackground),
-                                    elevation: MaterialStateProperty.all(0)),
-                                onPressed: () {},
-                                child: const Icon(
-                                  Icons.notifications,
-                                  color: Colors.red,
-                                  size: 35,
-                                ))
-                        ],
-                      ),
-                      Wrap(
-                        children: const [
-                          Padding(
-                            padding: EdgeInsets.all(15),
-                            child: CustomButtons(
-                              text: "Manage Courses",
-                              height: 90,
-                              width: 150,
-                              screen: '/ManageCourses',
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                            child: CustomButtons(
-                              text: "Manage Students",
-                              height: 90,
-                              width: 150,
-                              screen: '/ManageCourses',
+                            const Padding(
+                              padding: EdgeInsets.all(15.0),
+                              child: CustomButtons(
+                                text: "Manage Students",
+                                height: 90,
+                                width: 150,
+                                callback: null,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                            child: CustomButtons(
-                              text: "Manage Teachers",
-                              height: 90,
-                              width: 150,
-                              screen: '/ManageCourses',
+                            const Padding(
+                              padding: EdgeInsets.all(15.0),
+                              child: CustomButtons(
+                                text: "Manage Teachers",
+                                height: 90,
+                                width: 150,
+                                callback: null,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                            child: CustomButtons(
-                              text: "Update Fees",
-                              height: 90,
-                              width: 150,
-                              screen: '/ManageCourses',
+                            const Padding(
+                              padding: EdgeInsets.all(15.0),
+                              child: CustomButtons(
+                                text: "Update Fees",
+                                height: 90,
+                                width: 150,
+                                callback: null,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                            child: CustomButtons(
-                              text: "TimeTables",
-                              height: 90,
-                              width: 150,
-                              screen: '/ManageCourses',
+                            const Padding(
+                              padding: EdgeInsets.all(15.0),
+                              child: CustomButtons(
+                                text: "TimeTables",
+                                height: 90,
+                                width: 150,
+                                callback: null,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                            child: CustomButtons(
-                              text: "Complaints",
-                              height: 90,
-                              width: 150,
-                              screen: '/ManageCourses',
+                            const Padding(
+                              padding: EdgeInsets.all(15.0),
+                              child: CustomButtons(
+                                text: "Complaints",
+                                height: 90,
+                                width: 150,
+                                callback: null,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                            child: CustomButtons(
-                              text: "Analytics",
-                              height: 90,
-                              width: 150,
-                              screen: '/ManageCourses',
+                            const Padding(
+                              padding: EdgeInsets.all(15.0),
+                              child: CustomButtons(
+                                text: "Analytics",
+                                height: 90,
+                                width: 150,
+                                callback: null,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                            child: CustomButtons(
-                              text: "Announcements",
-                              height: 90,
-                              width: 150,
-                              screen: '/ManageCourses',
+                            const Padding(
+                              padding: EdgeInsets.all(15.0),
+                              child: CustomButtons(
+                                text: "Announcements",
+                                height: 90,
+                                width: 150,
+                                callback: null,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                            child: CustomButtons(
-                              text: "Teacher's Attendance",
-                              height: 90,
-                              width: 150,
-                              screen: '/ManageCourses',
+                            const Padding(
+                              padding: EdgeInsets.all(15.0),
+                              child: CustomButtons(
+                                text: "Teacher's Attendance",
+                                height: 90,
+                                width: 150,
+                                callback: null,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ));
+            ],
+          )),
+    );
   }
 }
