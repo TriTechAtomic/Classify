@@ -44,27 +44,30 @@ class _ManageCoursesState extends State<ManageCourses> {
                         : Scaffold(
                             backgroundColor: adminBackground,
                             body: Center(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                              child: Wrap(
+                                // mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  CustomButtons(
-                                    text: "User Template",
-                                    height: 200,
-                                    width: 200,
-                                    callback: () {},
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: CustomButtons(
+                                      text: "User Template",
+                                      height: 200,
+                                      width: 200,
+                                      callback: () {},
+                                    ),
                                   ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  CustomButtons(
-                                    text: "Create Custom",
-                                    height: 200,
-                                    width: 200,
-                                    callback: () {
-                                      setState(() {
-                                        createClass = true;
-                                      });
-                                    },
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: CustomButtons(
+                                      text: "Create Custom",
+                                      height: 200,
+                                      width: 200,
+                                      callback: () {
+                                        setState(() {
+                                          createClass = true;
+                                        });
+                                      },
+                                    ),
                                   ),
                                 ],
                               ),
