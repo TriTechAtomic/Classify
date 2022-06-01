@@ -1,8 +1,6 @@
-import 'package:classify/utils/buttons.dart';
-import 'package:classify/utils/responsive.dart';
+import 'package:classify/screens/student/student_home_content.dart';
 import 'package:flutter/material.dart';
 import '../widgets/customdrawer.dart';
-import 'StudentHomeHeader.dart';
 
 class StudentHome extends StatelessWidget {
   StudentHome({Key? key}) : super(key: key);
@@ -28,93 +26,34 @@ class StudentHome extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
-        drawer: CustomDrawer(
-          name: "Dummy Name",
-          email: "dummyemail@gmail.com",
-          drawerItems: drawerWidgets,
-        ),
+        drawer: MediaQuery.of(context).size.width < 1100
+            ? CustomDrawer(
+                name: "Dummy Name",
+                email: "dummyemail@gmail.com",
+                drawerItems: drawerWidgets,
+              )
+            : null,
         appBar: AppBar(
           title: const Text("Classify"),
         ),
-        body: Column(
-          children: [
-            StudentHomeHeader(
-              name: name,
-              contact: contact,
-              age: age,
-              email: email,
-              parentsContact: parentsContact,
-              address: address,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    "Pending fees: 20Rs",
-                    style: TextStyle(color: Colors.red),
+        body: MediaQuery.of(context).size.width < 1100
+            ? StudentHomeContents()
+            : Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: CustomDrawer(
+                      name: "Dummy Name",
+                      email: "dummyemail@gmail.com",
+                      drawerItems: drawerWidgets,
+                    ),
                   ),
-                  Text(
-                    "Paid fees: 10Rs",
-                    style: TextStyle(color: Colors.green),
+                  Expanded(
+                    flex: 5,
+                    child: StudentHomeContents(),
                   )
                 ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: SizedBox(
-                width: Responsive.isMobile(context)
-                    ? MediaQuery.of(context).size.width * 0.9
-                    : MediaQuery.of(context).size.width * 0.3,
-                height: Responsive.isMobile(context) ? 40 : 55,
-                child: CustomButtons(
-                  height: Responsive.isMobile(context) ? 40 : 55,
-                  width: Responsive.isMobile(context)
-                      ? MediaQuery.of(context).size.width * 0.9
-                      : MediaQuery.of(context).size.width * 0.15,
-                  text: "Payment History",
-                  callback: () {},
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: SizedBox(
-                width: Responsive.isMobile(context)
-                    ? MediaQuery.of(context).size.width * 0.9
-                    : MediaQuery.of(context).size.width * 0.3,
-                height: Responsive.isMobile(context) ? 40 : 55,
-                child: CustomButtons(
-                  height: Responsive.isMobile(context) ? 40 : 55,
-                  width: Responsive.isMobile(context)
-                      ? MediaQuery.of(context).size.width * 0.9
-                      : MediaQuery.of(context).size.width * 0.3,
-                  text: "Complaints",
-                  callback: () {},
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: SizedBox(
-                width: Responsive.isMobile(context)
-                    ? MediaQuery.of(context).size.width * 0.9
-                    : MediaQuery.of(context).size.width * 0.3,
-                height: Responsive.isMobile(context) ? 40 : 55,
-                child: CustomButtons(
-                  height: Responsive.isMobile(context) ? 40 : 55,
-                  width: Responsive.isMobile(context)
-                      ? MediaQuery.of(context).size.width * 0.9
-                      : MediaQuery.of(context).size.width * 0.3,
-                  text: "Time Table",
-                  callback: () {},
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
