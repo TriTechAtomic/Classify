@@ -1,3 +1,5 @@
+import 'package:classify/utils/buttons.dart';
+import 'package:classify/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import '../widgets/customdrawer.dart';
 import 'StudentHomeHeader.dart';
@@ -19,7 +21,7 @@ class StudentHome extends StatelessWidget {
       age = '20 yrs',
       email = "dummyemail@gmail.com",
       parentsContact = "0987654321",
-      address = "Dummy address";
+      address = "Bsc I.T./18";
 
   @override
   Widget build(BuildContext context) {
@@ -31,70 +33,88 @@ class StudentHome extends StatelessWidget {
           email: "dummyemail@gmail.com",
           drawerItems: drawerWidgets,
         ),
-        // appBar: AppBar(
-        //   toolbarHeight: 120,
-        //   title: Padding(
-        //     padding: const EdgeInsets.only(left: 10.0, top: 10.0, bottom: 10.0),
-        //     child: Column(
-        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //       crossAxisAlignment: CrossAxisAlignment.start,
-        //       children: [
-        //         Text(name),
-        //         Text(contact),
-        //         Text(age),
-        //       ],
-        //     ),
-        //   ),
-        //   actions: [
-        //     Padding(
-        //       padding:
-        //           const EdgeInsets.only(right: 10.0, top: 10.0, bottom: 10.0),
-        //       child: Column(
-        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //         crossAxisAlignment: CrossAxisAlignment.end,
-        //         children: [
-        //           Text(email),
-        //           Text(parentsContact),
-        //           Text(address),
-        //         ],
-        //       ),
-        //     ),
-        //   ],
-        //   // title: const Text("Student Home"),
-        // ),
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(100),
-          child: StudentHomeHeader(
-            name: name,
-            contact: contact,
-            age: age,
-            email: email,
-            parentsContact: parentsContact,
-            address: address,
-          ),
+        appBar: AppBar(
+          title: const Text("Classify"),
         ),
-        // body: Column(
-        //   children: [
-        //     StudentHomeHeader(
-        //       name: name,
-        //       contact: contact,
-        //       age: age,
-        //       email: email,
-        //       parentsContact: parentsContact,
-        //       address: address,
-        //     ),
-        //     Padding(
-        //       padding: const EdgeInsets.all(10.0),
-        //       child: Row(
-        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //         children: const [
-        //           Text("Pending fees: Pending fees"),
-        //           Text("Paid fees: paid fees")
-        //         ],
-        //       ),
-        //     ),
-        //   ],
-        // ),
+        body: Column(
+          children: [
+            StudentHomeHeader(
+              name: name,
+              contact: contact,
+              age: age,
+              email: email,
+              parentsContact: parentsContact,
+              address: address,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    "Pending fees: 20Rs",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  Text(
+                    "Paid fees: 10Rs",
+                    style: TextStyle(color: Colors.green),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10.0),
+              child: SizedBox(
+                width: Responsive.isMobile(context)
+                    ? MediaQuery.of(context).size.width * 0.9
+                    : MediaQuery.of(context).size.width * 0.3,
+                height: Responsive.isMobile(context) ? 40 : 55,
+                child: CustomButtons(
+                  height: Responsive.isMobile(context) ? 40 : 55,
+                  width: Responsive.isMobile(context)
+                      ? MediaQuery.of(context).size.width * 0.9
+                      : MediaQuery.of(context).size.width * 0.15,
+                  text: "Payment History",
+                  callback: () {},
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10.0),
+              child: SizedBox(
+                width: Responsive.isMobile(context)
+                    ? MediaQuery.of(context).size.width * 0.9
+                    : MediaQuery.of(context).size.width * 0.3,
+                height: Responsive.isMobile(context) ? 40 : 55,
+                child: CustomButtons(
+                  height: Responsive.isMobile(context) ? 40 : 55,
+                  width: Responsive.isMobile(context)
+                      ? MediaQuery.of(context).size.width * 0.9
+                      : MediaQuery.of(context).size.width * 0.3,
+                  text: "Complaints",
+                  callback: () {},
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10.0),
+              child: SizedBox(
+                width: Responsive.isMobile(context)
+                    ? MediaQuery.of(context).size.width * 0.9
+                    : MediaQuery.of(context).size.width * 0.3,
+                height: Responsive.isMobile(context) ? 40 : 55,
+                child: CustomButtons(
+                  height: Responsive.isMobile(context) ? 40 : 55,
+                  width: Responsive.isMobile(context)
+                      ? MediaQuery.of(context).size.width * 0.9
+                      : MediaQuery.of(context).size.width * 0.3,
+                  text: "Time Table",
+                  callback: () {},
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

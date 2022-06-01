@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 
 class CustomButtons extends StatefulWidget {
   final String text;
-  final String screen;
   final double height, width;
+  final VoidCallback? callback;
 
-  const CustomButtons(
-      {Key? key,
-      required this.text,
-      required this.height,
-      required this.width,
-      required this.screen})
-      : super(key: key);
+  const CustomButtons({
+    Key? key,
+    required this.text,
+    required this.height,
+    required this.width,
+    this.callback,
+  }) : super(key: key);
 
   @override
   State<CustomButtons> createState() => _CustomButtonsState();
@@ -27,9 +27,7 @@ class _CustomButtonsState extends State<CustomButtons> {
       onHover: (value) => setState(() {
         hovered = value;
       }),
-      onPressed: () {
-        Navigator.pushNamed(context, widget.screen);
-      },
+      onPressed: widget.callback,
       child: Text(
         widget.text,
         textAlign: TextAlign.center,
@@ -38,10 +36,10 @@ class _CustomButtonsState extends State<CustomButtons> {
             fontWeight: FontWeight.bold),
       ),
       style: ButtonStyle(
-          fixedSize:
-              MaterialStateProperty.all(Size(widget.width, widget.height)),
-          backgroundColor: MaterialStateProperty.all(Colors.white),
-          overlayColor: MaterialStateProperty.all(primaryColor)),
+        fixedSize: MaterialStateProperty.all(Size(widget.width, widget.height)),
+        backgroundColor: MaterialStateProperty.all(Colors.white),
+        overlayColor: MaterialStateProperty.all(primaryColor),
+      ),
     );
   }
 }
