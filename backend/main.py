@@ -1,6 +1,8 @@
 from fastapi import FastAPI
+from backend.dbcreds import DbController
 
 app = FastAPI()
+dbCon =  DbController()
 
 from backend.dbcreds import DbController
 
@@ -36,4 +38,6 @@ async def signup():
     # 3. Generate JWT token
     # 4. Return JWT token
     pass
+
+
 
