@@ -34,6 +34,7 @@ class StudentHome extends StatelessWidget {
               )
             : null,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: const Text("Classify"),
         ),
         body: MediaQuery.of(context).size.width < 1100

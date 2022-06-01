@@ -70,7 +70,8 @@ class _StudentSignupState extends State<StudentSignup> {
                       ss: MediaQuery.of(context).size,
                       text: "Proceed",
                       onPressed: () {
-                        Navigator.pushNamed(context, StudentHome.routeName);
+                        Navigator.pushReplacementNamed(
+                            context, StudentHome.routeName);
                       },
                     )
                   ],
