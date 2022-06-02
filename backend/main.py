@@ -1,5 +1,10 @@
 from fastapi import FastAPI
-from backend.dbcreds import DbController
+from dbcreds import DbController
+from models.db.users.institute import  Institute
+
+# haaaaa de sakte hai 
+# nehai bhai 
+# itna sub kamm kia vo sub nehai feekna
 
 app = FastAPI()
 dbCon =  DbController()
@@ -20,6 +25,8 @@ async def refresh_token():
 async def signin():
     
 
+    
+
     # TODO:
     # 1. Check if user exists
     # 2. Check if password is correct
@@ -27,14 +34,12 @@ async def signin():
     # 4. Return JWT token    
     pass
 
-@app.post("/signup")
-async def signup():
-    # TODO:
-    # 1. Check if user exists already ? signup is not allowed : pass 
-    # 2. Create user
-    # 3. Generate JWT token
-    # 4. Return JWT token
-    pass
+@app.post("/signupInstitute")
+async def signup(data: Institute):
+    dbCon.create_institute(data)
+
+    return ''
+ 
 
 
 

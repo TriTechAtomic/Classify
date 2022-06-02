@@ -1,15 +1,14 @@
 from pydantic import BaseModel
-from sqlalchemy import VARCHAR
 
 class Institute(BaseModel):
-    username: VARCHAR
-    password: VARCHAR
-    institutes_name: VARCHAR
-    email: VARCHAR
+    username: str
+    password: str
+    institutes_name: str
+    email: str
     contact: int
-    state: VARCHAR
-    city: VARCHAR
+    state: str
+    city: str
     pincode: int
-    area: VARCHAR
+    area: str
     subscription_id: int
     

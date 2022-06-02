@@ -1,12 +1,12 @@
 from pydantic import BaseModel
-from sqlalchemy import VARCHAR
 
 
 class Teachers(BaseModel):
     id: int
     institute_id: int
-    qualification: VARCHAR
-    key_subject: VARCHAR
-    username: VARCHAR
-    email:VARCHAR
-    password: VARCHAR
+    qualification: str
+    phonenumber: int
+    key_subject: str
+    username: str
+    email:str
+    password: str

@@ -1,3 +1,4 @@
+from models.db.users.institute import Institute
 from models.db.users.teacher import Teachers
 from models.response.sign_up import Signup
 from sqlalchemy import insert
@@ -5,24 +6,29 @@ from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy import create_engine
 import jwt
 
+from user_classes import InstituteData, StudentData, TeacherData
+
 
 
 
 class DbController:
-    
-   
-
     def __init__(self):
+        #creating the instances of the classes
+        self.teacher = TeacherData()
+        self.institute = InstituteData()
+        self.student = StudentData()
+        
+    
         # Database credentials 
         conData  = {
-        "host"     : "localhost",
-        "port"     : 5432,
         "user"     : "postgres",
         "password" : "123",
-        "database" : "jwt_auth_example",
+        "host"     : "localhost",
+        "port"     : 5432,
+        "database" : "classify",
         }
 
-        self.engine = create_engine(
+        self.engine= create_engine(
             url="postgresql://{0}:{1}@{2}:{3}/{4}".format(
                 conData["user"],
                 conData["password"],
@@ -32,34 +38,18 @@ class DbController:
             ),
             echo=True
         )
+        self.connection = self.engine.connect()
         
 
-    def create_teacher(self,Teacher:Teachers):
-        self._create_users_table()
-        ins = insert("teacher").values(id=Teacher.id,
-            institute_id=Teacher.institute_id,
-            qualification=Teacher.qualification,
-            key_subject=Teacher.key_subject,
-            username=Teacher.username,
-            email=Teacher.email,
-            password=Teacher.password,
-           
-        )
-        
-        
-        
-        
-        
-
-
-       
-
+    def create_teacher(self,Teacher:Teachers,):
+        self.teacher.create_table_in_db(self.connection)
+        self.teacher.create_user_in_db(self.connection, Teacher)
     
-
-
-
-
+    def create_institute(self, data: Institute):
+        self.institute.create_table_in_db(self.connection)
+        self.institute.create_user_in_db(self.connection, data)
         
 
         
-s = DbController().create_user()
+    
+        
