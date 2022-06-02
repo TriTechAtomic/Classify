@@ -1,10 +1,11 @@
 from models.db.users.institute import Institute
+from models.db.users.students import Students
 from models.db.users.teacher import Teachers
-from models.response.sign_up import Signup
-from sqlalchemy import insert
-from sqlalchemy.dialects.postgresql import insert
+
+
 from sqlalchemy import create_engine
 import jwt
+from models.response.sign_in import Signin
 
 from user_classes import InstituteData, StudentData, TeacherData
 
@@ -13,12 +14,6 @@ from user_classes import InstituteData, StudentData, TeacherData
 
 class DbController:
     def __init__(self):
-        #creating the instances of the classes
-        self.teacher = TeacherData()
-        self.institute = InstituteData()
-        self.student = StudentData()
-        
-    
         # Database credentials 
         conData  = {
         "user"     : "postgres",
@@ -40,15 +35,37 @@ class DbController:
         )
         self.connection = self.engine.connect()
         
+        #creating the instances of the classes    
+        self.teacher = TeacherData(engine=self.connection)
+        self.institute = InstituteData(engine=self.connection)
+        self.student = StudentData(engine=self.connection)
 
-    def create_teacher(self,Teacher:Teachers,):
-        self.teacher.create_table_in_db(self.connection)
+    # Student functions
+    def create_student(self, data: Students):
+        self.student.create_user_in_db(self.connection, data)
+    # check password 
+    def validate_student(self, data: Signin):
+        return self.student.validate_user(data)
+
+
+
+    # Teacher functions
+    def create_teacher(self,Teacher:Teachers):
         self.teacher.create_user_in_db(self.connection, Teacher)
+    # check password 
+    def validate_teacher(self, data: Signin):
+        return self.teacher.validate_user(data)
+
     
+
+    # Institute functions
     def create_institute(self, data: Institute):
-        self.institute.create_table_in_db(self.connection)
-        self.institute.create_user_in_db(self.connection, data)
-        
+        self.institute.create_user_in_db(data)
+    # check password 
+    def validate_institute_creds(self, data: Signin ):
+        return self.institute.validate_user(data)
+    
+
 
         
     

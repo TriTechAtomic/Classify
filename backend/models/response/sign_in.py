@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class signin(BaseModel):
-    username: str
+class Signin(BaseModel):
+    username_or_email: str
     password: str
     

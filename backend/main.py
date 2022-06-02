@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 from dbcreds import DbController
 from models.db.users.institute import  Institute
+from models.db.users.students import Students
+from models.db.users.teacher import Teachers
+from models.response.sign_in import  Signin
 
 # haaaaa de sakte hai 
 # nehai bhai 
@@ -21,25 +24,30 @@ async def refresh_token():
     # 3. Return a new access token
     pass
 
-@app.post("/signin")
-async def signin():
-    
-
-    
-
-    # TODO:
-    # 1. Check if user exists
-    # 2. Check if password is correct
-    # 3. Generate JWT token
-    # 4. Return JWT token    
-    pass
+@app.post("/signinInstitute")
+async def signin(data: Signin):
+    isValidUser =  dbCon.validate_institute_creds(data=data)
+    print("incoming data >>>> ",data,"\n","is the user valid >>>>>>>>>>>",isValidUser)
+    return isValidUser
 
 @app.post("/signupInstitute")
 async def signup(data: Institute):
     dbCon.create_institute(data)
-
-    return ''
+    return True
  
+@app.post("/signinTeacher")
+async def signin(data: Signin):
+    return dbCon.validate_teacher(data=data)
 
+@app.post("/signupTeacher")
+async def signup(data: Teachers):
+    return dbCon.create_teacher(data)
+    
+@app.post("/signupStudent")
+async def signup(data: Students):
+    return  dbCon.create_student(data)
 
+@app.post("/signinStudent")
+async def signin(data: Signin):
+    return dbCon.validate_student(data=data)
 
