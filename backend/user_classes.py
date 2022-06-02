@@ -1,76 +1,58 @@
 
 
 import bcrypt
+from sqlalchemy import VARCHAR, Column, Integer, MetaData, Table
 
 
 class InstituteData: 
     from models.db.users.institute import Institute
     def __init__(self):
-
         self.tableName = 'institute';
+        self.meta = MetaData();
+
+        
 
 
     def create_table_in_db(self,engine):
-        engine.execute(
-
-            '''
-            CREATE TABLE IF NOT EXISTS institute (
-                id SERIAL PRIMARY KEY,
-                username VARCHAR(255) NOT NULL,
-                password BYTEA NOT NULL,
-                institutes_name VARCHAR(255) NOT NULL,
-                email VARCHAR(255) NOT NULL,
-                contact VARCHAR(255) NOT NULL,
-                state VARCHAR(255) NOT NULL,
-                city VARCHAR(255) NOT NULL,
-                pincode VARCHAR(255) NOT NULL,
-                area VARCHAR(255) NOT NULL,
-                subscription_id VARCHAR(255) NOT NULL);
-            '''
+        print("Creating table in database")
+        # Create table query
+        self.table = Table(
+            self.tableName,
+            self.meta,
+            Column('id', Integer, primary_key=True),
+            Column('username', VARCHAR),
+            Column('password', VARCHAR),
+            Column('institutes_name', VARCHAR),
+            Column('email', VARCHAR),
+            Column('contact', VARCHAR),
+            Column('state', VARCHAR),
+            Column('city', VARCHAR),
+            Column('pincode', VARCHAR),
+            Column('area', VARCHAR),
+            Column('subscription_id', VARCHAR)
         )
+        self.meta.create_all(engine)
+        
+
+
+        
     
     def create_user_in_db(self, engine, data: Institute):
         # Insert query using Institute data class
-        # abhee institue ka bana hai  
-        statement = '''
-            INSERT INTO institute (
-                username,
-                password,
-                institutes_name,
-                email,
-                contact,
-                state,
-                city,
-                pincode,
-                area,
-                subscription_id
-            )
-            VALUES (
-                '{0}',
-                '{1}',
-                '{2}',
-                '{3}',
-                '{4}',
-                '{5}',
-                '{6}',
-                '{7}',
-                '{8}',
-                '{9}'
-            );
-        '''.format(
-            data.username,
-            bcrypt.hashpw((data.password).encode('utf-8'), bcrypt.gensalt()),
-            data.institutes_name,
-            data.email,
-            data.contact,
-            data.state,
-            data.city,
-            data.pincode,
-            data.area,
-            data.subscription_id
-        )  
-        engine.execute(statement)
-
+        print("Creating user in database")
+        ins = self.table.insert().values(
+            username=data.username,
+            password= bcrypt.hashpw((data.password).encode('utf-8'), bcrypt.gensalt()),
+            institutes_name=data.institutes_name,
+            email=data.email,
+            contact=data.contact,
+            state=data.state,
+            city=data.city,
+            pincode=data.pincode,
+            area=data.area,
+            subscription_id=data.subscription_id
+        )
+        engine.execute(ins)
     
 
 
