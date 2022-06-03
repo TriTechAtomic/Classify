@@ -6,7 +6,15 @@ tasks:
     before: cd sqlstarter && chmod +x ./sqlstarter.sh && sudo ./sqlstarter.sh 
 
   - name: python webserver
-    before: cd backend && pip3 install requirements.txt  && uvicorn main:app --reload --host 0.0.0.0 --port 6969
+    before: 
+      >
+        cd backend &&
+        sudo apt-get install libpq-dev python-dev &&
+        pip3 install virtualenv &&
+        python3 -m virtualenv interpreter &&
+        source ./interpreter/bin/activate &&
+        pip3 install -r requirements.txt  &&
+        uvicorn main:app --reload --host 0.0.0.0 --port 6969
 
 
   # TODO setup the api server start 
