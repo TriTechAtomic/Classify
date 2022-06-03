@@ -1,3 +1,9 @@
-sudo service mysql start;
-cat ./passwd.txt |  sudo mysql 
-cat ./secureinstaller.txt | while read line; do echo $line; done | sudo mysql_secure_installation
+sudo apt update ;
+sudo apt install -y postgresql postgresql-client;
+sudo pg_ctlcluster 12 main start;
+cat ./passwd.txt | sudo passwd postgres;
+sudo su -l postgres;
+psql -c "CREATE USER parth WITH SUPERUSER PASSWORD 'xxparthparekhxx_420';";
+psql -c "create database classify;";
+
+

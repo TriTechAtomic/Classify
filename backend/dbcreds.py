@@ -16,8 +16,8 @@ class DbController:
     def __init__(self):
         # Database credentials 
         conData  = {
-        "user"     : "postgres",
-        "password" : "123",
+        "user"     : "parth", 
+        "password" : "xxparthparekhxx_420",
         "host"     : "localhost",
         "port"     : 5432,
         "database" : "classify",

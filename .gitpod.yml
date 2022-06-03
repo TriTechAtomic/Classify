@@ -9,7 +9,7 @@ tasks:
     before: 
       >
         cd backend &&
-        sudo apt-get install libpq-dev python-dev &&
+        sudo apt-get install -y libpq-dev python-dev &&
         pip3 install virtualenv &&
         python3 -m virtualenv interpreter &&
         source ./interpreter/bin/activate &&
