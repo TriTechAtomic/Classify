@@ -1,10 +1,6 @@
 FROM cirrusci/flutter:latest
+
 USER gitpod
-
-
-RUN sudo apt-get update \
-    && sudo apt-get install -y \
-
 
 # Dazzle does not rebuild a layer until one of its lines are changed. Increase this counter to rebuild this layer.
 ENV TRIGGER_REBUILD=2
