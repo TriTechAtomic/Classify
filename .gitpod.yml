@@ -3,11 +3,8 @@ image:
 
 tasks:
   - name: sqlserver and api server starter
-    before: 
-      >
-        sudo apt update ;
-        sudo apt install -y postgresql postgresql-client;
-        sudo pg_ctlcluster 12 main start;
+    before: cd sqlstarter && chmod +x ./sqlstarter.sh && sudo ./sqlstarter.sh 
+        
      
 
   - name: python webserver
