@@ -4,8 +4,6 @@ USER gitpod
 
 RUN sudo apt-get update \
     && sudo apt-get install -y \
-    && sudo apt install -y python3 python3-pip \
-    && pip3 install fastapi uvicorn sqlalchemy 
 
 
 # Dazzle does not rebuild a layer until one of its lines are changed. Increase this counter to rebuild this layer.
