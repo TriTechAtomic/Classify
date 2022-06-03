@@ -42,7 +42,7 @@ class DbController:
 
     # Student functions
     def create_student(self, data: Students):
-        self.student.create_user_in_db(self.connection, data)
+        return self.student.create_user_in_db(data=data)
     # check password 
     def validate_student(self, data: Signin):
         return self.student.validate_user(data)
@@ -51,7 +51,7 @@ class DbController:
 
     # Teacher functions
     def create_teacher(self,Teacher:Teachers):
-        self.teacher.create_user_in_db(self.connection, Teacher)
+        return self.teacher.create_user_in_db(Teacher)
     # check password 
     def validate_teacher(self, data: Signin):
         return self.teacher.validate_user(data)
@@ -60,7 +60,7 @@ class DbController:
 
     # Institute functions
     def create_institute(self, data: Institute):
-        self.institute.create_user_in_db(data)
+        return self.institute.create_user_in_db(data)
     # check password 
     def validate_institute_creds(self, data: Signin ):
         return self.institute.validate_user(data)

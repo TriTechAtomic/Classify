@@ -5,7 +5,7 @@ class Institute(BaseModel):
     password: str
     institutes_name: str
     email: str
-    contact: int
+    contact: str
     state: str
     city: str
     pincode: int

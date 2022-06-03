@@ -1,5 +1,5 @@
 import bcrypt
-from sqlalchemy import FLOAT, INTEGER, VARCHAR, Column, Integer, MetaData, Table
+from sqlalchemy import FLOAT, INTEGER, VARCHAR, Column, Integer, MetaData, Table 
 from models.response.sign_in import Signin
 
 
@@ -13,29 +13,27 @@ class InstituteData:
 
     def validate_user(self, data: Signin):
         # Select query using username
-        print("Validating user")
+        print(f"Validating user Data username {data.username_or_email} password {data.password}")
         #selecting where username is equal to the username in the data
-        sel = self.table.select().where(self.table.c.username == data.username_or_email or self.table.c.email == data.username_or_email)
+        sel = self.table.select().where(self.table.c.username == data.username_or_email)
+        sel2 = self.table.select().where(self.table.c.email == data.username_or_email)
+
         result = self.engine.execute(sel)
+        result1 = self.engine.execute(sel2)
         #fetching the result
         user = result.fetchone()
-        #if the user is not found
+        user1 = result1.fetchone()
+        print(f"user {user}, user1 {user1}")
+        if user is None or user1 is None:
+            user = max(user, user1, key=lambda x: x != None)  
         if user is None:
-            return False
-        # validating the password 
+            return "User not found"
         if bcrypt.checkpw(data.password.encode('utf-8'), user.password.encode('utf-8')):
-            return True
-        # if the password is wrong
-        return False
-        
-    
-    def get_user_from_db(self, engine, username):
-        # Select query using username
-        print("Getting user from database")
-        sel = self.table.select().where(self.table.c.username == username)
-        result = self.engine.execute(sel)
-        return result.fetchone()
-    
+            return "User found"
+        else:
+            return "Password incorrect"
+
+       
     def create_user_in_db(self, data: Institute):
         # Insert query using Institute data class
         print("Creating user in database")
@@ -52,6 +50,7 @@ class InstituteData:
             subscription_id=data.subscription_id
         )
         self.engine.execute(ins)
+        return "User created successfully" 
     
 
     def create_table_in_db(self,engine):
@@ -61,10 +60,10 @@ class InstituteData:
             self.tableName,
             self.meta,
             Column('id', Integer, primary_key=True),
-            Column('username', VARCHAR),
+            Column('username', VARCHAR,unique= True),
             Column('password', VARCHAR),
             Column('institutes_name', VARCHAR),
-            Column('email', VARCHAR),
+            Column('email', VARCHAR,unique= True),
             Column('contact', VARCHAR),
             Column('state', VARCHAR),
             Column('city', VARCHAR),
@@ -79,7 +78,7 @@ class InstituteData:
 class StudentData:
     from models.db.users.students import Students
     def __init__(self,engine):
-        self.tableName = 'institute';
+        self.tableName = 'students';
         self.meta = MetaData();
         self.engine= engine;
         self.create_table_in_db(self.engine);
@@ -92,13 +91,14 @@ class StudentData:
             Column("institute_id", INTEGER),
             Column("age", Integer),
             Column("course_id", Integer),
-            Column("contact", Integer),
+            Column("contact", VARCHAR),
             Column("gender", VARCHAR),
             Column("address", VARCHAR),
-            Column("parent_contact", Integer),
+            Column("parent_contact", VARCHAR),
             Column("pending_fees", FLOAT),
             Column("total_fees", FLOAT),
-            Column("username", VARCHAR),
+            Column("email", VARCHAR,unique= True),
+            Column("username", VARCHAR,unique= True),
             Column("institute_code", Integer),
             Column("name", VARCHAR),
             Column("password", VARCHAR),
@@ -106,7 +106,7 @@ class StudentData:
         self.meta.create_all(engine)
 
 
-    def create_user_in_db(self, engine, data: Students):
+    def create_user_in_db(self,  data: Students):
         # Insert query using Students data class
         print("Creating user in database")
         ins = self.table.insert().values(
@@ -121,28 +121,34 @@ class StudentData:
             pending_fees = data.pending_fees,
             institute_code = data.institute_code,
             username = data.username,
+            email = data.email,
             password = bcrypt.hashpw((data.password).encode('utf-8'), bcrypt.gensalt()).decode('utf-8'),
             name = data.name,
         )
         self.engine.execute(ins);
+        return True
 
     def validate_user(self, data:Signin):
         # Select query using username
-        print("Validating user")
+        print(f"Validating user Data username {data.username_or_email} password {data.password}")
         #selecting where username is equal to the username in the data
-        sel = self.table.select().where(self.table.c.username == data.username_or_email or self.table.c.email == data.username_or_email)
+        sel = self.table.select().where(self.table.c.username == data.username_or_email)
+        sel2 = self.table.select().where(self.table.c.email == data.username_or_email)
+
         result = self.engine.execute(sel)
+        result1 = self.engine.execute(sel2)
         #fetching the result
         user = result.fetchone()
-        #if the user is not found
+        user1 = result1.fetchone()
+        print(f"user {user}, user1 {user1}")
+        if user is None or user1 is None:
+            user = max(user, user1, key=lambda x: x != None)  
         if user is None:
-            return False
-        # validating the password 
+            return "User not found"
         if bcrypt.checkpw(data.password.encode('utf-8'), user.password.encode('utf-8')):
-            return True
-        # if the password is wrong
-        return False
-
+            return "User found"
+        else:
+            return "Password incorrect"
         
         
 
@@ -151,7 +157,7 @@ class TeacherData:
     from models.db.users.teacher import Teachers  
 
     def __init__(self,engine):
-        self.tableName = 'institute';
+        self.tableName = 'teachers';
         self.meta = MetaData();
         self.engine= engine;
         self.create_table_in_db();
@@ -161,32 +167,36 @@ class TeacherData:
             self.tableName,
             self.meta,
             Column('id', Integer, primary_key=True),
-            Column("institute_id",  INTEGER),
+            Column("institute_id",  INTEGER,),
             Column("qualification",  VARCHAR),
-            Column("phonenumber",  INTEGER),
+            Column("phonenumber",  VARCHAR),
             Column("key_subject",  VARCHAR),
-            Column("username",  VARCHAR),
-            Column("email", VARCHAR),
+            Column("username",  VARCHAR,unique= True),
+            Column("email", VARCHAR,unique= True),
             Column("password",  VARCHAR)
         )
         self.meta.create_all(self.engine)
 
     def validate_user(self, data:Signin):
-        # Select query using Signin data class
-        print("Validating user")
+        print(f"Validating user Data username {data.username_or_email} password {data.password}")
         #selecting where username is equal to the username in the data
-        sel = self.table.select().where(self.table.c.username == data.username_or_email or self.table.c.email == data.username_or_email)
+        sel = self.table.select().where(self.table.c.username == data.username_or_email)
+        sel2 = self.table.select().where(self.table.c.email == data.username_or_email)
+
         result = self.engine.execute(sel)
+        result1 = self.engine.execute(sel2)
         #fetching the result
         user = result.fetchone()
-        #if the user is not found
+        user1 = result1.fetchone()
+        print(f"user {user}, user1 {user1}")
+        if user is None or user1 is None:
+            user = max(user, user1, key=lambda x: x != None)  
         if user is None:
-            return False
-        # validating the password 
+            return "User not found"
         if bcrypt.checkpw(data.password.encode('utf-8'), user.password.encode('utf-8')):
-            return True
-        # if the password is wrong
-        return False
+            return "password matched login sucessful"
+        else:
+            return "password not matched"
 
 
 
@@ -203,6 +213,7 @@ class TeacherData:
             password=bcrypt.hashpw((data.password).encode('utf-8'), bcrypt.gensalt()).decode('utf-8'),
         )
         self.engine.execute(ins)
+        return True
 
 
 
