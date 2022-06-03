@@ -2,20 +2,18 @@ image:
   file: .gitpod.dockerfile
 
 tasks:
-  - name: sqlserver and api server starter
-    before: cd sqlstarter && chmod +x ./sqlstarter.sh && sudo ./sqlstarter.sh 
-        
+  
      
 
   - name: python webserver
     before: 
       >
+        sudo apt-get install -y libpq-dev python-dev &&
         cd sqlstarter && 
         chmod +x ./sqlstarter.sh &&
         sudo ./sqlstarter.sh &&
         cd ..  &&
         cd backend &&
-        sudo apt-get install -y libpq-dev python-dev &&
         pip3 install virtualenv &&
         python3 -m virtualenv interpreter &&
         source ./interpreter/bin/activate &&
