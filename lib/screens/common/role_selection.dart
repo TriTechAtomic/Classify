@@ -93,7 +93,7 @@ class _RoleSelectionState extends State<RoleSelection> {
                           DropdownMenuItem(
                               child: Text('Student'), value: Role.student),
                           DropdownMenuItem(
-                              child: Text('parent'), value: Role.parent),
+                              child: Text('Parent'), value: Role.parent),
                           DropdownMenuItem(
                               child: Text('Teacher'), value: Role.teacher),
                         ],

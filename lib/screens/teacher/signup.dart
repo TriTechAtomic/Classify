@@ -1,4 +1,5 @@
 import 'package:classify/models/textfield_meta.dart';
+import 'package:classify/screens/teacher/teacher_home.dart';
 import 'package:classify/screens/widgets/form_heading.dart';
 import 'package:classify/screens/widgets/proceed_button.dart';
 import 'package:classify/screens/widgets/tf_flow.dart';
@@ -64,7 +65,9 @@ class _TeacherSignupState extends State<TeacherSignup> {
                     ProceedButton(
                       ss: MediaQuery.of(context).size,
                       text: "Proceed",
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, TeacherHome.routeName);
+                      },
                     )
                   ],
                 ),

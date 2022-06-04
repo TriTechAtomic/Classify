@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:classify/models/textfield_meta.dart';
 import 'package:classify/screens/widgets/form_heading.dart';
 
+import 'student_home.dart';
+
 class StudentSignup extends StatefulWidget {
   const StudentSignup({Key? key}) : super(key: key);
   static const String routeName = '/studentSignup';
@@ -67,7 +69,10 @@ class _StudentSignupState extends State<StudentSignup> {
                     ProceedButton(
                       ss: MediaQuery.of(context).size,
                       text: "Proceed",
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(
+                            context, StudentHome.routeName);
+                      },
                     )
                   ],
                 ),
