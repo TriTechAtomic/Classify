@@ -6,7 +6,6 @@ from models.db.users.teacher import Teachers
 from models.response.sign_in import  Signin
 
 from jwtcon import create_access_token,  create_refresh_token, access_required, refresh_required
-import os
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -16,7 +15,6 @@ load_dotenv()
 app = FastAPI()
 dbCon =  DbController()
 
-from backend.dbcreds import DbController
 
 app = FastAPI()
 dbCon =  DbController()
@@ -28,9 +26,10 @@ async def root():
 @app.get("/newaccesstoken",dependencies=[Depends(refresh_required)])
 async def refresh_token(token: str = Header(None)):
     data = refresh_required(token)
+    print(data)
     return {
-        "access_token": create_access_token(data),
-        "refresh_token": create_refresh_token(data)
+        "access_token": create_access_token(data['username']),
+        "refresh_token": create_refresh_token(data['username'])
     }
 
 @app.get("/authonlyRouteTest" , dependencies=[Depends(access_required)])
