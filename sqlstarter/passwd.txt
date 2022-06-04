@@ -1,1 +1,2 @@
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'xxparthparekhxx_420';
+xxparthparekhxx_420
+xxparthparekhxx_420
