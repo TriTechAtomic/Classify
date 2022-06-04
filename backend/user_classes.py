@@ -27,11 +27,11 @@ class InstituteData:
         if user is None or user1 is None:
             user = max(user, user1, key=lambda x: x != None)  
         if user is None:
-            return "User not found"
+            return False
         if bcrypt.checkpw(data.password.encode('utf-8'), user.password.encode('utf-8')):
-            return "User found"
+            return True
         else:
-            return "Password incorrect"
+            return False
 
        
     def create_user_in_db(self, data: Institute):
@@ -144,11 +144,11 @@ class StudentData:
         if user is None or user1 is None:
             user = max(user, user1, key=lambda x: x != None)  
         if user is None:
-            return "User not found"
+            return False
         if bcrypt.checkpw(data.password.encode('utf-8'), user.password.encode('utf-8')):
-            return "User found"
+            return True
         else:
-            return "Password incorrect"
+            return False
         
         
 
@@ -192,11 +192,11 @@ class TeacherData:
         if user is None or user1 is None:
             user = max(user, user1, key=lambda x: x != None)  
         if user is None:
-            return "User not found"
+            return False
         if bcrypt.checkpw(data.password.encode('utf-8'), user.password.encode('utf-8')):
-            return "password matched login sucessful"
+            return True
         else:
-            return "password not matched"
+            return False
 
 
 
