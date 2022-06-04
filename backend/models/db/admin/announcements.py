@@ -1,13 +1,12 @@
 from datetime import datetime
 from pydantic import BaseModel
-from sqlalchemy import VARCHAR
 
 
 class Announcements(BaseModel):
     id: int
     institute_id: int
-    subject: VARCHAR
-    message: VARCHAR
+    subject: str
+    message: str
     time: datetime
-    type: VARCHAR
+    type: str
     
