@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import '../widgets/customdrawer.dart';
-<<<<<<< HEAD
-=======
->>>>>>> 7cc771d7e2da6e1a0a4e36aed9eef305d0d4b3cb
 
 class StudentHome extends StatelessWidget {
   StudentHome({Key? key}) : super(key: key);
