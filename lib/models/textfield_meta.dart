@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
 class TFmeta {
-  String hint;
-  TextEditingController controller = TextEditingController();
-  bool ispass;
-  int lineCount;
+  final String hint;
+  final TextEditingController controller = TextEditingController();
+  final bool ispass;
+  final int lineCount;
+  final Widget? trailing;
 
-  TFmeta(this.hint, {this.ispass = false, this.lineCount = 1});
+  TFmeta(this.hint, {this.ispass = false, this.lineCount = 1, this.trailing});
 }
