@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class TFrow extends StatelessWidget {
   final TFmeta data;
   final Size ss;
+
   const TFrow({Key? key, required this.data, required this.ss})
       : super(key: key);
 
@@ -20,6 +21,7 @@ class TFrow extends StatelessWidget {
                 obscureText: data.ispass,
                 decoration: InputDecoration(
                   labelText: data.hint,
+                  suffixIcon: data.trailing,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(13)),
                 ),

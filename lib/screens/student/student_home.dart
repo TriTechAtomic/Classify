@@ -34,6 +34,14 @@ class StudentHome extends StatelessWidget {
               )
             : null,
         appBar: AppBar(
+          leading: MediaQuery.of(context).size.width < 1100
+              ? Builder(
+                  builder: (context) => // Ensure Scaffold is in context
+                      IconButton(
+                          icon: const Icon(Icons.menu),
+                          onPressed: () => Scaffold.of(context).openDrawer()),
+                )
+              : null,
           automaticallyImplyLeading: false,
           title: const Text("Classify"),
         ),

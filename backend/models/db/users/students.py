@@ -1,20 +1,18 @@
-from numpy import double
 from pydantic import BaseModel
-from sqlalchemy import VARCHAR
 
 
 class Students(BaseModel):
-    id: int
     institute_id: int
     course_id: int
     age: int
-    gender: VARCHAR
-    contact: int
+    gender: str
+    contact: str
     parent_contact: int
-    address: VARCHAR
+    address: str
     total_fees: float
     pending_fees: float
     institute_code: int
-    username: VARCHAR
-    password: VARCHAR
-    name: VARCHAR
+    email :str
+    username: str
+    password: str
+    name: str

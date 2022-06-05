@@ -1,16 +1,15 @@
 from datetime import datetime
 from pydantic import BaseModel
-from sqlalchemy import VARCHAR
 
 
 class Test(BaseModel):
     id: int
     institute_id: int
-    name: VARCHAR
+    name: str
     subject_id: int
     course_id: int
     
-    test_type: VARCHAR
+    test_type: str
     total_marks: int
     passing_marks: int
     date: datetime

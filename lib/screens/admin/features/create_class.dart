@@ -1,11 +1,7 @@
 import 'package:classify/screens/widgets/proceed_button.dart';
 import 'package:classify/screens/widgets/tf_flow.dart';
-import 'package:classify/screens/widgets/transperent_app_bar.dart';
-import 'package:classify/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:classify/models/textfield_meta.dart';
-import 'package:classify/screens/widgets/form_heading.dart';
-import 'package:flutter/widgets.dart';
 
 class CreateCustomClass extends StatefulWidget {
   const CreateCustomClass({Key? key}) : super(key: key);
@@ -19,7 +15,6 @@ class _CreateCustomClassState extends State<CreateCustomClass> {
   List<TFmeta> controllers = [
     TFmeta("Enter Class Name"),
     TFmeta("Fees Amount"),
-    TFmeta("Add Subjects"),
   ];
 
   @override
@@ -57,10 +52,41 @@ class _CreateCustomClassState extends State<CreateCustomClass> {
                   child: ListView(
                     children: [
                       for (var ele in controllers)
-                        TFrow(data: ele, ss: MediaQuery.of(context).size),
+                        TFrow(
+                          data: ele,
+                          ss: MediaQuery.of(context).size,
+                        ),
                       TextButton(
                         onPressed: () {
-                          
+                          controllers.add(
+                            TFmeta("Add Subjects",
+                                trailing: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    iconSize: 10,
+                                    items: const [
+                                      DropdownMenuItem(
+                                        value: "",
+                                        child: Text("Teacher Name"),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: "",
+                                        child: Text("Teacher Name"),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: "",
+                                        child: Text("Teacher Name"),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: "",
+                                        child: Text("Teacher Name"),
+                                      ),
+                                    ],
+                                    onChanged: (e) => {},
+                                    icon: const Text("asd"),
+                                  ),
+                                )),
+                          );
+                          setState(() {});
                         },
                         child: const Text(
                           "+Add More Subjects",
