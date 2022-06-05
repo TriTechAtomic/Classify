@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:classify/models/textfield_meta.dart';
 
 class Institute {
@@ -39,8 +41,9 @@ class Institute {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
+  @override
+  String toString() {
+    return jsonEncode({
       'username': username,
       'password': password,
       'institutes_name': institutes_name,
@@ -51,12 +54,7 @@ class Institute {
       'pincode': pincode,
       'area': area,
       'subscription_id': subscription_id,
-    };
-  }
-
-  @override
-  String toString() {
-    return 'Institute{username: $username, password: $password, institutes_name: $institutes_name, email: $email, contact: $contact, state: $state, city: $city, pincode: $pincode, area: $area, subscription_id: $subscription_id}';
+    });
   }
 
   factory Institute.fromTFMETA(List<TFmeta> list) {

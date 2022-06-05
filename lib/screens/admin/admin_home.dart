@@ -3,7 +3,7 @@ import 'package:classify/utils/buttons.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:classify/utils/responsive.dart';
 import 'package:flutter/material.dart';
-import 'adminSideDrawer.dart';
+import 'admin_side_drawer.dart';
 
 class AdminHome extends StatefulWidget {
   const AdminHome({Key? key}) : super(key: key);

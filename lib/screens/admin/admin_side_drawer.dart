@@ -1,3 +1,4 @@
+import 'package:classify/screens/common/widgets.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -72,6 +73,7 @@ class _AdminSideDrawerState extends State<AdminSideDrawer> {
               press: () {},
               mode: null,
             ),
+            logoutButton(context)
           ],
         ),
       ),
