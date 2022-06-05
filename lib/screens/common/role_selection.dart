@@ -1,7 +1,6 @@
 import 'package:classify/assets/asset_register.dart';
 import 'package:classify/screens/admin/signup.dart';
 import 'package:classify/screens/common/signin.dart';
-import 'package:classify/screens/student/signup.dart';
 import 'package:classify/screens/teacher/signup.dart';
 import 'package:classify/screens/widgets/transperent_app_bar.dart';
 import 'package:classify/utils/colors.dart';
@@ -91,8 +90,6 @@ class _RoleSelectionState extends State<RoleSelection> {
                           DropdownMenuItem(
                               child: Text('Admin'), value: Role.admin),
                           DropdownMenuItem(
-                              child: Text('Student'), value: Role.student),
-                          DropdownMenuItem(
                               child: Text('Parent'), value: Role.parent),
                           DropdownMenuItem(
                               child: Text('Teacher'), value: Role.teacher),
@@ -114,8 +111,6 @@ class _RoleSelectionState extends State<RoleSelection> {
           if (e == Role.admin) {
             pagename = AdminSignup.routename;
           } else if (e == Role.student) {
-            pagename = StudentSignup.routeName;
-          } else if (e == Role.parent) {
             pagename = Signin.routename;
           } else {
             pagename = TeacherSignup.routeName;

@@ -4,7 +4,6 @@ import 'package:classify/screens/admin/signup.dart';
 import 'package:classify/screens/common/role_selection.dart';
 import 'package:classify/screens/common/signin.dart';
 import 'package:classify/screens/parent/parent_home.dart';
-import 'package:classify/screens/student/signup.dart';
 import 'package:classify/screens/student/student_home.dart';
 import 'package:classify/screens/teacher/signup.dart';
 import 'package:classify/screens/teacher/teacher_home.dart';
@@ -34,7 +33,6 @@ class MyApp extends StatelessWidget {
 
         // signup Screens
         AdminSignup.routename: (context) => const AdminSignup(),
-        StudentSignup.routeName: (context) => const StudentSignup(),
         TeacherSignup.routeName: (context) => const TeacherSignup(),
 
         // common Signin Screen

@@ -153,7 +153,6 @@ class _SigninState extends State<Signin> {
                               GetHomeRouteNameWithRole(SelectedRole),
                             );
                           } catch (e) {
-                            print(e);
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text(
