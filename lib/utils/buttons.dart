@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 class CustomButtons extends StatefulWidget {
   final String text;
   final double height, width;
+  final Color? color;
+  final Color? textcolor;
   final VoidCallback? callback;
 
   const CustomButtons({
@@ -11,6 +13,8 @@ class CustomButtons extends StatefulWidget {
     required this.text,
     required this.height,
     required this.width,
+    this.color,
+    this.textcolor,
     this.callback,
   }) : super(key: key);
 
@@ -32,12 +36,14 @@ class _CustomButtonsState extends State<CustomButtons> {
         widget.text,
         textAlign: TextAlign.center,
         style: TextStyle(
-            color: hovered ? Colors.white : Colors.black,
+            color: widget.textcolor ?? (hovered ? Colors.white : Colors.black),
             fontWeight: FontWeight.bold),
       ),
       style: ButtonStyle(
         fixedSize: MaterialStateProperty.all(Size(widget.width, widget.height)),
-        backgroundColor: MaterialStateProperty.all(Colors.white),
+        backgroundColor: widget.color != null
+            ? MaterialStateProperty.all(widget.color)
+            : MaterialStateProperty.all(Colors.white),
         overlayColor: MaterialStateProperty.all(primaryColor),
       ),
     );

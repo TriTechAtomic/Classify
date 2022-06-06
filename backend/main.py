@@ -9,13 +9,6 @@ from jwtcon import create_access_token,  create_refresh_token, access_required, 
 from dotenv import load_dotenv
 load_dotenv()
 
-
-
-
-app = FastAPI()
-dbCon =  DbController()
-
-
 app = FastAPI()
 dbCon =  DbController()
 
