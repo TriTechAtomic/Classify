@@ -1,3 +1,4 @@
+import 'package:classify/screens/admin/features/manage_courses.dart';
 import 'package:classify/screens/widgets/proceed_button.dart';
 import 'package:classify/screens/widgets/tf_flow.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +44,13 @@ class _CreateCustomClassState extends State<CreateCustomClass> {
           padding: const EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
+              IconButton(
+                  onPressed: () {
+                    setState(() {});
+                  },
+                  icon: const Icon(Icons.close)),
               Expanded(
                 flex: 5,
                 child: SizedBox(

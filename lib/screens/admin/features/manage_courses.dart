@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'create_class.dart';
 
 class ManageCourses extends StatefulWidget {
-  const ManageCourses({Key? key}) : super(key: key);
+  const ManageCourses({Key? key,}) : super(key: key);
 
   @override
   State<ManageCourses> createState() => _ManageCoursesState();
@@ -13,7 +13,6 @@ class ManageCourses extends StatefulWidget {
 
 class _ManageCoursesState extends State<ManageCourses> {
   bool createClass = false;
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,10 +33,7 @@ class _ManageCoursesState extends State<ManageCourses> {
                     ],
                   ),
                 ),
-                body:
-                    // createClass
-                    //     ? CreateCustomClass():
-                    TabBarView(
+                body: TabBarView(
                   children: [
                     createClass
                         ? const CreateCustomClass()
@@ -45,7 +41,6 @@ class _ManageCoursesState extends State<ManageCourses> {
                             backgroundColor: adminBackground,
                             body: Center(
                               child: Wrap(
-                                // mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
