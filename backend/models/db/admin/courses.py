@@ -1,14 +1,13 @@
 from pydantic import BaseModel
-from sqlalchemy import VARCHAR
 
 
 class Courses(BaseModel):
-    id: VARCHAR
+    id: str
     institute_id: int
-    name: VARCHAR
-    description: VARCHAR
+    name: str
+    description: str
     duration: int
     fees: int
-    start_date: VARCHAR
-    end_date: VARCHAR
+    start_date: str
+    end_date: str
     

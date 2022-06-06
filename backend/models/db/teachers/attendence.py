@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-from sqlalchemy import VARCHAR
 
 
 class Attendence(BaseModel):
@@ -8,6 +7,6 @@ class Attendence(BaseModel):
     institute_id: int
     teacher_id: int
     present:bool
-    date: VARCHAR
-    status: VARCHAR
-    time: VARCHAR
+    date: str
+    status: str
+    time: str

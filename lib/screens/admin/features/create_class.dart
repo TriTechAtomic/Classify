@@ -68,6 +68,7 @@ class _CreateCustomClassState extends State<CreateCustomClass> {
                             TFmeta("Add Subjects",
                                 trailing: DropdownButtonHideUnderline(
                                   child: DropdownButton(
+                                    iconSize: 10,
                                     items: const [
                                       DropdownMenuItem(
                                         value: "",
@@ -87,13 +88,7 @@ class _CreateCustomClassState extends State<CreateCustomClass> {
                                       ),
                                     ],
                                     onChanged: (e) => {},
-                                    icon: const Padding(
-                                      padding: EdgeInsets.only(right: 8.0),
-                                      child: Text(
-                                        "Assign teachers",
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
+                                    icon: const Text("asd"),
                                   ),
                                 )),
                           );

@@ -36,10 +36,10 @@ class _CustomButtonsState extends State<CustomButtons> {
             fontWeight: FontWeight.bold),
       ),
       style: ButtonStyle(
-          fixedSize:
-              MaterialStateProperty.all(Size(widget.width, widget.height)),
-          backgroundColor: MaterialStateProperty.all(Colors.white),
-          overlayColor: MaterialStateProperty.all(primaryColor)),
+        fixedSize: MaterialStateProperty.all(Size(widget.width, widget.height)),
+        backgroundColor: MaterialStateProperty.all(Colors.white),
+        overlayColor: MaterialStateProperty.all(primaryColor),
+      ),
     );
   }
 }

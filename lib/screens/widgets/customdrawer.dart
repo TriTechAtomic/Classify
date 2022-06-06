@@ -1,3 +1,4 @@
+import 'package:classify/screens/common/widgets.dart';
 import 'package:flutter/material.dart';
 
 import '../../assets/asset_register.dart';
@@ -61,21 +62,32 @@ class CustomDrawerState extends State<CustomDrawer> {
             padding: const EdgeInsets.only(left: 8.0),
             child: ListTile(
               title: const Text("Theme"),
-              trailing: ToggleButtons(
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-                isSelected: isSelected,
-                fillColor: Colors.white,
-                onPressed: (index) {
-                  setState(() {
-                    selected = !selected;
-                    icon = selected
-                        ? Icons.light_mode_outlined
-                        : Icons.dark_mode_outlined;
-                  });
-                },
-                children: [
-                  Icon(icon),
-                ],
+              onTap: () {
+                setState(() {
+                  selected = !selected;
+                  icon = selected
+                      ? Icons.light_mode_outlined
+                      : Icons.dark_mode_outlined;
+                });
+              },
+              trailing: SizedBox(
+                height: 40,
+                child: ToggleButtons(
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+                  isSelected: isSelected,
+                  fillColor: Colors.white,
+                  onPressed: (index) {
+                    setState(() {
+                      selected = !selected;
+                      icon = selected
+                          ? Icons.light_mode_outlined
+                          : Icons.dark_mode_outlined;
+                    });
+                  },
+                  children: [
+                    Icon(icon),
+                  ],
+                ),
               ),
             ),
           ),
@@ -142,6 +154,7 @@ class Draweritems extends StatelessWidget {
               onTap: functions[i],
             ),
           ),
+        logoutButton(context)
       ],
     );
   }

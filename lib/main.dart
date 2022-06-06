@@ -4,11 +4,11 @@ import 'package:classify/screens/admin/signup.dart';
 import 'package:classify/screens/common/role_selection.dart';
 import 'package:classify/screens/common/signin.dart';
 import 'package:classify/screens/parent/parent_home.dart';
-import 'package:classify/screens/student/signup.dart';
 import 'package:classify/screens/student/student_home.dart';
 import 'package:classify/screens/teacher/signup.dart';
 import 'package:classify/screens/teacher/teacher_home.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(const MyApp());
 
@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.deepPurple,
           scaffoldBackgroundColor: Colors.white),
-      title: 'Material App',
-      home: Signin(),
+      title: 'Classify',
+      home: const AuthValidator(),
       routes: {
         // home Screens
         AdminHome.routeName: (context) => const AdminHome(),
@@ -33,11 +33,10 @@ class MyApp extends StatelessWidget {
 
         // signup Screens
         AdminSignup.routename: (context) => const AdminSignup(),
-        StudentSignup.routeName: (context) => const StudentSignup(),
         TeacherSignup.routeName: (context) => const TeacherSignup(),
 
         // common Signin Screen
-        Signin.routename: (context) => Signin(),
+        Signin.routename: (context) => const Signin(),
 
         // role selection Screen
         RoleSelection.routeName: (context) => const RoleSelection(),
@@ -46,5 +45,34 @@ class MyApp extends StatelessWidget {
         '/ManageCourses': (context) => const ManageCourses(),
       },
     );
+  }
+}
+
+class AuthValidator extends StatelessWidget {
+  const AuthValidator({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: SharedPreferences.getInstance()
+            .then((prefs) => prefs.getString('role')),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final role = snapshot.data;
+            if (role == "Institute") {
+              return const AdminHome();
+            } else if (role == "Student") {
+              return StudentHome();
+            } else if (role == "Parent") {
+              return const ParentHome();
+            } else {
+              return TeacherHome();
+            }
+          } else {
+            return const Signin();
+          }
+        });
   }
 }
