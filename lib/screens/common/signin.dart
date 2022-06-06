@@ -1,19 +1,71 @@
 import 'package:classify/models/textfield_meta.dart';
+import 'package:classify/screens/admin/admin_home.dart';
 import 'package:classify/screens/common/role_selection.dart';
+import 'package:classify/screens/parent/parent_home.dart';
+import 'package:classify/screens/student/student_home.dart';
+import 'package:classify/screens/teacher/teacher_home.dart';
 import 'package:classify/screens/widgets/form_heading.dart';
 import 'package:classify/screens/widgets/proceed_button.dart';
 import 'package:classify/screens/widgets/tf_flow.dart';
+import 'package:classify/utils/auth/classify_auth.dart';
+import 'package:classify/utils/auth/models/user.dart';
+import 'package:classify/utils/colors.dart';
 import 'package:classify/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
-class Signin extends StatelessWidget {
+class Signin extends StatefulWidget {
   static const routename = '/signin';
 
-  Signin({Key? key}) : super(key: key);
+  const Signin({Key? key}) : super(key: key);
+
+  @override
+  State<Signin> createState() => _SigninState();
+}
+
+class _SigninState extends State<Signin> {
   final List<TFmeta> controllers = [
     TFmeta("Enter User Name / Email"),
     TFmeta("Enter password", ispass: true)
   ];
+
+  Role SelectedRole = Role.admin;
+
+  ClassifyAuth getInstanceWithRole(Role e) {
+    if (e == Role.admin) {
+      return ClassifyAuth<Institute>();
+    } else if (e == Role.student) {
+      return ClassifyAuth<Student>();
+    } else if (e == Role.parent) {
+      return ClassifyAuth<Parent>();
+    } else {
+      return ClassifyAuth<Teacher>();
+    }
+  }
+
+  String getEndpointWithRole(Role e) {
+    if (e == Role.admin) {
+      return "signinInstitute";
+    } else if (e == Role.student) {
+      return "signinStudent";
+    } else if (e == Role.parent) {
+      return "signinParent";
+    } else {
+      return "signinTeacher";
+    }
+  }
+
+  String GetHomeRouteNameWithRole(Role e) {
+    if (e == Role.admin) {
+      return AdminHome.routeName;
+    } else if (e == Role.student) {
+      return StudentHome.routeName;
+    } else if (e == Role.parent) {
+      return ParentHome.routeName;
+    } else {
+      return TeacherHome.routeName;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +83,47 @@ class Signin extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: 250,
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            color: accentColor,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                              isExpanded: true,
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.white,
+                              ),
+                              style: const TextStyle(color: Colors.white),
+                              borderRadius: BorderRadius.circular(10),
+                              focusColor: accentColor,
+                              dropdownColor: accentColor,
+                              hint: const Text("Select your role"),
+                              value: SelectedRole,
+                              items: const [
+                                DropdownMenuItem(
+                                    child: Text('Admin'), value: Role.admin),
+                                DropdownMenuItem(
+                                    child: Text('Student'),
+                                    value: Role.student),
+                                // DropdownMenuItem(
+                                //     child: Text('Parent'), value: Role.parent),
+                                DropdownMenuItem(
+                                    child: Text('Teacher'),
+                                    value: Role.teacher),
+                              ],
+                              onChanged: (Role? e) {
+                                setState(() {
+                                  SelectedRole = e!;
+                                });
+                              }),
+                        ),
+                      ),
+                    ),
                     for (var ele in controllers)
                       TFrow(data: ele, ss: MediaQuery.of(context).size),
                     Row(
@@ -46,8 +139,32 @@ class Signin extends StatelessWidget {
                       child: ProceedButton(
                         ss: MediaQuery.of(context).size,
                         text: "Sign in",
-                        onPressed: () {
-                          //Login Karo
+                        onPressed: () async {
+                          try {
+                            Response res =
+                                await getInstanceWithRole(SelectedRole).signIn(
+                              controllers[0].controller.text,
+                              controllers[1].controller.text,
+                              getEndpointWithRole(SelectedRole),
+                            );
+
+                            Navigator.pushNamed(
+                              context,
+                              GetHomeRouteNameWithRole(SelectedRole),
+                            );
+                          } catch (e) {
+                            print(e);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  "Invalid Credentials",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                            //Login Karo
+                          }
                         },
                       ),
                     ),

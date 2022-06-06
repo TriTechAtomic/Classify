@@ -1,7 +1,7 @@
 import 'package:classify/utils/buttons.dart';
 import 'package:classify/utils/responsive.dart';
 import 'package:flutter/material.dart';
-import 'StudentHomeHeader.dart';
+import 'student_home_header.dart';
 
 class StudentHomeContents extends StatelessWidget {
   StudentHomeContents({Key? key}) : super(key: key);

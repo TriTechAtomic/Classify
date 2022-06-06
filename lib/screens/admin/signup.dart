@@ -1,9 +1,8 @@
 import 'package:classify/models/textfield_meta.dart';
-import 'package:classify/screens/admin/admin_home.dart';
 import 'package:classify/screens/widgets/form_heading.dart';
-import 'package:classify/screens/widgets/proceed_button.dart';
-import 'package:classify/screens/widgets/tf_flow.dart';
 import 'package:classify/screens/widgets/transperent_app_bar.dart';
+import 'package:classify/utils/auth/classify_auth.dart';
+import 'package:classify/utils/auth/models/user.dart';
 import 'package:flutter/material.dart';
 
 class AdminSignup extends StatefulWidget {
@@ -17,15 +16,15 @@ class AdminSignup extends StatefulWidget {
 class _AdminSignupState extends State<AdminSignup> {
   final List<TFmeta> controllers = [
     TFmeta("Enter User Name"),
+    TFmeta("Enter Password", ispass: true),
     TFmeta("Enter Institute Name"),
     TFmeta("Enter Email"),
-    TFmeta("Enter Password", ispass: true),
     TFmeta("Enter Contact"),
-    TFmeta("Enter Area"),
-    TFmeta("Enter City"),
     TFmeta("Enter State"),
+    TFmeta("Enter City"),
     TFmeta("Enter pincode"),
-    TFmeta("Enter Institute Email"),
+    TFmeta("Enter Area"),
+    TFmeta("Enter Subscription ID"),
   ];
 
   @override
@@ -78,7 +77,12 @@ class _AdminSignupState extends State<AdminSignup> {
                       ),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, AdminHome.routeName);
+                        if (controllers
+                            .every((ele) => ele.controller.text.isNotEmpty)) {
+                          ClassifyAuth<Institute>()
+                              .signUp(Institute.fromTFMETA(controllers));
+                        }
+                        // Navigator.pushNamed(context, AdminHome.routeName);
                       },
                       child: const Text('Proceed'),
                     )

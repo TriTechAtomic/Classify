@@ -1,3 +1,4 @@
+import 'package:classify/screens/common/widgets.dart';
 import 'package:flutter/material.dart';
 
 import '../../assets/asset_register.dart';
@@ -153,6 +154,7 @@ class Draweritems extends StatelessWidget {
               onTap: functions[i],
             ),
           ),
+        logoutButton(context)
       ],
     );
   }
