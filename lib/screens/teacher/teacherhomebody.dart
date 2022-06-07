@@ -24,19 +24,16 @@ class TeacherHomeBody extends StatelessWidget {
                 width: 1,
               ),
               borderRadius: radius),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomButtons(
-                text: 'Institution $className',
-                height: Responsive.isMobile(context) ? 50 : 60,
-                width: Responsive.isMobile(context)
-                    ? MediaQuery.of(context).size.width * 0.85
-                    : (Responsive.isTablet(context)
-                        ? MediaQuery.of(context).size.width * 0.7
-                        : MediaQuery.of(context).size.width * 0.4),
-              ),
-            ],
+          child: CustomButtons(
+            text: 'Institution $className',
+            height: Responsive.isMobile(context) ? 50 : 60,
+            width: Responsive.isMobile(context)
+                ? MediaQuery.of(context).size.width * 0.85
+                : (Responsive.isTablet(context)
+                    ? MediaQuery.of(context).size.width * 0.7
+                    : MediaQuery.of(context).size.width * 0.4),
+            callback: () {},
+            borderradius: 20.0,
           ),
         ),
       ),

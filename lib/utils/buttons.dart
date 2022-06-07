@@ -7,6 +7,7 @@ class CustomButtons extends StatefulWidget {
   final Color? color;
   final Color? textcolor;
   final VoidCallback? callback;
+  final double? borderradius;
 
   const CustomButtons({
     Key? key,
@@ -16,6 +17,7 @@ class CustomButtons extends StatefulWidget {
     this.color,
     this.textcolor,
     this.callback,
+    this.borderradius,
   }) : super(key: key);
 
   @override
@@ -40,6 +42,14 @@ class _CustomButtonsState extends State<CustomButtons> {
             fontWeight: FontWeight.bold),
       ),
       style: ButtonStyle(
+        shape: widget.borderradius != null
+            ? MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.circular(widget.borderradius as double),
+                ),
+              )
+            : null,
         fixedSize: MaterialStateProperty.all(Size(widget.width, widget.height)),
         backgroundColor: widget.color != null
             ? MaterialStateProperty.all(widget.color)
