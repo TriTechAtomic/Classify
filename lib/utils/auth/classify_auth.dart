@@ -4,7 +4,7 @@ import 'package:http/http.dart' show post, Response;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ClassifyAuth<T> {
-  final String base = 'http://localhost:8000/';
+  final String base = 'http://52.66.199.213:8000/';
 
   ClassifyAuth();
 
