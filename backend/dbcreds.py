@@ -45,6 +45,10 @@ class DbController:
     # check password 
     def validate_student(self, data: Signin):
         return self.student.validate_user(data)
+    #get username 
+    def get_user_details(self, username: str):
+        return self.student.get_user_details(username)
+
 
 
 
@@ -54,6 +58,9 @@ class DbController:
     # check password 
     def validate_teacher(self, data: Signin):
         return self.teacher.validate_user(data)
+    #get username 
+    def get_user_details(self, username: str):
+        return self.teacher.get_user_details(username)
 
     
 
@@ -63,6 +70,9 @@ class DbController:
     # check password 
     def validate_institute_creds(self, data: Signin ):
         return self.institute.validate_user(data)
+    #get username 
+    def get_user_details(self, username: str):
+        return self.institute.get_user_details(username)
     
 
 

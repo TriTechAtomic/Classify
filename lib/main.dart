@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         RoleSelection.routeName: (context) => const RoleSelection(),
 
         //For admin Home
-        '/ManageCourses': (context) => const ManageCourses(),
+        ManageCourses.routeName: (context) => const ManageCourses(),
       },
     );
   }

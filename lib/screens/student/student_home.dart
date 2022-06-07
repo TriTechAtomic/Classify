@@ -1,4 +1,4 @@
-import 'package:classify/screens/student/student_home_content.dart';
+import 'student_home_content.dart';
 import 'package:flutter/material.dart';
 import '../widgets/customdrawer.dart';
 
@@ -7,6 +7,7 @@ class StudentHome extends StatelessWidget {
   static const String routeName = '/studentHome';
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
   final List<String> drawerWidgets = [
     "Rate us",
     "Share",

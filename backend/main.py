@@ -8,13 +8,6 @@ from models.response.sign_in import  Signin
 from jwtcon import create_access_token,  create_refresh_token, access_required, refresh_required
 
 
-
-
-
-app = FastAPI()
-dbCon =  DbController()
-
-
 app = FastAPI()
 dbCon =  DbController()
 
@@ -35,15 +28,41 @@ async def refresh_token(token: str = Header(None)):
 async def authonlyRouteTest():
     return {"message": ">> Hello from xxparthparekhxx >> \n You are authorized to access this route"}
 
+
+'''
+ Institue ROUTES
+ Todos 
+ [] Get User Details 
+ [] Create Course
+ [] Enroll Student
+ [] Enroll Teacher
+'''
+
+@app.get("userdetails",dependencies=[Depends(access_required)])
+async def get_user_details(token: str = Header(None)):
+    userdetails =access_required(token)
+    role=userdetails['role']
+    username = userdetails['username']
+    print(userdetails)
+    if  role == "institute":
+        return dbCon.institute.get_user_details(username)
+    elif role == "teacher":
+        return dbCon.teacher.get_user_details(username)
+    elif role == "student":
+        return dbCon.student.get_user_details(username)
+    else: 
+        return {"message": ">> You are not authorized to access this route"}
+
+
+
 @app.post("/signinInstitute")
 async def signin(data: Signin):
     isValidUser =  dbCon.validate_institute_creds(data=data)
     if isValidUser:
-        access_token = create_access_token(data.username_or_email)
-        refresh_token = create_refresh_token(data.username_or_email)
+        access_token = create_access_token(data.username_or_email, "institute")
+        refresh_token = create_refresh_token(data.username_or_email, "institute")
         return { "access_token": access_token, "refresh_token": refresh_token }
     return {"message": "Invalid Credentials"}
-
 
 @app.post("/signupInstitute")
 async def signup(data: Institute):
@@ -54,8 +73,8 @@ async def signup(data: Institute):
 async def signin(data: Signin):
     isValidUser =  dbCon.validate_teacher(data=data)
     if isValidUser:
-        access_token = create_access_token(data.username_or_email)
-        refresh_token = create_refresh_token(data.username_or_email)
+        access_token = create_access_token(data.username_or_email , "teacher")
+        refresh_token = create_refresh_token(data.username_or_email , "teacher")
         return { "access_token": access_token, "refresh_token": refresh_token }
     return {"message": "Invalid Credentials"}
 
@@ -74,8 +93,8 @@ async def signup(data: Students):
 async def signin(data: Signin):
     isValidUser =  dbCon.validate_student(data=data)
     if isValidUser:
-        access_token = create_access_token(data.username_or_email)
-        refresh_token = create_refresh_token(data.username_or_email)
+        access_token = create_access_token(data.username_or_email,"student")
+        refresh_token = create_refresh_token(data.username_or_email,"student")
         return { "access_token": access_token, "refresh_token": refresh_token }
     return {"message": "Invalid Credentials"}
 

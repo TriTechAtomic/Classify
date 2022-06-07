@@ -53,7 +53,7 @@ class StudentHomeContents extends StatelessWidget {
           child: SizedBox(
             width: Responsive.isMobile(context)
                 ? MediaQuery.of(context).size.width * 0.9
-                : MediaQuery.of(context).size.width * 0.3,
+                : MediaQuery.of(context).size.width * 0.4,
             height: Responsive.isMobile(context) ? 40 : 55,
             child: CustomButtons(
               height: Responsive.isMobile(context) ? 40 : 55,
@@ -70,7 +70,7 @@ class StudentHomeContents extends StatelessWidget {
           child: SizedBox(
             width: Responsive.isMobile(context)
                 ? MediaQuery.of(context).size.width * 0.9
-                : MediaQuery.of(context).size.width * 0.3,
+                : MediaQuery.of(context).size.width * 0.4,
             height: Responsive.isMobile(context) ? 40 : 55,
             child: CustomButtons(
               height: Responsive.isMobile(context) ? 40 : 55,
@@ -87,7 +87,7 @@ class StudentHomeContents extends StatelessWidget {
           child: SizedBox(
             width: Responsive.isMobile(context)
                 ? MediaQuery.of(context).size.width * 0.9
-                : MediaQuery.of(context).size.width * 0.3,
+                : MediaQuery.of(context).size.width * 0.4,
             height: Responsive.isMobile(context) ? 40 : 55,
             child: CustomButtons(
               height: Responsive.isMobile(context) ? 40 : 55,
