@@ -32,7 +32,13 @@ class TeacherHomeBody extends StatelessWidget {
                 : (Responsive.isTablet(context)
                     ? MediaQuery.of(context).size.width * 0.7
                     : MediaQuery.of(context).size.width * 0.4),
-            callback: () {},
+            callback: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("Institution $className"),
+                ),
+              );
+            },
             borderradius: 20.0,
           ),
         ),
