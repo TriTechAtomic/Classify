@@ -1,4 +1,7 @@
 import 'package:classify/assets/asset_register.dart';
+import 'package:classify/models/route_meta.dart';
+import 'package:classify/screens/admin/features/announcemet.dart';
+import 'package:classify/screens/admin/features/manage_courses.dart';
 import 'package:classify/utils/buttons.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:classify/utils/responsive.dart';
@@ -104,90 +107,29 @@ class _AdminHomeState extends State<AdminHome> {
                         ),
                         Wrap(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: CustomButtons(
-                                text: "Manage Courses",
-                                height: 90,
-                                width: 150,
-                                callback: () {
-                                  Navigator.pushNamed(
-                                      context, '/ManageCourses');
-                                },
+                            for (var ele in <RouteMeta>[
+                              RouteMeta(
+                                  "Manage Courses", ManageCourses.routeName),
+                              RouteMeta("Manage Students", ""),
+                              RouteMeta("Manage Teachers", ""),
+                              RouteMeta("TimeTables", ""),
+                              RouteMeta("Complaints", ""),
+                              RouteMeta(
+                                  "Announcements", Announcement.routeName),
+                              RouteMeta("Analytics", ""),
+                              RouteMeta("Teacher's Attendance", ""),
+                            ])
+                              Padding(
+                                padding: const EdgeInsets.all(15),
+                                child: CustomButtons(
+                                  text: ele.MetaName,
+                                  height: 90,
+                                  width: 150,
+                                  callback: () {
+                                    Navigator.pushNamed(context, ele.routeName);
+                                  },
+                                ),
                               ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Manage Students",
-                                height: 90,
-                                width: 150,
-                                callback: null,
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Manage Teachers",
-                                height: 90,
-                                width: 150,
-                                callback: null,
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Update Fees",
-                                height: 90,
-                                width: 150,
-                                callback: null,
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "TimeTables",
-                                height: 90,
-                                width: 150,
-                                callback: null,
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Complaints",
-                                height: 90,
-                                width: 150,
-                                callback: null,
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Analytics",
-                                height: 90,
-                                width: 150,
-                                callback: null,
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Announcements",
-                                height: 90,
-                                width: 150,
-                                callback: null,
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: CustomButtons(
-                                text: "Teacher's Attendance",
-                                height: 90,
-                                width: 150,
-                                callback: null,
-                              ),
-                            ),
                           ],
                         ),
                       ],

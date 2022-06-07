@@ -19,8 +19,6 @@ def create_refresh_token (username: str):
             },
             os.getenv("REFRESH_TOKEN"), algorithm='HS256')
 
-
-
 def refresh_required(token: str = Header(None)):
     # verify the token
     if token:
@@ -33,7 +31,6 @@ def refresh_required(token: str = Header(None)):
     else :
         raise HTTPException(status_code=401, detail="X-Token header missing")
     
-
 def access_required(Token: str = Header(None)):
     # verify the token
     if Token:

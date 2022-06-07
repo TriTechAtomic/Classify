@@ -1,4 +1,5 @@
 import 'package:classify/screens/admin/admin_home.dart';
+import 'package:classify/screens/admin/features/announcemet.dart';
 import 'package:classify/screens/admin/features/manage_courses.dart';
 import 'package:classify/screens/admin/signup.dart';
 import 'package:classify/screens/common/role_selection.dart';
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
         RoleSelection.routeName: (context) => const RoleSelection(),
 
         //For admin Home
-        '/ManageCourses': (context) => const ManageCourses(),
+        ManageCourses.routeName: (context) => const ManageCourses(),
+        Announcement.routeName: (context) => const Announcement(),
       },
     );
   }

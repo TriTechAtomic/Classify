@@ -5,6 +5,8 @@ import 'package:classify/utils/auth/classify_auth.dart';
 import 'package:classify/utils/auth/models/user.dart';
 import 'package:flutter/material.dart';
 
+import 'admin_home.dart';
+
 class AdminSignup extends StatefulWidget {
   const AdminSignup({Key? key}) : super(key: key);
   static const String routename = '/adminSignup';
@@ -77,12 +79,12 @@ class _AdminSignupState extends State<AdminSignup> {
                       ),
                     ElevatedButton(
                       onPressed: () {
-                        if (controllers
-                            .every((ele) => ele.controller.text.isNotEmpty)) {
-                          ClassifyAuth<Institute>()
-                              .signUp(Institute.fromTFMETA(controllers));
-                        }
-                        // Navigator.pushNamed(context, AdminHome.routeName);
+                        // if (controllers
+                        //     .every((ele) => ele.controller.text.isNotEmpty)) {
+                        //   ClassifyAuth<Institute>()
+                        //       .signUp(Institute.fromTFMETA(controllers));
+                        // }
+                        Navigator.pushNamed(context, AdminHome.routeName);
                       },
                       child: const Text('Proceed'),
                     )
