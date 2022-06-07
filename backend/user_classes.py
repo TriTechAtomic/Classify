@@ -32,7 +32,6 @@ class InstituteData:
             return True
         else:
             return False
-
        
     def create_user_in_db(self, data: Institute):
         # Insert query using Institute data class
@@ -72,6 +71,14 @@ class InstituteData:
             Column('subscription_id', VARCHAR)
         )
         self.meta.create_all(engine)
+
+    def get_user_by_username(self, username:str):
+        print(f"Getting user by username {username}")
+        # Select query using username
+        sel = self.table.select().where(self.table.c.username == username)
+        result = self.engine.execute(sel)
+        user = result.fetchone()
+        return user
    
 
 
@@ -149,6 +156,14 @@ class StudentData:
             return True
         else:
             return False
+
+    def get_user_by_username(self, username:str):
+        print(f"Getting user by username {username}")
+        # Select query using username
+        sel = self.table.select().where(self.table.c.username == username)
+        result = self.engine.execute(sel)
+        user = result.fetchone()
+        return user
         
         
 
@@ -198,7 +213,13 @@ class TeacherData:
         else:
             return False
 
-
+    def get_user_by_username(self, username:str):
+        print(f"Getting user by username {username}")
+        # Select query using username
+        sel = self.table.select().where(self.table.c.username == username)
+        result = self.engine.execute(sel)
+        user = result.fetchone()
+        return user
 
     def create_user_in_db(self, data: Teachers):
         # Insert query using Teachers data class
