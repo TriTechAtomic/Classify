@@ -38,6 +38,7 @@ class TeacherHome extends StatelessWidget {
       body: MediaQuery.of(context).size.width < 1100
           ? const TeacherHomeContents()
           : Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   flex: 1,

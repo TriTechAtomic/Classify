@@ -29,6 +29,18 @@ async def refresh_token(token: str = Header(None)):
 async def authonlyRouteTest():
     return {"message": ">> Hello from xxparthparekhxx >> \n You are authorized to access this route"}
 
+
+'''
+ Institue ROUTES
+ Todos 
+ [] Get User Details 
+ [] Create Course
+ [] Enroll Student
+ [] Enroll Teacher
+ 
+ 
+'''
+
 @app.post("/signinInstitute")
 async def signin(data: Signin):
     isValidUser =  dbCon.validate_institute_creds(data=data)
@@ -37,7 +49,6 @@ async def signin(data: Signin):
         refresh_token = create_refresh_token(data.username_or_email)
         return { "access_token": access_token, "refresh_token": refresh_token }
     return {"message": "Invalid Credentials"}
-
 
 @app.post("/signupInstitute")
 async def signup(data: Institute):
