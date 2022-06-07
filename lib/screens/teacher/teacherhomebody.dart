@@ -1,3 +1,4 @@
+import 'package:classify/utils/buttons.dart';
 import 'package:flutter/material.dart';
 import '../../utils/responsive.dart';
 
@@ -23,16 +24,18 @@ class TeacherHomeBody extends StatelessWidget {
                 width: 1,
               ),
               borderRadius: radius),
-          height: Responsive.isMobile(context) ? 50 : 60,
-          width: Responsive.isMobile(context)
-              ? MediaQuery.of(context).size.width * 0.85
-              : (Responsive.isTablet(context)
-                  ? MediaQuery.of(context).size.width * 0.7
-                  : MediaQuery.of(context).size.width * 0.4),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Institution $className'),
+              CustomButtons(
+                text: 'Institution $className',
+                height: Responsive.isMobile(context) ? 50 : 60,
+                width: Responsive.isMobile(context)
+                    ? MediaQuery.of(context).size.width * 0.85
+                    : (Responsive.isTablet(context)
+                        ? MediaQuery.of(context).size.width * 0.7
+                        : MediaQuery.of(context).size.width * 0.4),
+              ),
             ],
           ),
         ),
