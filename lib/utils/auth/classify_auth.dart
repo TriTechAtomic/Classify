@@ -4,7 +4,7 @@ import 'package:http/http.dart' show post, Response;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ClassifyAuth<T> {
-  final String base = 'http://localhost:8000/';
+  final String base = 'http://52.66.199.213:8000/';
 
   ClassifyAuth();
 
@@ -32,8 +32,8 @@ class ClassifyAuth<T> {
       if (tokens.keys.contains('access_token')) {
         for (var e in [
           prefs.setString("role", instance.substring(6)),
-          prefs.setString("access_token", tokens["access_token"]),
-          prefs.setString("refresh_token", tokens["refresh_token"]),
+          prefs.setString("accessToken", tokens["access_token"]),
+          prefs.setString("refreshToken", tokens["refresh_token"]),
         ]) {
           await e;
         }

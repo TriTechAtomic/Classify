@@ -6,6 +6,7 @@ import 'create_class.dart';
 
 class ManageCourses extends StatefulWidget {
   const ManageCourses({Key? key}) : super(key: key);
+  static const String routeName = '/ManageCourses';
 
   @override
   State<ManageCourses> createState() => _ManageCoursesState();
