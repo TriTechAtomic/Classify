@@ -6,8 +6,7 @@ from models.db.users.teacher import Teachers
 from models.response.sign_in import  Signin
 
 from jwtcon import create_access_token,  create_refresh_token, access_required, refresh_required
-from dotenv import load_dotenv
-load_dotenv()
+
 
 
 

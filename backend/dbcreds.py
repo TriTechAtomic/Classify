@@ -4,7 +4,6 @@ from models.db.users.teacher import Teachers
 
 
 from sqlalchemy import create_engine
-import jwt
 from models.response.sign_in import Signin
 
 from user_classes import InstituteData, StudentData, TeacherData
