@@ -32,8 +32,8 @@ class ClassifyAuth<T> {
       if (tokens.keys.contains('access_token')) {
         for (var e in [
           prefs.setString("role", instance.substring(6)),
-          prefs.setString("access_token", tokens["access_token"]),
-          prefs.setString("refresh_token", tokens["refresh_token"]),
+          prefs.setString("accessToken", tokens["access_token"]),
+          prefs.setString("refreshToken", tokens["refresh_token"]),
         ]) {
           await e;
         }

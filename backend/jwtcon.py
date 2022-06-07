@@ -28,7 +28,7 @@ def refresh_required(token: str = Header(None)):
     # verify the token
     if token:
         try:
-           return jwt.decode(token, os.getenv("REFRESH_TOKEN"), algorithms=['HS256'])
+           return jwt.decode(token, REFRESH_TOKEN, algorithms=['HS256'])
         except jwt.ExpiredSignatureError:
             raise HTTPException(status_code=400, detail="Signature expired")
         except jwt.InvalidTokenError:
@@ -40,7 +40,7 @@ def access_required(token: str = Header(None)):
     # verify the token
     if token:
         try:
-           return jwt.decode(token, os.getenv("ACCESS_TOKEN"), algorithms=['HS256'])
+           return jwt.decode(token, ACCESS_TOKEN, algorithms=['HS256'])
         except jwt.ExpiredSignatureError:
             raise HTTPException(status_code=400, detail="Signature expired")
         except jwt.InvalidTokenError:

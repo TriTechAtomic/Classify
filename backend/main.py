@@ -1,4 +1,4 @@
-from fastapi import Depends, FastAPI,Header,Request
+from fastapi import Depends, FastAPI,Header
 from dbcreds import DbController
 from models.db.users.institute import  Institute
 from models.db.users.students import Students
@@ -32,24 +32,24 @@ async def authonlyRouteTest():
 '''
  Institue ROUTES
  Todos 
- [] Get User Details 
+ [X] Get User Details 
  [] Create Course
  [] Enroll Student
  [] Enroll Teacher
 '''
 
-@app.get("userdetails",dependencies=[Depends(access_required)])
+@app.get("/userdetails",dependencies=[Depends(access_required)])
 async def get_user_details(token: str = Header(None)):
     userdetails =access_required(token)
     role=userdetails['role']
     username = userdetails['username']
     print(userdetails)
     if  role == "institute":
-        return dbCon.institute.get_user_details(username)
+        return dbCon.institute.get_user_by_username(username)
     elif role == "teacher":
-        return dbCon.teacher.get_user_details(username)
+        return dbCon.teacher.get_user_by_username(username)
     elif role == "student":
-        return dbCon.student.get_user_details(username)
+        return dbCon.student.get_user_by_username(username)
     else: 
         return {"message": ">> You are not authorized to access this route"}
 
