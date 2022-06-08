@@ -1,3 +1,6 @@
+import 'package:classify/provider/authprovider.dart';
+import 'package:provider/provider.dart';
+
 import 'student_home_content.dart';
 import 'package:flutter/material.dart';
 import '../widgets/customdrawer.dart';
@@ -24,13 +27,14 @@ class StudentHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var user = Provider.of<Auth>(context).user;
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
         drawer: MediaQuery.of(context).size.width < 1100
             ? CustomDrawer(
-                name: "Dummy Name",
-                email: "dummyemail@gmail.com",
+                name: user?.username ?? "Dummy Name",
+                email: user?.email ?? "dummyemail@gmail.com",
                 drawerItems: drawerWidgets,
               )
             : null,
@@ -53,8 +57,8 @@ class StudentHome extends StatelessWidget {
                   Expanded(
                     flex: 1,
                     child: CustomDrawer(
-                      name: "Dummy Name",
-                      email: "dummyemail@gmail.com",
+                      name: user?.username ?? 'name',
+                      email: user?.email ?? "email",
                       drawerItems: drawerWidgets,
                     ),
                   ),

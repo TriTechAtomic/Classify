@@ -20,8 +20,8 @@ async def refresh_token(token: str = Header(None)):
     data = refresh_required(token)
     print(data)
     return {
-        "access_token": create_access_token(data['username']),
-        "refresh_token": create_refresh_token(data['username'])
+        "access_token": create_access_token(data['username'],data['role']),
+        "refresh_token": create_refresh_token(data['username'],data['role'])
     }
 
 @app.get("/authonlyRouteTest" , dependencies=[Depends(access_required)])
@@ -45,11 +45,17 @@ async def get_user_details(token: str = Header(None)):
     username = userdetails['username']
     print(userdetails)
     if  role == "institute":
-        return dbCon.institute.get_user_by_username(username)
+        data =  dbCon.institute.get_user_by_username(username)
+        print(data)
+        return data
     elif role == "teacher":
-        return dbCon.teacher.get_user_by_username(username)
+        data =  dbCon.teacher.get_user_by_username(username)
+        print(data)
+        return data
     elif role == "student":
-        return dbCon.student.get_user_by_username(username)
+        data =  dbCon.student.get_user_by_username(username)
+        print(data)
+        return data
     else: 
         return {"message": ">> You are not authorized to access this route"}
 

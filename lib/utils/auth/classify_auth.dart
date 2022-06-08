@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:classify/provider/authprovider.dart';
 import 'package:http/http.dart' show post, Response;
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ClassifyAuth<T> {
-  final String base = 'http://52.66.199.213:8000/';
+  final String base = 'http://localhost:8000/';
 
   ClassifyAuth();
 
@@ -17,7 +19,7 @@ class ClassifyAuth<T> {
   }
 
   Future<Response> signIn(
-      String email, String password, String instance) async {
+      String email, String password, String instance, context) async {
     var body = jsonEncode({
       'username_or_email': email,
       'password': password,
@@ -37,6 +39,7 @@ class ClassifyAuth<T> {
         ]) {
           await e;
         }
+        Provider.of<Auth>(context, listen: false).init();
       } else {
         throw Exception("Invalid Credentials");
       }

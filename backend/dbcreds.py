@@ -13,23 +13,10 @@ from user_classes import InstituteData, StudentData, TeacherData
 
 class DbController:
     def __init__(self):
-        # Database credentials 
-        conData  = {
-        "user"     : "parth", 
-        "password" : "xxparthparekhxx_420",
-        "host"     : "localhost",
-        "port"     : 5432,
-        "database" : "classify",
-        }
-
+        # Database credentials create connection
+        
         self.engine= create_engine(
-            url="postgresql://{0}:{1}@{2}:{3}/{4}".format(
-                conData["user"],
-                conData["password"],
-                conData["host"],
-                conData["port"], 
-                conData["database"]
-            ),
+            url="postgresql://uaiufttmambwmd:996f587ac6d450109d1456aa5f2a3c7f645a9416214512f6dcaef2cbe5dbdbd6@ec2-3-248-121-12.eu-west-1.compute.amazonaws.com:5432/d16tgau69sk67n",
             echo=True
         )
         self.connection = self.engine.connect()
