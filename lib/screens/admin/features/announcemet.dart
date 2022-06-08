@@ -1,3 +1,5 @@
+import 'package:classify/screens/widgets/proceed_button.dart';
+import 'package:classify/utils/buttons.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +14,8 @@ class Announcement extends StatefulWidget {
 class _AnnouncementState extends State<Announcement> {
   @override
   Widget build(BuildContext context) {
+    final Atype = ['In Class', 'In Institution'];
+    String? selectedType = "In Class";
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
@@ -23,6 +27,7 @@ class _AnnouncementState extends State<Announcement> {
           padding: const EdgeInsets.all(30),
           width: MediaQuery.of(context).size.width * 0.8,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextField(
                 decoration: InputDecoration(
@@ -41,6 +46,30 @@ class _AnnouncementState extends State<Announcement> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10))),
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                "Select Announcement Type",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              DropdownButton<String>(
+                value: selectedType,
+                items: Atype.map((item) => DropdownMenuItem(
+                      value: item,
+                      child: Text(
+                        item,
+                        style: const TextStyle(),
+                      ),
+                    )).toList(),
+                onChanged: (item) => setState(() {
+                  selectedType = item;
+                }),
+              ),
+              ProceedButton(
+                  ss: MediaQuery.of(context).size,
+                  text: "Announce",
+                  onPressed: () {})
             ],
           ),
         ),
