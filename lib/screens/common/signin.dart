@@ -143,17 +143,16 @@ class _SigninState extends State<Signin> {
                           try {
                             Response res =
                                 await getInstanceWithRole(SelectedRole).signIn(
-                              controllers[0].controller.text,
-                              controllers[1].controller.text,
-                              getEndpointWithRole(SelectedRole),
-                            );
+                                    controllers[0].controller.text,
+                                    controllers[1].controller.text,
+                                    getEndpointWithRole(SelectedRole),
+                                    context);
 
                             Navigator.pushNamed(
                               context,
                               GetHomeRouteNameWithRole(SelectedRole),
                             );
                           } catch (e) {
-                            print(e);
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text(
