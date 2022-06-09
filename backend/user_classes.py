@@ -32,7 +32,6 @@ class InstituteData:
             return True
         else:
             return False
-
        
     def create_user_in_db(self, data: Institute):
         # Insert query using Institute data class
@@ -72,6 +71,26 @@ class InstituteData:
             Column('subscription_id', VARCHAR)
         )
         self.meta.create_all(engine)
+
+    def get_user_by_username(self, username:str):
+        print(f"Getting user by username {username}")
+        # Select query using username
+        print(f"Validating user Data username {username}")
+        #selecting where username is equal to the username in the data
+        sel = self.table.select().where(self.table.c.username == username)
+        sel2 = self.table.select().where(self.table.c.email == username)
+
+        result = self.engine.execute(sel)
+        result1 = self.engine.execute(sel2)
+        #fetching the result
+        user = result.fetchone()
+        user1 = result1.fetchone()
+        print(f"user {user}, user1 {user1}")
+        if user is None or user1 is None:
+            user = max(user, user1, key=lambda x: x != None)  
+        if user is None:
+            return "User not found"
+        return user
    
 
 
@@ -149,6 +168,27 @@ class StudentData:
             return True
         else:
             return False
+
+    def get_user_by_username(self, username:str):
+        print(f"Getting user by username {username}")
+        # Select query using username
+        print(f"Validating user Data username {username}")
+        #selecting where username is equal to the username in the data
+        sel = self.table.select().where(self.table.c.username == username)
+        sel2 = self.table.select().where(self.table.c.email == username)
+
+        result = self.engine.execute(sel)
+        result1 = self.engine.execute(sel2)
+        #fetching the result
+        user = result.fetchone()
+        user1 = result1.fetchone()
+        print(f"user {user}, user1 {user1}")
+        if user is None or user1 is None:
+            user = max(user, user1, key=lambda x: x != None)  
+        if user is None:
+            return "User not found"
+
+        return user
         
         
 
@@ -198,7 +238,26 @@ class TeacherData:
         else:
             return False
 
+    def get_user_by_username(self, username:str):
+        print(f"Getting user by username {username}")
+        # Select query using username
+        print(f"Validating user Data username {username}")
+        #selecting where username is equal to the username in the data
+        sel = self.table.select().where(self.table.c.username == username)
+        sel2 = self.table.select().where(self.table.c.email == username)
 
+        result = self.engine.execute(sel)
+        result1 = self.engine.execute(sel2)
+        #fetching the result
+        user = result.fetchone()
+        user1 = result1.fetchone()
+        print(f"user {user}, user1 {user1}")
+        if user is None or user1 is None:
+            user = max(user, user1, key=lambda x: x != None)  
+        if user is None:
+            return "User not found"
+
+        return user
 
     def create_user_in_db(self, data: Teachers):
         # Insert query using Teachers data class

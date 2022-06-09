@@ -10,7 +10,7 @@ class Institute {
   final String contact;
   final String state;
   final String city;
-  final int pincode;
+  final String pincode;
   final String area;
   final int subscription_id;
 
@@ -28,16 +28,16 @@ class Institute {
 
   factory Institute.fromJson(Map<String, dynamic> json) {
     return Institute(
-      json['username'] as String,
-      json['password'] as String,
-      json['institutes_name'] as String,
-      json['email'] as String,
-      json['contact'] as String,
-      json['state'] as String,
-      json['city'] as String,
-      json['pincode'] as int,
-      json['area'] as String,
-      json['subscription_id'] as int,
+      json['username'].toString(),
+      json['password'].toString(),
+      json['institutes_name'].toString(),
+      json['email'].toString(),
+      json['contact'].toString(),
+      json['state'].toString(),
+      json['city'].toString(),
+      json['pincode'].toString(),
+      json['area'].toString(),
+      int.parse(json['subscription_id']),
     );
   }
 
@@ -66,7 +66,7 @@ class Institute {
       list[4].controller.text,
       list[5].controller.text,
       list[6].controller.text,
-      int.parse(list[7].controller.text),
+      (list[7].controller.text),
       list[8].controller.text,
       int.parse(list[9].controller.text),
     );

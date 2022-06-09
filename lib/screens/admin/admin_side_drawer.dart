@@ -1,6 +1,8 @@
+import 'package:classify/provider/authprovider.dart';
 import 'package:classify/screens/common/widgets.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AdminSideDrawer extends StatefulWidget {
   const AdminSideDrawer({
@@ -16,15 +18,41 @@ class _AdminSideDrawerState extends State<AdminSideDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    var user = Provider.of<Auth>(context).user;
     return Drawer(
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const DrawerHeader(
-                child: Icon(
-              Icons.account_circle,
-              size: 35,
-            )),
+            DrawerHeader(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [],
+                    ),
+                  ),
+                  const Icon(
+                    Icons.account_circle,
+                    size: 30,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text(user?.username ?? ''),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 8.0, bottom: 10, top: 5),
+                    child: Text(
+                      user?.email ?? '',
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  )
+                ],
+              ),
+            ),
             MenuItem(
               title: "Billing",
               icon: const Icon(Icons.subscriptions),

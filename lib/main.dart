@@ -1,15 +1,10 @@
-import 'package:classify/screens/admin/admin_home.dart';
-import 'package:classify/screens/admin/features/announcemet.dart';
-import 'package:classify/screens/admin/features/manage_courses.dart';
-import 'package:classify/screens/admin/signup.dart';
-import 'package:classify/screens/common/role_selection.dart';
-import 'package:classify/screens/common/signin.dart';
-import 'package:classify/screens/parent/parent_home.dart';
-import 'package:classify/screens/student/student_home.dart';
-import 'package:classify/screens/teacher/signup.dart';
-import 'package:classify/screens/teacher/teacher_home.dart';
+import 'package:classify/provider/authprovider.dart';
 import 'package:flutter/material.dart';
+import './screens/screens.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'screens/admin/features/announcemet.dart';
 
 void main() => runApp(const MyApp());
 
@@ -18,34 +13,39 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-          scaffoldBackgroundColor: Colors.white),
-      title: 'Classify',
-      home: const AuthValidator(),
-      routes: {
-        // home Screens
-        AdminHome.routeName: (context) => const AdminHome(),
-        TeacherHome.routeName: (context) => TeacherHome(),
-        ParentHome.routeName: (context) => const ParentHome(),
-        StudentHome.routeName: (context) => StudentHome(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Auth()),
+      ],
+      builder: (ctx, child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            primarySwatch: Colors.deepPurple,
+            scaffoldBackgroundColor: Colors.white),
+        title: 'Classify',
+        home: const AuthValidator(),
+        routes: {
+          // home Screens
+          AdminHome.routeName: (context) => const AdminHome(),
+          TeacherHome.routeName: (context) => TeacherHome(),
+          ParentHome.routeName: (context) => const ParentHome(),
+          StudentHome.routeName: (context) => StudentHome(),
 
-        // signup Screens
-        AdminSignup.routename: (context) => const AdminSignup(),
-        TeacherSignup.routeName: (context) => const TeacherSignup(),
+          // signup Screens
+          AdminSignup.routename: (context) => const AdminSignup(),
+          TeacherSignup.routeName: (context) => const TeacherSignup(),
 
-        // common Signin Screen
-        Signin.routename: (context) => const Signin(),
+          // common Signin Screen
+          Signin.routename: (context) => const Signin(),
 
-        // role selection Screen
-        RoleSelection.routeName: (context) => const RoleSelection(),
+          // role selection Screen
+          RoleSelection.routeName: (context) => const RoleSelection(),
 
-        //For admin Home
-        ManageCourses.routeName: (context) => const ManageCourses(),
-        Announcement.routeName: (context) => const Announcement(),
-      },
+          //For admin Home
+          ManageCourses.routeName: (context) => const ManageCourses(),
+          Announcement.routeName: (context) => const Announcement(),
+        },
+      ),
     );
   }
 }

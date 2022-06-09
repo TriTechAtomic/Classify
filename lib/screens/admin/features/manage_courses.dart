@@ -3,6 +3,7 @@ import 'package:classify/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'create_class.dart';
+import 'delete_class.dart';
 
 class ManageCourses extends StatefulWidget {
   const ManageCourses({Key? key}) : super(key: key);
@@ -73,10 +74,7 @@ class _ManageCoursesState extends State<ManageCourses> {
                       body: CustomButtons(
                           text: "User Template", height: 250, width: 250),
                     ),
-                    const Scaffold(
-                      body: CustomButtons(
-                          text: "User Template", height: 250, width: 250),
-                    ),
+                    DeleteClass(),
                     const Scaffold(
                       body: CustomButtons(
                           text: "User Template", height: 250, width: 250),
