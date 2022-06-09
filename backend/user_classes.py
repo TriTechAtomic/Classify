@@ -298,10 +298,15 @@ class TeacherData:
         return user
     def join_institute_as_teacher( self, teacher_id:int, institute_id:int):
         print(f"Joining institute as teacher {teacher_id} {institute_id}")
-        ins = self.idtable.insert().values(teacher_id=teacher_id, institute_id=institute_id)
-        self.engine.execute(ins);
-        return "joined institute"
-    
+        ins = self.idtable.select().where(self.idtable.c.teacher_id == teacher_id)
+        haikya =  self.engine.execute(ins);
+        if haikya.rowcount == 0:
+            ins = self.idtable.insert().values(teacher_id=teacher_id, institute_id=institute_id)
+            self.engine.execute(ins);
+            return "joined institute"
+        else: 
+            return "already joined institute"
+
     def get_all_teachers_in_institute(self,institute_id):
         # join table with teacher_id and institute_id
         sel = self.idtable.select().where(self.idtable.c.institute_id == institute_id)
