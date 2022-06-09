@@ -15,6 +15,7 @@ class Auth with ChangeNotifier {
   Auth() {
     init();
   }
+
   init() async {
     getuserDataFromLocalStorage();
     notifyListeners();
