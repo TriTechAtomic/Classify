@@ -30,32 +30,33 @@ class _CustomButtonsState extends State<CustomButtons> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onHover: (value) => setState(() {
-        hovered = value;
-      }),
-      onPressed: widget.callback,
-      child: Text(
-        widget.text,
-        textAlign: TextAlign.center,
-        style: TextStyle(
+        onHover: (value) => setState(() {
+              hovered = value;
+            }),
+        onPressed: widget.callback,
+        child: Text(
+          widget.text,
+          textAlign: TextAlign.center,
+          style: TextStyle(
             color: widget.textcolor ?? (hovered ? Colors.white : Colors.black),
-            fontWeight: FontWeight.bold),
-      ),
-      style: ButtonStyle(
-        shape: widget.borderradius != null
-            ? MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(widget.borderradius as double),
-                ),
-              )
-            : null,
-        fixedSize: MaterialStateProperty.all(Size(widget.width, widget.height)),
-        backgroundColor: widget.color != null
-            ? MaterialStateProperty.all(widget.color)
-            : MaterialStateProperty.all(Colors.white),
-        overlayColor: MaterialStateProperty.all(primaryColor),
-      ),
-    );
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        style: ButtonStyle(
+          shape: widget.borderradius != null
+              ? MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(widget.borderradius as double),
+                  ),
+                )
+              : null,
+          fixedSize:
+              MaterialStateProperty.all(Size(widget.width, widget.height)),
+          backgroundColor: widget.color != null
+              ? MaterialStateProperty.all(widget.color)
+              : MaterialStateProperty.all(Colors.white),
+          overlayColor: MaterialStateProperty.all(primaryColor),
+        ));
   }
 }

@@ -1,4 +1,8 @@
 import 'package:classify/provider/authprovider.dart';
+import 'package:classify/screens/admin/features/analytics/analytics_menu.dart';
+import 'package:classify/screens/admin/features/manage_students.dart';
+import 'package:classify/screens/admin/features/manage_teachers.dart';
+import 'package:classify/screens/admin/features/teachers_attendence.dart';
 import 'package:flutter/material.dart';
 import './screens/screens.dart';
 import 'package:provider/provider.dart';
@@ -44,6 +48,10 @@ class MyApp extends StatelessWidget {
           //For admin Home
           ManageCourses.routeName: (context) => const ManageCourses(),
           Announcement.routeName: (context) => const Announcement(),
+          Analytics.routeName: (context) => const Analytics(),
+          ManageStudents.routeName: (context) => ManageStudents(),
+          ManageTeachers.routeName: (context) => const ManageTeachers(),
+          TeacherAttendence.routeName: (context) => const TeacherAttendence(),
         },
       ),
     );

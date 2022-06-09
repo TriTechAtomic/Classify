@@ -1,12 +1,16 @@
 import 'package:classify/assets/asset_register.dart';
 import 'package:classify/models/route_meta.dart';
+import 'package:classify/screens/admin/features/analytics/analytics_menu.dart';
 import 'package:classify/screens/admin/features/announcemet.dart';
 import 'package:classify/screens/admin/features/manage_courses.dart';
+import 'package:classify/screens/admin/features/manage_students.dart';
+import 'package:classify/screens/admin/features/manage_teachers.dart';
 import 'package:classify/utils/buttons.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:classify/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'admin_side_drawer.dart';
+import 'features/teachers_attendence.dart';
 
 class AdminHome extends StatefulWidget {
   const AdminHome({Key? key}) : super(key: key);
@@ -110,14 +114,17 @@ class _AdminHomeState extends State<AdminHome> {
                             for (var ele in <RouteMeta>[
                               RouteMeta(
                                   "Manage Courses", ManageCourses.routeName),
-                              RouteMeta("Manage Students", ""),
-                              RouteMeta("Manage Teachers", ""),
+                              RouteMeta(
+                                  "Manage Students", ManageStudents.routeName),
+                              RouteMeta(
+                                  "Manage Teachers", ManageTeachers.routeName),
                               RouteMeta("TimeTables", ""),
                               RouteMeta("Complaints", ""),
                               RouteMeta(
                                   "Announcements", Announcement.routeName),
-                              RouteMeta("Analytics", ""),
-                              RouteMeta("Teacher's Attendance", ""),
+                              RouteMeta("Analytics", Analytics.routeName),
+                              RouteMeta("Teacher's Attendance",
+                                  TeacherAttendence.routeName),
                             ])
                               Padding(
                                 padding: const EdgeInsets.all(15),
