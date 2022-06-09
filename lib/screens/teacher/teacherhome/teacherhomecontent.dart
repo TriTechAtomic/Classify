@@ -62,15 +62,19 @@ class TeacherHomeContents extends StatelessWidget {
         return Responsive(
           mobile: ShowModalContainer(
             height: mq.height * 0.25,
-            width: mq.width * 0.93,
+            width: mq.width * 0.83,
           ),
           tablet: ShowModalContainer(
-            height: mq.height * 0.2,
-            width: 0.4,
+            height: mq.height * 0.25,
+            width: mq.width * 0.63,
           ),
-          desktop: ShowModalContainer(
-            height: mq.height * 0.1,
-            width: mq.width * 0.3,
+          desktop: Padding(
+            padding: EdgeInsets.only(
+                bottom: (mq.height / 2) - ((mq.height * 0.27) / 2)),
+            child: ShowModalContainer(
+              height: mq.height * 0.27,
+              width: mq.width * 0.39,
+            ),
           ),
         );
       },
