@@ -3,6 +3,7 @@ import 'package:classify/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'create_class.dart';
+import 'delete_class.dart';
 
 class ManageCourses extends StatefulWidget {
   const ManageCourses({Key? key}) : super(key: key);
@@ -14,6 +15,11 @@ class ManageCourses extends StatefulWidget {
 
 class _ManageCoursesState extends State<ManageCourses> {
   bool createClass = false;
+  void flipcreateClass() {
+    setState(() {
+      createClass = !createClass;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,18 +41,16 @@ class _ManageCoursesState extends State<ManageCourses> {
                     ],
                   ),
                 ),
-                body:
-                    // createClass
-                    //     ? CreateCustomClass():
-                    TabBarView(
+                body: TabBarView(
                   children: [
                     createClass
-                        ? const CreateCustomClass()
+                        ? CreateCustomClass(
+                            flipper: flipcreateClass,
+                          )
                         : Scaffold(
                             backgroundColor: adminBackground,
                             body: Center(
                               child: Wrap(
-                                // mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
@@ -78,10 +82,7 @@ class _ManageCoursesState extends State<ManageCourses> {
                       body: CustomButtons(
                           text: "User Template", height: 250, width: 250),
                     ),
-                    const Scaffold(
-                      body: CustomButtons(
-                          text: "User Template", height: 250, width: 250),
-                    ),
+                    DeleteClass(),
                     const Scaffold(
                       body: CustomButtons(
                           text: "User Template", height: 250, width: 250),

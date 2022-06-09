@@ -1,5 +1,6 @@
 import 'package:classify/assets/asset_register.dart';
 import 'package:classify/models/route_meta.dart';
+import 'package:classify/screens/admin/features/announcemet.dart';
 import 'package:classify/screens/admin/features/manage_courses.dart';
 import 'package:classify/utils/buttons.dart';
 import 'package:classify/utils/colors.dart';
@@ -113,7 +114,8 @@ class _AdminHomeState extends State<AdminHome> {
                               RouteMeta("Manage Teachers", ""),
                               RouteMeta("TimeTables", ""),
                               RouteMeta("Complaints", ""),
-                              RouteMeta("Announcements", ""),
+                              RouteMeta(
+                                  "Announcements", Announcement.routeName),
                               RouteMeta("Analytics", ""),
                               RouteMeta("Teacher's Attendance", ""),
                             ])

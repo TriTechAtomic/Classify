@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:classify/models/textfield_meta.dart';
 
 class CreateCustomClass extends StatefulWidget {
-  const CreateCustomClass({Key? key}) : super(key: key);
+  final VoidCallback flipper;
+  const CreateCustomClass({Key? key, required this.flipper}) : super(key: key);
   static const String routeName = '/CreateCustomClass';
 
   @override
@@ -43,8 +44,13 @@ class _CreateCustomClassState extends State<CreateCustomClass> {
           padding: const EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
+              IconButton(
+                  onPressed: () {
+                    widget.flipper();
+                  },
+                  icon: const Icon(Icons.close)),
               Expanded(
                 flex: 5,
                 child: SizedBox(

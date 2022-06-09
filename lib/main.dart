@@ -4,6 +4,8 @@ import './screens/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'screens/admin/features/announcemet.dart';
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -41,6 +43,7 @@ class MyApp extends StatelessWidget {
 
           //For admin Home
           ManageCourses.routeName: (context) => const ManageCourses(),
+          Announcement.routeName: (context) => const Announcement(),
         },
       ),
     );
