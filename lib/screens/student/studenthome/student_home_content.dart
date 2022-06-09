@@ -30,31 +30,25 @@ class StudentHomeContents extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size mq = MediaQuery.of(context).size;
 
-    void payment() {
+    void showbottomtext(e) {
+      String text;
+      if (e == buttonText[0]) {
+        text = "Payment History";
+      } else if (e == buttonText[1]) {
+        text = "Complaints";
+      } else if (e == buttonText[2]) {
+        text = "Time Table";
+      } else {
+        text = "nigge";
+      }
+
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Pament button Clicked"),
+        SnackBar(
+          content: Text('$text button Clicked'),
         ),
       );
     }
 
-    void complaints() {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Complaints button Clicked"),
-        ),
-      );
-    }
-
-    void timeTable() {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Time Table button Clicked"),
-        ),
-      );
-    }
-
-    final List<VoidCallback> buttonFunctions = [payment, complaints, timeTable];
     return Column(
       children: [
         StudentHomeHeader(
@@ -89,19 +83,19 @@ class StudentHomeContents extends StatelessWidget {
                 height: 40,
                 width: mq.width * 0.9,
                 text: buttonText[i],
-                callback: buttonFunctions[i],
+                callback: () => showbottomtext(buttonText[i]),
               ),
               tablet: CustomButtons(
                 height: 55,
                 width: mq.width * 0.4,
                 text: buttonText[i],
-                callback: buttonFunctions[i],
+                callback: () => showbottomtext(buttonText[i]),
               ),
               desktop: CustomButtons(
                 height: 55,
                 width: mq.width * 0.4,
                 text: buttonText[i],
-                callback: buttonFunctions[i],
+                callback: () => showbottomtext(buttonText[i]),
               ),
             ),
           ),

@@ -33,9 +33,10 @@ async def authonlyRouteTest():
  Institue ROUTES
  Todos 
  [X] Get User Details 
+ [X] Enroll Teacher
+ 
  [] Create Course
  [] Enroll Student
- [] Enroll Teacher
 '''
 
 @app.get("/userdetails",dependencies=[Depends(access_required)])
