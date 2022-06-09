@@ -24,9 +24,6 @@ async def refresh_token(token: str = Header(None)):
         "refresh_token": create_refresh_token(data['username'],data['role'])
     }
 
-@app.get("/authonlyRouteTest" , dependencies=[Depends(access_required)])
-async def authonlyRouteTest():
-    return {"message": ">> Hello from xxparthparekhxx >> \n You are authorized to access this route"}
 
 
 '''
@@ -43,21 +40,7 @@ async def get_user_details(token: str = Header(None)):
     userdetails =access_required(token)
     role=userdetails['role']
     username = userdetails['username']
-    print(userdetails)
-    if  role == "institute":
-        data =  dbCon.institute.get_user_by_username(username)
-        print(data)
-        return data
-    elif role == "teacher":
-        data =  dbCon.teacher.get_user_by_username(username)
-        print(data)
-        return data
-    elif role == "student":
-        data =  dbCon.student.get_user_by_username(username)
-        print(data)
-        return data
-    else: 
-        return {"message": ">> You are not authorized to access this route"}
+    return dbCon.get_user_details(username=username,role=role)
 
 
 
@@ -95,6 +78,27 @@ async def signup(data: Teachers):
 async def signup(data: Students):
     return  dbCon.create_student(data)
 
+@app.post("/joinInstitueAsTeacher",dependencies=[Depends(access_required)])
+async def join_institue_as_teacher(institute_id:int ,token: str = Header(None)):
+    userdetails =access_required(token)
+    role=userdetails['role']
+    username = userdetails['username']
+    if  role == "teacher":
+        return dbCon.join_institute_as_teacher(institute_id,dbCon.get_user_details(username=username,role=role)["id"])
+    else:
+        return {"message": ">> You are not authorized to access this route"}
+
+@app.post("/getTeachers",dependencies=[Depends(access_required)])
+async def get_teachers(token: str = Header(None)):
+    user_details = access_required(token)
+    role=user_details['role']
+    username = user_details['username']
+    if  role == "institute":
+        Instituteid =dbCon.get_user_details(username,role)
+        return dbCon.get_all_teachers_in_institute(institute_id=Instituteid['id'])
+    else:
+        return {"message": ">> You are not authorized to access this route"}
+
 @app.post("/signinStudent")
 async def signin(data: Signin):
     isValidUser =  dbCon.validate_student(data=data)
@@ -103,4 +107,5 @@ async def signin(data: Signin):
         refresh_token = create_refresh_token(data.username_or_email,"student")
         return { "access_token": access_token, "refresh_token": refresh_token }
     return {"message": "Invalid Credentials"}
+
 

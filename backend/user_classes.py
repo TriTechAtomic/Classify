@@ -50,6 +50,10 @@ class InstituteData:
         )
         self.engine.execute(ins)
         return "User created successfully" 
+
+    def drop_all_tables(self):
+        print("Dropping all tables")
+        self.meta.drop_all(self.engine)
     
 
     def create_table_in_db(self,engine):
@@ -123,7 +127,9 @@ class StudentData:
             Column("password", VARCHAR),
         )
         self.meta.create_all(engine)
-
+    def drop_all_tables(self):
+        print("Dropping all tables")
+        self.meta.drop_all(self.engine)
 
     def create_user_in_db(self,  data: Students):
         # Insert query using Students data class
@@ -198,16 +204,19 @@ class TeacherData:
 
     def __init__(self,engine):
         self.tableName = 'teachers';
+        self.id_tableName = 'teacher_id';
         self.meta = MetaData();
         self.engine= engine;
         self.create_table_in_db();
+
+    
+    
 
     def create_table_in_db(self):   
         self.table = Table(
             self.tableName,
             self.meta,
             Column('id', Integer, primary_key=True),
-            Column("institute_id",  INTEGER,),
             Column("qualification",  VARCHAR),
             Column("phonenumber",  VARCHAR),
             Column("key_subject",  VARCHAR),
@@ -215,7 +224,22 @@ class TeacherData:
             Column("email", VARCHAR,unique= True),
             Column("password",  VARCHAR)
         )
+
+        self.idtable = Table(
+            self.id_tableName,
+            self.meta,
+            Column('id', Integer, primary_key=True),
+            Column("teacher_id",  Integer),
+            Column("institute_id",  Integer),
+        )
+
         self.meta.create_all(self.engine)
+
+
+    def drop_all_tables(self):
+        print("Dropping all tables")
+        self.meta.drop_all(self.engine)
+
 
     def validate_user(self, data:Signin):
         print(f"Validating user Data username {data.username_or_email} password {data.password}")
@@ -259,11 +283,38 @@ class TeacherData:
 
         return user
 
+    def get_details_using_id(self, id:int):
+        print(f"Getting user by id {id}")
+        # Select query using username
+        print(f"Validating user Data username {id}")
+        #selecting where username is equal to the username in the data
+        sel = self.table.select().where(self.table.c.id == id)
+        result = self.engine.execute(sel)
+        #fetching the result
+        user = result.fetchone()
+        if user is None:
+            return "User not found"
+
+        return user
+    def join_institute_as_teacher( self, teacher_id:int, institute_id:int):
+        print(f"Joining institute as teacher {teacher_id} {institute_id}")
+        ins = self.idtable.insert().values(teacher_id=teacher_id, institute_id=institute_id)
+        self.engine.execute(ins);
+        return "joined institute"
+    
+    def get_all_teachers_in_institute(self,institute_id):
+        # join table with teacher_id and institute_id
+        sel = self.idtable.select().where(self.idtable.c.institute_id == institute_id)
+        result = self.engine.execute(sel)
+        teachers = result.fetchall()
+        print(f"teachers {teachers}")
+        
+        return [self.get_details_using_id(x['teacher_id']) for x in teachers]
+
     def create_user_in_db(self, data: Teachers):
         # Insert query using Teachers data class
         print("Creating user in database")
         ins = self.table.insert().values(
-            institute_id=data.institute_id,
             qualification=data.qualification,
             phonenumber=data.phonenumber,
             key_subject=data.key_subject,

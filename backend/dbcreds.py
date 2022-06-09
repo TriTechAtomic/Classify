@@ -26,15 +26,37 @@ class DbController:
         self.institute = InstituteData(engine=self.connection)
         self.student = StudentData(engine=self.connection)
 
+
+
+
+    #commons 
+    
+    # get userdetails with username and role 
+
+    # username aur role se userdetails return kar raha hai
+    def get_user_details(self, username: str,role:str):
+        if role == "institute":
+            data =  self.institute.get_user_by_username(username)
+            print(data)
+            return data
+        elif role == "teacher":
+            data =  self.teacher.get_user_by_username(username)
+            print(data)
+            return data
+        elif role == "student":
+            data =  self.student.get_user_by_username(username)
+            print(data)
+            return data
+        else: 
+            return {"message": ">> You are not authorized to access this route"}
+        
+
     # Student functions
     def create_student(self, data: Students):
         return self.student.create_user_in_db(data=data)
     # check password 
     def validate_student(self, data: Signin):
         return self.student.validate_user(data)
-    #get username 
-    def get_user_details(self, username: str):
-        return self.student.get_user_details(username)
 
 
 
@@ -45,23 +67,40 @@ class DbController:
     # check password 
     def validate_teacher(self, data: Signin):
         return self.teacher.validate_user(data)
-    #get username 
-    def get_user_details(self, username: str):
-        return self.teacher.get_user_details(username)
+        
+   
 
+
+    # institute ka sub teacher
+    def get_all_teachers_in_institute(self,institute_id):
+        return self.teacher.get_all_teachers_in_institute(institute_id)
+    
+    # teacher ka sub institute
+    def get_all_teachers_institute(self,teacher_id): 
+        return self.teacher.get_all_teachers_institute(teacher_id)
+
+    # teacher join kar raha hai institute  
+    def join_institute_as_teacher(self, teacher_id: int, institute_id: int):
+        return self.teacher.join_institute_as_teacher(teacher_id=teacher_id, institute_id=institute_id )
+
+    
     
 
     # Institute functions
+    # institute bana raha hai
     def create_institute(self, data: Institute):
         return self.institute.create_user_in_db(data)
+    
     # check password 
+    # bhai ka details check kar raha hai
     def validate_institute_creds(self, data: Signin ):
         return self.institute.validate_user(data)
-    #get username 
-    def get_user_details(self, username: str):
-        return self.institute.get_user_details(username)
-    
 
+    # dont call this deletes the complete startup database
+    def drop_all_tables(self):
+        self.institute.drop_all_tables()
+        self.student.drop_all_tables()
+        self.teacher.drop_all_tables()
 
         
     
