@@ -1,11 +1,11 @@
-import 'package:classify/screens/admin/features/manage_courses.dart';
 import 'package:classify/screens/widgets/proceed_button.dart';
 import 'package:classify/screens/widgets/tf_flow.dart';
 import 'package:flutter/material.dart';
 import 'package:classify/models/textfield_meta.dart';
 
 class CreateCustomClass extends StatefulWidget {
-  const CreateCustomClass({Key? key}) : super(key: key);
+  final VoidCallback flipper;
+  const CreateCustomClass({Key? key, required this.flipper}) : super(key: key);
   static const String routeName = '/CreateCustomClass';
 
   @override
@@ -48,7 +48,7 @@ class _CreateCustomClassState extends State<CreateCustomClass> {
             children: [
               IconButton(
                   onPressed: () {
-                    setState(() {});
+                    widget.flipper();
                   },
                   icon: const Icon(Icons.close)),
               Expanded(

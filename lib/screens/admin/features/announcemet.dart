@@ -1,5 +1,4 @@
 import 'package:classify/screens/widgets/proceed_button.dart';
-import 'package:classify/utils/buttons.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -12,10 +11,10 @@ class Announcement extends StatefulWidget {
 }
 
 class _AnnouncementState extends State<Announcement> {
+  final Atype = ['In Class', 'In Institution'];
+  String? selectedType = "In Class";
   @override
   Widget build(BuildContext context) {
-    final Atype = ['In Class', 'In Institution'];
-    String? selectedType = "In Class";
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(

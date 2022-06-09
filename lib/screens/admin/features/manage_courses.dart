@@ -15,6 +15,12 @@ class ManageCourses extends StatefulWidget {
 
 class _ManageCoursesState extends State<ManageCourses> {
   bool createClass = false;
+  void flipcreateClass() {
+    setState(() {
+      createClass = !createClass;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -38,7 +44,9 @@ class _ManageCoursesState extends State<ManageCourses> {
                 body: TabBarView(
                   children: [
                     createClass
-                        ? const CreateCustomClass()
+                        ? CreateCustomClass(
+                            flipper: flipcreateClass,
+                          )
                         : Scaffold(
                             backgroundColor: adminBackground,
                             body: Center(
