@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import '../../utils/colors.dart';
+import '../../../utils/colors.dart';
 
 class TeacherHeader extends StatelessWidget {
   const TeacherHeader({

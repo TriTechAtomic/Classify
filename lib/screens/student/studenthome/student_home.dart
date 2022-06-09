@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'student_home_content.dart';
 import 'package:flutter/material.dart';
-import '../widgets/customdrawer.dart';
+import '../../widgets/customdrawer.dart';
 
 class StudentHome extends StatelessWidget {
   StudentHome({Key? key}) : super(key: key);
