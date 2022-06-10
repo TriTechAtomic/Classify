@@ -10,12 +10,15 @@ class ClassifyAuth<T> {
 
   ClassifyAuth();
 
-  signUp(T user) async {
-    var response = await post(
-        Uri.parse(base + "signup" + user.runtimeType.toString()),
-        headers: {'Content-Type': 'application/json'},
-        body: user.toString());
-    return response.body;
+  Future<bool> signUp(T user) async {
+    String req = base + "signup" + user.runtimeType.toString();
+    var response = await post(Uri.parse(req),
+        headers: {'Content-Type': 'application/json'}, body: user.toString());
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   Future<Response> signIn(
@@ -43,7 +46,10 @@ class ClassifyAuth<T> {
       } else {
         throw Exception("Invalid Credentials");
       }
+    } else if (response.statusCode == 400) {
+      throw Exception("User already exists");
     }
+
     return response;
   }
 }

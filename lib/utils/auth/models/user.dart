@@ -74,7 +74,6 @@ class Institute {
 }
 
 class Teacher {
-  final int institute_id;
   final String qualification;
   final String phonenumber;
   final String key_subject;
@@ -82,12 +81,11 @@ class Teacher {
   final String email;
   final String password;
 
-  Teacher(this.institute_id, this.qualification, this.phonenumber,
-      this.key_subject, this.username, this.email, this.password);
+  Teacher(this.qualification, this.phonenumber, this.key_subject, this.username,
+      this.email, this.password);
 
   factory Teacher.fromJson(Map<String, dynamic> json) {
     return Teacher(
-      json['institute_id'] as int,
       json['qualification'] as String,
       json['phonenumber'] as String,
       json['key_subject'] as String,
@@ -97,9 +95,20 @@ class Teacher {
     );
   }
 
+  @override
+  String toString() {
+    return jsonEncode({
+      'qualification': qualification,
+      'phonenumber': phonenumber,
+      'key_subject': key_subject,
+      'username': username,
+      'email': email,
+      'password': password,
+    });
+  }
+
   Map<String, dynamic> toJson() {
     return {
-      'institute_id': institute_id,
       'qualification': qualification,
       'phonenumber': phonenumber,
       'key_subject': key_subject,
@@ -111,13 +120,12 @@ class Teacher {
 
   factory Teacher.fromTFMETA(List<TFmeta> list) {
     return Teacher(
-      int.parse(list[0].controller.text),
+      list[0].controller.text,
       list[1].controller.text,
       list[2].controller.text,
       list[3].controller.text,
       list[4].controller.text,
       list[5].controller.text,
-      list[6].controller.text,
     );
   }
 }

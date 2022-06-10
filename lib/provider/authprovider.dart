@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:classify/utils/auth/models/user.dart';
@@ -17,8 +18,29 @@ class Auth with ChangeNotifier {
   }
 
   init() async {
-    getuserDataFromLocalStorage();
+    await getuserDataFromLocalStorage();
+    startRefreshingTheAccessToken();
     notifyListeners();
+  }
+
+  startRefreshingTheAccessToken() async {
+    Timer.periodic(const Duration(minutes: 2), (t) async {
+      print(t.tick);
+
+      http.Response res =
+          await http.get(Uri.parse(base + "/newaccesstoken"), headers: {
+        "token": refreshToken!,
+      });
+      var data = jsonDecode(res.body);
+      if (res.statusCode == 200) {
+        accessToken = data['access_token'];
+        refreshToken = data['refresh_token'];
+        prefs!.setString("accessToken", accessToken!);
+        prefs!.setString("refreshToken", refreshToken!);
+        print("access token refreshed");
+        notifyListeners();
+      }
+    });
   }
 
   getuserDataFromLocalStorage() async {
@@ -26,17 +48,12 @@ class Auth with ChangeNotifier {
     accessToken = prefs!.getString('accessToken');
     refreshToken = prefs!.getString('refreshToken');
     role = prefs!.getString('role');
-    getuserDetails();
+    await getuserDetails();
   }
 
   getuserDetails() async {
     http.Response res = await http.get(Uri.parse(base + "/userdetails"),
         headers: {'token': accessToken!});
-    print("$accessToken");
-    print("body>>>>>>>>>>>>>>>>>>>> ${res.body}");
-    print("statusCode>>>>>>>>>>>>>>>>>>>> ${res.statusCode}");
-    print("headers>>>>>>>>>>>>>>>>>>>> ${res.headers}");
-
     if (res.statusCode == 200 && role != null) {
       if (role == 'Institute') {
         user = Institute.fromJson(jsonDecode(res.body));
@@ -50,11 +67,9 @@ class Auth with ChangeNotifier {
 
       notifyListeners();
     } else if (res.statusCode == 400) {
-      print(refreshToken!);
       res = await http.get(Uri.parse(base + "/newaccesstoken"),
           headers: {'token': refreshToken!});
       var newtokens = jsonDecode(res.body);
-      print(newtokens);
       prefs!.setString("accessToken", newtokens["access_token"]);
       prefs!.setString("refreshToken", newtokens["refresh_token"]);
       await getuserDataFromLocalStorage();

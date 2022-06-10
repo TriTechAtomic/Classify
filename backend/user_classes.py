@@ -1,7 +1,7 @@
 import bcrypt
 from sqlalchemy import FLOAT, INTEGER, VARCHAR, Column, Integer, MetaData, Table 
 from models.response.sign_in import Signin
-
+from fastapi import HTTPException
 
 class InstituteData: 
     from models.db.users.institute import Institute
@@ -296,6 +296,7 @@ class TeacherData:
             return "User not found"
 
         return user
+
     def join_institute_as_teacher( self, teacher_id:int, institute_id:int):
         print(f"Joining institute as teacher {teacher_id} {institute_id}")
         ins = self.idtable.select().where(self.idtable.c.teacher_id == teacher_id)
@@ -318,17 +319,20 @@ class TeacherData:
 
     def create_user_in_db(self, data: Teachers):
         # Insert query using Teachers data class
-        print("Creating user in database")
-        ins = self.table.insert().values(
-            qualification=data.qualification,
-            phonenumber=data.phonenumber,
-            key_subject=data.key_subject,
-            username=data.username,
-            email=data.email,
-            password=bcrypt.hashpw((data.password).encode('utf-8'), bcrypt.gensalt()).decode('utf-8'),
-        )
-        self.engine.execute(ins)
-        return True
+        try:
+            print("Creating user in database")
+            ins = self.table.insert().values(
+                qualification=data.qualification,
+                phonenumber=data.phonenumber,
+                key_subject=data.key_subject,
+                username=data.username,
+                email=data.email,
+                password=bcrypt.hashpw((data.password).encode('utf-8'), bcrypt.gensalt()).decode('utf-8'),
+            )
+            self.engine.execute(ins)
+            return True
+        except:
+            raise HTTPException(status_code=400, detail="User already exists")
 
 
 

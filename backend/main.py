@@ -1,3 +1,4 @@
+from typing import Dict
 from fastapi import Depends, FastAPI,Header
 from dbcreds import DbController
 from models.db.users.institute import  Institute
@@ -100,6 +101,23 @@ async def get_teachers(token: str = Header(None)):
     else:
         return {"message": ">> You are not authorized to access this route"}
 
+@app.get("/teacherDetails",dependencies=[Depends(access_required)])
+async def get_teacher_details(token: str = Header(None)):
+    userDetails = access_required(token)
+    role=userDetails['role']
+    username = userDetails['username']
+    if  role == "teacher":
+        teacher = dbCon.get_user_details(username,role)
+        return {
+            "username": teacher['username'], 
+            "email": teacher['email'],
+            "key_subject": teacher['key_subject'],
+            "phonenumber":teacher['phonenumber'],
+        }
+    else:
+        return {"message": ">> You are not authorized to access this route"}
+
+    
 @app.post("/signinStudent")
 async def signin(data: Signin):
     isValidUser =  dbCon.validate_student(data=data)
