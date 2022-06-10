@@ -38,8 +38,11 @@ class ShowModalContainer extends StatelessWidget {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const Text(
+                  "Check Your email inbox for the invite code \n if you havent recived invite code ask admin",
+                ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
+                  padding: const EdgeInsets.only(top: 10, bottom: 20.0),
                   child: SizedBox(
                     height: dimens.maxHeight * 0.25,
                     width: dimens.maxWidth * 0.75,
