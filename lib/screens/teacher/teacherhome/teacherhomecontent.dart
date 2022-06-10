@@ -21,7 +21,7 @@ class TeacherHomeContents extends StatelessWidget {
               email: "Dummyemail@gmail.com",
               keysubject: "Pehele seekh lu"),
           Padding(
-            padding: const EdgeInsets.only(top: 10.0, right: 8.0),
+            padding: const EdgeInsets.only(top: 15.0, right: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

@@ -1,6 +1,5 @@
 import 'package:classify/screens/common/widgets.dart';
 import 'package:flutter/material.dart';
-
 import '../../assets/asset_register.dart';
 
 class CustomDrawer extends StatefulWidget {
@@ -10,6 +9,7 @@ class CustomDrawer extends StatefulWidget {
       required this.email,
       required this.drawerItems})
       : super(key: key);
+
   final String name, email;
   final List<String> drawerItems;
 
@@ -105,44 +105,17 @@ class Draweritems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void rateus() {
+    void drawerNavidation(String nav) {
+      if (nav == 'Rate us') {
+      } else if (nav == 'Share') {
+      } else if (nav == 'Contact us') {
+      } else {}
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("RateUs"),
+        SnackBar(
+          content: Text("$nav Clicked"),
         ),
       );
     }
-
-    void share() {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Share"),
-        ),
-      );
-    }
-
-    void contactus() {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("ContactUs"),
-        ),
-      );
-    }
-
-    void credits() {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Credits"),
-        ),
-      );
-    }
-
-    final List<VoidCallback> functions = [
-      rateus,
-      share,
-      contactus,
-      credits,
-    ];
 
     return Column(
       children: [
@@ -151,7 +124,7 @@ class Draweritems extends StatelessWidget {
             padding: const EdgeInsets.only(left: 8.0),
             child: ListTile(
               title: Text(listwidgets[i]),
-              onTap: functions[i],
+              onTap: () => drawerNavidation(listwidgets[i]),
             ),
           ),
         logoutButton(context)

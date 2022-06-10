@@ -7,3 +7,4 @@ export 'package:classify/screens/parent/parent_home.dart';
 export 'package:classify/screens/student/studenthome/student_home.dart';
 export 'package:classify/screens/teacher/signup.dart';
 export 'package:classify/screens/teacher/teacherhome/teacher_home.dart';
+export 'package:classify/screens/teacher/institution interface/institionmain.dart';
