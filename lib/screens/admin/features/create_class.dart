@@ -66,9 +66,10 @@ class _CreateCustomClassState extends State<CreateCustomClass> {
                         onPressed: () {
                           controllers.add(
                             TFmeta("Add Subjects",
-                                trailing: DropdownButtonHideUnderline(
+                                trailing: Padding(
+                                  padding: const EdgeInsets.all(8.0),
                                   child: DropdownButton(
-                                    iconSize: 10,
+                                    hint: Text("Assing Teacher"),
                                     items: const [
                                       DropdownMenuItem(
                                         value: "",
@@ -88,7 +89,7 @@ class _CreateCustomClassState extends State<CreateCustomClass> {
                                       ),
                                     ],
                                     onChanged: (e) => {},
-                                    icon: const Text("asd"),
+                                    icon: null,
                                   ),
                                 )),
                           );

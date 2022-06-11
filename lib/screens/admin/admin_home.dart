@@ -5,6 +5,7 @@ import 'package:classify/screens/admin/features/announcemet.dart';
 import 'package:classify/screens/admin/features/manage_courses.dart';
 import 'package:classify/screens/admin/features/manage_students.dart';
 import 'package:classify/screens/admin/features/manage_teachers.dart';
+import 'package:classify/screens/admin/timetable/timetables.dart';
 import 'package:classify/utils/buttons.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:classify/utils/responsive.dart';
@@ -118,7 +119,7 @@ class _AdminHomeState extends State<AdminHome> {
                                   "Manage Students", ManageStudents.routeName),
                               RouteMeta(
                                   "Manage Teachers", ManageTeachers.routeName),
-                              RouteMeta("TimeTables", ""),
+                              RouteMeta("TimeTables", TimeTables.routeName),
                               RouteMeta("Complaints", ""),
                               RouteMeta(
                                   "Announcements", Announcement.routeName),

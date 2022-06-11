@@ -1,9 +1,11 @@
 import 'package:classify/provider/authprovider.dart';
 import 'package:classify/screens/admin/admission/student_account.dart';
+import 'package:classify/screens/admin/timetable/create_TimeTable.dart';
 import 'package:classify/screens/admin/features/analytics/analytics_menu.dart';
 import 'package:classify/screens/admin/features/manage_students.dart';
 import 'package:classify/screens/admin/features/manage_teachers.dart';
 import 'package:classify/screens/admin/features/teachers_attendence.dart';
+import 'package:classify/screens/admin/timetable/timetables.dart';
 import 'package:flutter/material.dart';
 import './screens/screens.dart';
 import 'package:provider/provider.dart';
@@ -54,6 +56,8 @@ class MyApp extends StatelessWidget {
           ManageTeachers.routeName: (context) => const ManageTeachers(),
           TeacherAttendence.routeName: (context) => const TeacherAttendence(),
           StudentAccount.routeName: (context) => const StudentAccount(),
+          TimeTables.routeName:(context) => const TimeTables(),
+          CreateTimeTable.routeName:(context) =>  const CreateTimeTable(),
         },
       ),
     );
