@@ -1,12 +1,11 @@
+import 'package:classify/screens/admin/admission/student_account.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 
-import '../../models/textfield_meta.dart';
-import '../widgets/proceed_button.dart';
-import '../widgets/tf_flow.dart';
+import '../../../models/textfield_meta.dart';
+import '../../widgets/proceed_button.dart';
+import '../../widgets/tf_flow.dart';
 
 class AddStudents extends StatefulWidget {
   final VoidCallback flipper;
@@ -53,47 +52,53 @@ class _AddStudentsState extends State<AddStudents> {
               TFrow(data: ele, ss: MediaQuery.of(context).size),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.8,
-              child: DropdownButton<String>(
-                value: seletedCourses,
-                hint: const Text("Select Course"),
-                items: courses
-                    .map((item) => DropdownMenuItem(
-                          value: item,
-                          child: Text(
-                            item,
-                            style: const TextStyle(),
-                          ),
-                        ))
-                    .toList(),
-                onChanged: (item) => setState(() {
-                  seletedCourses = item;
-                }),
+              child: Wrap(
+                alignment: WrapAlignment.start,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    child: DateTimePicker(
+                      initialValue: DateTime.now().toString(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
+                      dateLabelText: 'Date of Admission',
+                      onChanged: (val) => print(val),
+                      validator: (val) {
+                        print(val);
+                        return null;
+                      },
+                      onSaved: (val) => print(val),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 30,
+                    height: 30,
+                  ),
+                  DropdownButton<String>(
+                    value: seletedCourses,
+                    hint: const Text("Select Course"),
+                    items: courses
+                        .map((item) => DropdownMenuItem(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: const TextStyle(),
+                              ),
+                            ))
+                        .toList(),
+                    onChanged: (item) => setState(() {
+                      seletedCourses = item;
+                    }),
+                  ),
+                ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: DateTimePicker(
-                  initialValue: DateTime.now().toString(),
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2100),
-                  dateLabelText: 'Date of Admission',
-                  onChanged: (val) => print(val),
-                  validator: (val) {
-                    print(val);
-                    return null;
-                  },
-                  onSaved: (val) => print(val),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+              padding: const EdgeInsets.fromLTRB(0, 40, 0, 8),
               child: Wrap(
                 alignment: WrapAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Chooce Gender Of Student",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
@@ -116,7 +121,7 @@ class _AddStudentsState extends State<AddStudents> {
               ss: MediaQuery.of(context).size,
               text: "Admit",
               onPressed: () {
-                Navigator.pushNamed(context, "");
+                Navigator.pushNamed(context, StudentAccount.routeName);
               },
             ),
           ],

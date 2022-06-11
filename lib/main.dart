@@ -1,4 +1,5 @@
 import 'package:classify/provider/authprovider.dart';
+import 'package:classify/screens/admin/admission/student_account.dart';
 import 'package:classify/screens/admin/features/analytics/analytics_menu.dart';
 import 'package:classify/screens/admin/features/manage_students.dart';
 import 'package:classify/screens/admin/features/manage_teachers.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
           ManageStudents.routeName: (context) => ManageStudents(),
           ManageTeachers.routeName: (context) => const ManageTeachers(),
           TeacherAttendence.routeName: (context) => const TeacherAttendence(),
+          StudentAccount.routeName: (context) => const StudentAccount(),
         },
       ),
     );

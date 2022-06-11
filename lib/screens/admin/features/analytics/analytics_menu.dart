@@ -32,7 +32,6 @@ class _AnalyticsState extends State<Analytics> {
             RouteMeta("Student's Pending Fees", ""),
             RouteMeta("Student's Full Paid", ""),
             RouteMeta("Total Test Held", ""),
-            RouteMeta("Analytics", ""),
             RouteMeta("Total Complaints", ""),
             RouteMeta("Total Lectures", ""),
           ])

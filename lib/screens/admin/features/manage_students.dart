@@ -1,4 +1,4 @@
-import 'package:classify/screens/admin/add_students.dart';
+import 'package:classify/screens/admin/admission/add_students.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:flutter/material.dart';
 
