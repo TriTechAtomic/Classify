@@ -11,6 +11,8 @@ class InstituteData:
         self.engine= engine;
         self.create_table_in_db(self.engine);
 
+    
+
     def validate_user(self, data: Signin):
         # Select query using username
         print(f"Validating user Data username {data.username_or_email} password {data.password}")

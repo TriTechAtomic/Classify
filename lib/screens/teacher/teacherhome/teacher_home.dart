@@ -1,3 +1,7 @@
+import 'package:classify/provider/authprovider.dart';
+import 'package:classify/utils/auth/models/user.dart';
+import 'package:provider/provider.dart';
+
 import '../../widgets/customdrawer.dart';
 import 'package:flutter/material.dart';
 import 'teacherhomecontent.dart';
@@ -14,11 +18,12 @@ class TeacherHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Teacher? teach = Provider.of<Auth>(context).user;
     return Scaffold(
       drawer: MediaQuery.of(context).size.width < 1100
           ? CustomDrawer(
-              name: "Dummy Name",
-              email: "dummyemail@gmail.com",
+              name: teach!.username,
+              email: teach.email,
               drawerItems: drawerWidgets,
             )
           : null,

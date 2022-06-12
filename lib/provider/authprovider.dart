@@ -19,12 +19,13 @@ class Auth with ChangeNotifier {
 
   init() async {
     await getuserDataFromLocalStorage();
+    print(accessToken);
     startRefreshingTheAccessToken();
     notifyListeners();
   }
 
   startRefreshingTheAccessToken() async {
-    Timer.periodic(const Duration(minutes: 2), (t) async {
+    Timer.periodic(const Duration(seconds: 100), (t) async {
       print(t.tick);
 
       http.Response res =
