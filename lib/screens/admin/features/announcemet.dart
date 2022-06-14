@@ -13,6 +13,8 @@ class Announcement extends StatefulWidget {
 class _AnnouncementState extends State<Announcement> {
   final Atype = ['In Class', 'In Institution'];
   String? selectedType = "In Class";
+  final AllClass = ['1', '2', '3', '4'];
+  String? selectedclass;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -52,18 +54,42 @@ class _AnnouncementState extends State<Announcement> {
                 "Select Announcement Type",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              DropdownButton<String>(
-                value: selectedType,
-                items: Atype.map((item) => DropdownMenuItem(
-                      value: item,
-                      child: Text(
-                        item,
-                        style: const TextStyle(),
-                      ),
-                    )).toList(),
-                onChanged: (item) => setState(() {
-                  selectedType = item;
-                }),
+              Wrap(
+                children: [
+                  DropdownButton<String>(
+                    value: selectedType,
+                    items: Atype.map((item) => DropdownMenuItem(
+                          value: item,
+                          child: Text(
+                            item,
+                            style: const TextStyle(),
+                          ),
+                        )).toList(),
+                    onChanged: (item) => setState(() {
+                      selectedType = item;
+                    }),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Visibility(
+                    visible: selectedType == "In Class",
+                    child: DropdownButton<String>(
+                      value: selectedclass,
+                      hint: const Text("Select Class"),
+                      items: AllClass.map((item) => DropdownMenuItem(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(),
+                            ),
+                          )).toList(),
+                      onChanged: (item) => setState(() {
+                        selectedclass = item;
+                      }),
+                    ),
+                  ),
+                ],
               ),
               ProceedButton(
                   ss: MediaQuery.of(context).size,

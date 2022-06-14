@@ -1,5 +1,5 @@
 export 'package:classify/screens/admin/admin_home.dart';
-export 'package:classify/screens/admin/features/manage_courses.dart';
+export 'package:classify/screens/admin/manage_courses/manage_courses.dart';
 export 'package:classify/screens/admin/signup.dart';
 export 'package:classify/screens/common/role_selection.dart';
 export 'package:classify/screens/common/signin.dart';

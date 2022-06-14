@@ -1,3 +1,4 @@
+import 'package:classify/screens/admin/manage_courses/test_held.dart';
 import 'package:classify/utils/buttons.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -83,10 +84,7 @@ class _ManageCoursesState extends State<ManageCourses> {
                           text: "User Template", height: 250, width: 250),
                     ),
                     DeleteClass(),
-                    const Scaffold(
-                      body: CustomButtons(
-                          text: "User Template", height: 250, width: 250),
-                    ),
+                    const Scaffold(body: TestHeld()),
                   ],
                 ))));
   }

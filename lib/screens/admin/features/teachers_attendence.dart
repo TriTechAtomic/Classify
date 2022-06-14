@@ -1,4 +1,5 @@
 import 'package:classify/screens/widgets/proceed_button.dart';
+import 'package:classify/utils/colors.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -21,8 +22,8 @@ class _TeacherAttendenceState extends State<TeacherAttendence> {
 
   String? seletedTeacher;
   DateTime seletedDate = DateTime.now();
-  TimeOfDay startTime = TimeOfDay.now();
-  TimeOfDay endTime = TimeOfDay.now();
+  TimeOfDay startTime = const TimeOfDay(hour: 00, minute: 00);
+  TimeOfDay endTime = const TimeOfDay(hour: 00, minute: 00);
   int durationOfLecture = 0;
   final courses = [
     'Padai Likhai karo',
@@ -47,8 +48,10 @@ class _TeacherAttendenceState extends State<TeacherAttendence> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(title: const Text("Teacher's Attendence")),
-      body: SingleChildScrollView(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             DropdownButton<String>(
               value: seletedTeacher,
@@ -70,8 +73,12 @@ class _TeacherAttendenceState extends State<TeacherAttendence> {
               height: 30,
             ),
             Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  border: Border.all(color: accentColor, width: 2),
+                  borderRadius: const BorderRadius.all(Radius.circular(5))),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   SizedBox(
                     width: 200,
@@ -153,7 +160,7 @@ class _TeacherAttendenceState extends State<TeacherAttendence> {
                       ),
                       ElevatedButton(
                           onPressed: _selectEndTime,
-                          child: const Text("Enter End Time")),
+                          child: const Text("Enter  End  Time")),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
@@ -176,12 +183,7 @@ class _TeacherAttendenceState extends State<TeacherAttendence> {
             ),
             ProceedButton(
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    backgroundColor: Colors.green,
-                    content: Text("Attendence Marked Succesfully"),
-                  ),
-                );
+                validatingAttendance();
               },
               text: "Done",
               ss: MediaQuery.of(context).size,
@@ -214,8 +216,41 @@ class _TeacherAttendenceState extends State<TeacherAttendence> {
     if (newTime != null) {
       setState(() {
         endTime = newTime;
-        durationOfLecture = ((endTime.hour + 12) - startTime.hour);
+        durationOfLecture = ((endTime.hour) - startTime.hour);
+        if (durationOfLecture < 0) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              backgroundColor: Colors.red,
+              content: Text("Duration of Lecture Can't be in negative")));
+        }
       });
+    }
+  }
+
+  void validatingAttendance() {
+    if (seletedTeacher == null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.red, content: Text("Select Teacher")));
+    } else if (seletedCourses == null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.red, content: Text("Select Course")));
+    } else if (seletedSubject == null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.red, content: Text("Select Subject")));
+    } else if (startTime.hour == 0) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text("Mark Start Time Of Lecture")));
+    } else if (endTime.hour == 0) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text("Mark EndTime of Lecture")));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.green,
+          content: Text("Attendence Marked Succesfully"),
+        ),
+      );
     }
   }
 }

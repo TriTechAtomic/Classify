@@ -1,8 +1,7 @@
 import 'package:classify/assets/asset_register.dart';
 import 'package:classify/models/route_meta.dart';
-import 'package:classify/screens/admin/features/analytics/analytics_menu.dart';
 import 'package:classify/screens/admin/features/announcemet.dart';
-import 'package:classify/screens/admin/features/manage_courses.dart';
+import 'package:classify/screens/admin/manage_courses/manage_courses.dart';
 import 'package:classify/screens/admin/features/manage_students.dart';
 import 'package:classify/screens/admin/features/manage_teachers.dart';
 import 'package:classify/screens/admin/timetable/timetables.dart';
@@ -11,6 +10,7 @@ import 'package:classify/utils/colors.dart';
 import 'package:classify/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'admin_side_drawer.dart';
+import 'analytics/analytics_menu.dart';
 import 'features/teachers_attendence.dart';
 
 class AdminHome extends StatefulWidget {
