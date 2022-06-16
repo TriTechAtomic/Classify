@@ -15,7 +15,7 @@ dbCon =  DbController()
 async def root():
     return {"message": ">> Hello from xxparthparekhxx >>"}
 
-@app.get("/newaccesstoken",dependencies=[Depends(refresh_required)])
+@app.get("/newaccesstoken",dependencies=[Depends(refresh_required)]) # login 
 async def refresh_token(token: str = Header(None)):
     data = refresh_required(token)
     print(data)
@@ -84,13 +84,19 @@ async def signup(data: Teachers):
 async def signup(data: Students):
     return  dbCon.create_student(data)
 
-@app.get("createTeacherInvite",depends=[Depends(create_invite_token, access_required)])
+@app.get("/createTeacherInvite",dependencies=[Depends(create_invite_token),Depends(access_required)])
 async def create_teacher_invite(institute_id: int = Header(None), teacher_id: int = Header(None), token: str = Header(None)):
-    return create_invite_token(institute_id, teacher_id, token) 
+    userdetails = access_required(token)
+    role = userdetails['role']
+    username = userdetails['username']
+    if role == "institute":
+        return create_invite_token(institute_id=institute_id, teacher_id=teacher_id) 
+    else:
+        raise HTTPException(status_code=400, detail="You are not an institute")
 
 
 
-@app.post("/joinInstitueAsTeacher",dependencies=[Depends(verify_invite_token,access_required)])
+@app.post("/joinInstitueAsTeacher",dependencies=[Depends(verify_invite_token) ,Depends(access_required)])
 async def join_institue_as_teacher(inviteToken : str = Header(None) ,token: str = Header(None)):
 
     userdetails =access_required(token)
@@ -122,7 +128,7 @@ async def get_teachers(token: str = Header(None)):
         Instituteid =dbCon.get_user_details(username,role)
         return dbCon.get_all_teachers_in_institute(institute_id=Instituteid['id'])
     else:
-        return {"message": ">> You are not authorized to access this route"}
+        return HTTPException(status_code=400, detail="not authorized")
 
 @app.get("/teacherDetails",dependencies=[Depends(access_required)])
 async def get_teacher_details(token: str = Header(None)):
@@ -138,7 +144,7 @@ async def get_teacher_details(token: str = Header(None)):
             "phonenumber":teacher['phonenumber'],
         }
     else:
-        return {"message": ">> You are not authorized to access this route"}
+        return HTTPException(status_code=400, detail="You are not authorized to access this route")
 
     
 @app.post("/signinStudent")

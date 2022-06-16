@@ -1,5 +1,5 @@
 import bcrypt
-from sqlalchemy import FLOAT, INTEGER, VARCHAR, Column, Integer, MetaData, Table 
+from sqlalchemy import FLOAT, INTEGER, VARCHAR, Column, ForeignKey, Integer, MetaData, Table 
 from models.response.sign_in import Signin
 from fastapi import HTTPException
 
@@ -7,6 +7,8 @@ class InstituteData:
     from models.db.users.institute import Institute
     def __init__(self,engine):
         self.tableName = 'institute';
+        self.courcetablename  = 'courses';
+        self.subjectstableName = "Subjects";
         self.meta = MetaData();
         self.engine= engine;
         self.create_table_in_db(self.engine);
@@ -76,7 +78,31 @@ class InstituteData:
             Column('area', VARCHAR),
             Column('subscription_id', VARCHAR)
         )
+        self.coursetable = Table(
+            self.courcetablename,
+            self.meta,
+            Column("id", Integer, primary_key=True),
+            Column("institute_id", Integer, ForeignKey("institute.id")),
+            Column("name", VARCHAR), 
+            Column("description", VARCHAR),
+            Column("duration", Integer ),
+            Column("fees", Integer),
+            Column("start_date", VARCHAR),
+            Column("end_date", VARCHAR),
+        )
+        
+        self.subjects = Table(
+            self.subjectstableName,
+            self.meta,
+            Column("id", Integer, primary_key=True),
+            Column("institute_id",Integer),
+            Column("name",VARCHAR),
+            Column("course_id",Integer),
+            Column("teacher_id",Integer),
+        )
         self.meta.create_all(engine)
+
+
 
     def get_user_by_username(self, username:str):
         print(f"Getting user by username {username}")
