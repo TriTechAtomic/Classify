@@ -1,4 +1,7 @@
+from datetime import datetime
 from typing import List
+
+from fastapi import HTTPException
 from models.db.admin.courses import Courses
 from models.db.features.subjects import Subject
 from models.db.users.institute import Institute
@@ -6,7 +9,7 @@ from models.db.users.students import Students
 from models.db.users.teacher import Teachers
 
 
-from sqlalchemy import create_engine
+from sqlalchemy import Column, DateTime, create_engine
 from models.response.sign_in import Signin
 
 from user_classes import InstituteData, StudentData, TeacherData
@@ -101,6 +104,11 @@ class DbController:
 
     # create course in institute
     def create_course(self,data: Courses, institute_id: int, SubjectsDetails: List[Subject] ):
+        # valdiate all the teacher id is valid or not
+        all_the_teachers_in_institute =  self.get_all_teachers_in_institute(institute_id)
+        for subject in SubjectsDetails:
+            if subject.teacher_id not in all_the_teachers_in_institute :
+                raise HTTPException(400,"Teacher id is not valid / trying to add teachers that dont extist in the institute")
         return self.institute.create_cource(data, institute_id, SubjectsDetails)
 
     # get all courses in institute
@@ -118,6 +126,4 @@ class DbController:
         self.student.drop_all_tables()
         self.teacher.drop_all_tables()
 
-        
-    
         

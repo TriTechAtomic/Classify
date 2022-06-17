@@ -157,7 +157,7 @@ class InstituteData:
             return "No subjects in cource found"
         return subjects
     
-    
+
     
     def create_cource(self , data: Courses, institute_id: int , SubjectsDetails: List[Subject]):
 
