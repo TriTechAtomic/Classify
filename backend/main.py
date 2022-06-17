@@ -1,5 +1,8 @@
+from typing import List
 from fastapi import Depends, FastAPI,Header ,HTTPException
 from dbcreds import DbController
+from models.db.admin.courses import Courses
+from models.db.features.subjects import Subject
 from models.db.users.institute import  Institute
 from models.db.users.students import Students
 from models.db.users.teacher import Teachers
@@ -60,8 +63,48 @@ async def signin(data: Signin):
 @app.post("/signupInstitute")
 async def signup(data: Institute):
     return dbCon.create_institute(data)
+
+@app.post("/getTeachersInInstitute",dependencies=[Depends(access_required)])
+async def get_teachers(token: str = Header(None)):
+    user_details = access_required(token)
+    role=user_details['role']
+    username = user_details['username']
+    if  role == "institute":
+        Instituteid =dbCon.get_user_details(username,role)
+        return dbCon.get_all_teachers_in_institute(institute_id=Instituteid['id'])
+    else:
+        return HTTPException(status_code=400, detail="not authorized")
     
- 
+@app.post("/createCourse",dependencies=[Depends(access_required)])
+async def create_course( data: Courses, SubjectsDetails: List[Subject],token: str = Header(None)):
+    user_details = access_required(token)
+    role=user_details['role']
+    username = user_details['username']
+    if  role == "institute":
+        Instituteid =dbCon.get_user_details(username,role)
+        return dbCon.create_course(data=data,institute_id=Instituteid['id'],SubjectsDetails=SubjectsDetails)
+    else:
+        return HTTPException(status_code=400, detail="not authorized")
+
+@app.get("/getCoursesInInstitute",dependencies=[Depends(access_required)])
+async def get_courses(token: str = Header(None)):
+    user_details = access_required(token)
+    role=user_details['role']
+    username = user_details['username']
+    if  role == "institute":
+        Instituteid =dbCon.get_user_details(username,role)
+        return dbCon.get_all_courses_in_institute(institute_id=Instituteid['id'])
+    else:
+        return HTTPException(status_code=400, detail="not authorized")
+
+@app.get("/getSubjectsInCourse",dependencies=[Depends(access_required)])
+async def get_subjects(courceid:int,token: str = Header(None)):
+    user_details = access_required(token)
+    role=user_details['role']
+    if  role == "institute":
+        return dbCon.get_all_subjects_in_course(course_id=courceid)
+    else:
+        return HTTPException(status_code=400, detail="not authorized")
 
 # teacher
 @app.post("/signinTeacher")
@@ -119,16 +162,7 @@ async def join_institue_as_teacher(inviteToken : str = Header(None) ,token: str 
         else:
             return HTTPException(status_code=400, detail="You are not authorized to join this institute")
 
-@app.post("/getTeachers",dependencies=[Depends(access_required)])
-async def get_teachers(token: str = Header(None)):
-    user_details = access_required(token)
-    role=user_details['role']
-    username = user_details['username']
-    if  role == "institute":
-        Instituteid =dbCon.get_user_details(username,role)
-        return dbCon.get_all_teachers_in_institute(institute_id=Instituteid['id'])
-    else:
-        return HTTPException(status_code=400, detail="not authorized")
+
 
 @app.get("/teacherDetails",dependencies=[Depends(access_required)])
 async def get_teacher_details(token: str = Header(None)):

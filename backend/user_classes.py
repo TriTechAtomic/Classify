@@ -1,5 +1,9 @@
+from datetime import datetime
+from typing import List
 import bcrypt
-from sqlalchemy import FLOAT, INTEGER, VARCHAR, Column, ForeignKey, Integer, MetaData, Table 
+from sqlalchemy import FLOAT, INTEGER, VARCHAR, Column, ForeignKey, Integer, MetaData, Table
+from models.db.admin.courses import Courses
+from models.db.features.subjects import Subject 
 from models.response.sign_in import Signin
 from fastapi import HTTPException
 
@@ -89,6 +93,7 @@ class InstituteData:
             Column("fees", Integer),
             Column("start_date", VARCHAR),
             Column("end_date", VARCHAR),
+            Column("created_at",VARCHAR),
         )
         
         self.subjects = Table(
@@ -101,8 +106,6 @@ class InstituteData:
             Column("teacher_id",Integer),
         )
         self.meta.create_all(engine)
-
-
 
     def get_user_by_username(self, username:str):
         print(f"Getting user by username {username}")
@@ -123,7 +126,69 @@ class InstituteData:
         if user is None:
             return "User not found"
         return user
-   
+
+    def get_all_courses_in_institute(self, institute_id:int):
+        print(f"Getting all courses in institute {institute_id}")
+        # Select query using username
+        print(f"Validating user Data username {institute_id}")
+        #selecting where username is equal to the username in the data
+        sel = self.coursetable.select().where(self.coursetable.c.institute_id == institute_id)
+        result = self.engine.execute(sel)
+        #fetching the result
+        courses = result.fetchall()
+        print(f"courses {courses}")
+
+        if courses is None:
+            return "No courses found"
+        return courses
+
+    def get_all_subjects_in_course(self, course_id:int):
+        print(f"Getting all subjects in course {course_id}")
+        # Select query using username
+        print(f"Validating user Data username {course_id}")
+        #selecting where username is equal to the username in the data
+        sel = self.subjects.select().where(self.subjects.c.course_id == course_id)
+        result = self.engine.execute(sel)
+        #fetching the result
+        subjects = result.fetchall()
+        print(f"subjects {subjects}")
+
+        if subjects is None:
+            return "No subjects in cource found"
+        return subjects
+    
+    
+    
+    def create_cource(self , data: Courses, institute_id: int , SubjectsDetails: List[Subject]):
+
+        print(f"Creating course in database")
+        created_at =  str(datetime.now())
+        ins = self.coursetable.insert().values(
+            institute_id=institute_id,
+            name=data.name,
+            description=data.description,
+            duration=data.duration,
+            fees=data.fees,
+            start_date=data.start_date,
+            end_date=data.end_date, 
+            created_at=created_at
+        )
+        self.engine.execute(ins)
+        ins = self.coursetable.select().where(
+            self.coursetable.c.created_at == created_at,
+        )
+        course_id = self.engine.execute(ins).fetchone().id
+        
+        print(f"course_id {course_id}")
+        for subject in SubjectsDetails:
+            ins = self.subjects.insert().values(
+                institute_id=institute_id,
+                name=subject.name,
+                course_id=course_id,
+                teacher_id=subject.teacher_id,
+            )
+            self.engine.execute(ins)
+        return "Course created successfully"
 
 
 class StudentData:

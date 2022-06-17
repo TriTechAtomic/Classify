@@ -1,3 +1,6 @@
+from typing import List
+from models.db.admin.courses import Courses
+from models.db.features.subjects import Subject
 from models.db.users.institute import Institute
 from models.db.users.students import Students
 from models.db.users.teacher import Teachers
@@ -95,6 +98,19 @@ class DbController:
     # bhai ka details check kar raha hai
     def validate_institute_creds(self, data: Signin ):
         return self.institute.validate_user(data)
+
+    # create course in institute
+    def create_course(self,data: Courses, institute_id: int, SubjectsDetails: List[Subject] ):
+        return self.institute.create_cource(data, institute_id, SubjectsDetails)
+
+    # get all courses in institute
+    def get_all_courses_in_institute(self, institute_id: int):
+        return self.institute.get_all_courses_in_institute(institute_id)
+
+    # get all subjects in course
+    def get_all_subjects_in_course(self, course_id: int):
+        return self.institute.get_all_subjects_in_course(course_id)
+    
 
     # dont call this deletes the complete startup database
     def drop_all_tables(self):
