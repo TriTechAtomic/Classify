@@ -47,6 +47,10 @@ class MyApp extends StatelessWidget {
           //For teachers
           TeacherInstitutionPage.routeName: (context) =>
               const TeacherInstitutionPage(),
+          StudentsAttendence.routeName: (context) => const StudentsAttendence(),
+
+          // For students
+          StudentStatus.routeName: (context) => const StudentStatus(),
         },
       ),
     );

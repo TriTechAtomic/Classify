@@ -1,15 +1,16 @@
 import '../../widgets/customdrawer.dart';
 import 'package:flutter/material.dart';
 import 'teacherhomecontent.dart';
+import '../../../models/route_meta.dart';
 
 class TeacherHome extends StatelessWidget {
   TeacherHome({Key? key}) : super(key: key);
   static const String routeName = '/teacherHome';
-  final List<String> drawerWidgets = [
-    "Rate us",
-    "Share",
-    "Contact us",
-    "Credits",
+  final List<RouteMeta> drawerWidgets = [
+    RouteMeta("Rate us", ''),
+    RouteMeta("Share", ''),
+    RouteMeta("Contact us", ''),
+    RouteMeta("Credits", ''),
   ];
 
   @override

@@ -17,8 +17,8 @@ class TeacherInstitutionPage extends StatelessWidget {
       backgroundColor: adminBackground,
       body: Responsive(
         mobile: MobileInterface(),
-        tablet: const DesktopInterface(),
-        desktop: const DesktopInterface(),
+        tablet: DesktopInterface(),
+        desktop: DesktopInterface(),
       ),
     );
   }
