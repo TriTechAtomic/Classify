@@ -1,12 +1,11 @@
-from typing import Dict
-from fastapi import Depends, FastAPI,Header
+from fastapi import Depends, FastAPI,Header ,HTTPException
 from dbcreds import DbController
 from models.db.users.institute import  Institute
 from models.db.users.students import Students
 from models.db.users.teacher import Teachers
 from models.response.sign_in import  Signin
 
-from jwtcon import create_access_token,  create_refresh_token, access_required, refresh_required
+from jwtcon import create_access_token, create_invite_token,  create_refresh_token, access_required, refresh_required, verify_invite_token
 
 
 app = FastAPI()
@@ -16,7 +15,7 @@ dbCon =  DbController()
 async def root():
     return {"message": ">> Hello from xxparthparekhxx >>"}
 
-@app.get("/newaccesstoken",dependencies=[Depends(refresh_required)])
+@app.get("/newaccesstoken",dependencies=[Depends(refresh_required)]) # login 
 async def refresh_token(token: str = Header(None)):
     data = refresh_required(token)
     print(data)
@@ -37,6 +36,9 @@ async def refresh_token(token: str = Header(None)):
  [] Enroll Student
 '''
 
+
+
+
 @app.get("/userdetails",dependencies=[Depends(access_required)])
 async def get_user_details(token: str = Header(None)):
     userdetails =access_required(token)
@@ -45,7 +47,7 @@ async def get_user_details(token: str = Header(None)):
     return dbCon.get_user_details(username=username,role=role)
 
 
-
+# institute
 @app.post("/signinInstitute")
 async def signin(data: Signin):
     isValidUser =  dbCon.validate_institute_creds(data=data)
@@ -60,6 +62,8 @@ async def signup(data: Institute):
     return dbCon.create_institute(data)
     
  
+
+# teacher
 @app.post("/signinTeacher")
 async def signin(data: Signin):
     isValidUser =  dbCon.validate_teacher(data=data)
@@ -75,20 +79,45 @@ async def signup(data: Teachers):
     return dbCon.create_teacher(data)
 
    
-    
+# student   
 @app.post("/signupStudent")
 async def signup(data: Students):
     return  dbCon.create_student(data)
 
-@app.post("/joinInstitueAsTeacher",dependencies=[Depends(access_required)])
-async def join_institue_as_teacher(institute_id:int ,token: str = Header(None)):
-    userdetails =access_required(token)
-    role=userdetails['role']
+@app.get("/createTeacherInvite",dependencies=[Depends(create_invite_token),Depends(access_required)])
+async def create_teacher_invite(institute_id: int = Header(None), teacher_id: int = Header(None), token: str = Header(None)):
+    userdetails = access_required(token)
+    role = userdetails['role']
     username = userdetails['username']
-    if  role == "teacher":
-        return dbCon.join_institute_as_teacher(institute_id,dbCon.get_user_details(username=username,role=role)["id"])
+    if role == "institute":
+        return create_invite_token(institute_id=institute_id, teacher_id=teacher_id) 
     else:
-        return {"message": ">> You are not authorized to access this route"}
+        raise HTTPException(status_code=400, detail="You are not an institute")
+
+
+
+@app.post("/joinInstitueAsTeacher",dependencies=[Depends(verify_invite_token) ,Depends(access_required)])
+async def join_institue_as_teacher(inviteToken : str = Header(None) ,token: str = Header(None)):
+
+    userdetails =access_required(token)
+    invite_details = verify_invite_token(inviteToken)
+    if invite_details:
+        teacher_id =  invite_details['teacher_id']
+        institute_id = invite_details['institute_id']
+        
+        role=userdetails['role']
+        username = userdetails['username']
+
+        accessing_teacher_id =dbCon.get_user_details(username=username,role=role)["id"] 
+
+        if accessing_teacher_id == teacher_id: # check if the invited teacher is the one who is trying to join
+
+            if  role == "teacher":
+                return dbCon.join_institute_as_teacher(institute_id=institute_id,teacher_id=accessing_teacher_id)
+            else:
+                return HTTPException(status_code=400, detail="You are not a teacher")
+        else:
+            return HTTPException(status_code=400, detail="You are not authorized to join this institute")
 
 @app.post("/getTeachers",dependencies=[Depends(access_required)])
 async def get_teachers(token: str = Header(None)):
@@ -99,7 +128,7 @@ async def get_teachers(token: str = Header(None)):
         Instituteid =dbCon.get_user_details(username,role)
         return dbCon.get_all_teachers_in_institute(institute_id=Instituteid['id'])
     else:
-        return {"message": ">> You are not authorized to access this route"}
+        return HTTPException(status_code=400, detail="not authorized")
 
 @app.get("/teacherDetails",dependencies=[Depends(access_required)])
 async def get_teacher_details(token: str = Header(None)):
@@ -115,7 +144,7 @@ async def get_teacher_details(token: str = Header(None)):
             "phonenumber":teacher['phonenumber'],
         }
     else:
-        return {"message": ">> You are not authorized to access this route"}
+        return HTTPException(status_code=400, detail="You are not authorized to access this route")
 
     
 @app.post("/signinStudent")

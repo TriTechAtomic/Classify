@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class Courses(BaseModel):
-    id: str
+    id: int
     institute_id: int
     name: str
     description: str
