@@ -1,7 +1,5 @@
 import 'package:classify/assets/asset_register.dart';
-import 'package:classify/screens/admin/signup.dart';
-import 'package:classify/screens/common/signin.dart';
-import 'package:classify/screens/teacher/signup.dart';
+import 'package:classify/screens/screens.dart';
 import 'package:classify/screens/widgets/transperent_app_bar.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -110,8 +108,8 @@ class _RoleSelectionState extends State<RoleSelection> {
           String pagename;
           if (e == Role.admin) {
             pagename = AdminSignup.routename;
-          } else if (e == Role.student) {
-            pagename = Signin.routename;
+          } else if (e == Role.parent) {
+            pagename = StudentHome.routeName;
           } else {
             pagename = TeacherSignup.routeName;
           }

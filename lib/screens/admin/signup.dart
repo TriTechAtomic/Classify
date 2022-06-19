@@ -1,8 +1,8 @@
 import 'package:classify/models/textfield_meta.dart';
 import 'package:classify/screens/widgets/form_heading.dart';
 import 'package:classify/screens/widgets/transperent_app_bar.dart';
-import 'package:classify/utils/auth/classify_auth.dart';
 import 'package:classify/utils/auth/models/user.dart';
+import 'package:classify/utils/auth/classify_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'admin_home.dart';
@@ -29,6 +29,8 @@ class _AdminSignupState extends State<AdminSignup> {
     TFmeta("Enter Subscription ID"),
   ];
 
+  String buttonText = "Proceed";
+
   @override
   void initState() {
     super.initState();
@@ -45,6 +47,15 @@ class _AdminSignupState extends State<AdminSignup> {
       ele.controller.dispose();
     }
     super.dispose();
+  }
+
+  bool textfieldsAreValid() {
+    for (var ele in controllers) {
+      if (ele.controller.text.isEmpty) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @override
@@ -79,14 +90,32 @@ class _AdminSignupState extends State<AdminSignup> {
                       ),
                     ElevatedButton(
                       onPressed: () {
-                        // if (controllers
-                        //     .every((ele) => ele.controller.text.isNotEmpty)) {
-                        //   ClassifyAuth<Institute>()
-                        //       .signUp(Institute.fromTFMETA(controllers));
-                        // }
-                        Navigator.pushNamed(context, AdminHome.routeName);
+                        textfieldsAreValid()
+                            ? () async {
+                                Institute t = Institute.fromTFMETA(controllers);
+                                var instance = ClassifyAuth<Institute>();
+                                setState(() {
+                                  buttonText = "Signing up...";
+                                });
+                                var res = await instance.signUp(t);
+                                setState(() {
+                                  buttonText = "Logging in...";
+                                });
+                                if (res) {
+                                  instance.signIn(t.email, t.password,
+                                      'signinInstitute', context);
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content:
+                                              Text("User already exists")));
+                                }
+                                Navigator.pushNamed(
+                                    context, AdminHome.routeName);
+                              }
+                            : null;
                       },
-                      child: const Text('Proceed'),
+                      child: Text(buttonText),
                     )
                   ],
                 ),
