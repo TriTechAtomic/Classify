@@ -1,1 +1,1 @@
-const String baseUrl = 'http://localhost:8000/';
+const String baseUrl = 'https://classify-by-tta.herokuapp.com/';

@@ -69,8 +69,12 @@ class AuthValidator extends StatelessWidget {
               return StudentHome();
             } else if (role == "Parent") {
               return const ParentHome();
-            } else {
+            } else if (role == "Teacher") {
               return TeacherHome();
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(color: Colors.deepPurple),
+              );
             }
           } else {
             return const Signin();
