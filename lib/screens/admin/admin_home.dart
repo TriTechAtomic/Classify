@@ -1,12 +1,15 @@
 import 'package:classify/assets/asset_register.dart';
 import 'package:classify/models/route_meta.dart';
+import 'package:classify/provider/authprovider.dart';
 import 'package:classify/screens/admin/features/announcemet.dart';
 import 'package:classify/screens/admin/features/manage_courses.dart';
+import 'package:classify/screens/widgets/customdrawer.dart';
+import 'package:classify/utils/auth/models/user.dart';
 import 'package:classify/utils/buttons.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:classify/utils/responsive.dart';
 import 'package:flutter/material.dart';
-import 'admin_side_drawer.dart';
+import 'package:provider/provider.dart';
 
 class AdminHome extends StatefulWidget {
   const AdminHome({Key? key}) : super(key: key);
@@ -19,20 +22,40 @@ class AdminHome extends StatefulWidget {
 class _AdminHomeState extends State<AdminHome> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   bool searchIcon = false;
+  var drawerItems = [
+    RouteMeta("Billing", ''),
+    RouteMeta("Rate us", ''),
+    RouteMeta("Share", ''),
+    RouteMeta("Contact us", ''),
+    RouteMeta("Feedback", ''),
+    RouteMeta("Credits", ''),
+  ];
   @override
   Widget build(BuildContext context) {
+    Institute? ins;
+    try {
+      ins = Provider.of<Auth>(context).user;
+    } catch (e) {}
     return SafeArea(
       child: Scaffold(
           key: _scaffoldKey,
           drawer: MediaQuery.of(context).size.width <= 1100
-              ? const AdminSideDrawer()
+              ? CustomDrawer(
+                  name: ins?.username ?? "loading",
+                  email: ins?.email ?? "loading",
+                  drawerItems: drawerItems,
+                )
               : null,
           backgroundColor: adminBackground,
           body: Row(
             children: [
               if (Responsive.isDesktop(context))
-                const Expanded(
-                  child: AdminSideDrawer(),
+                Expanded(
+                  child: CustomDrawer(
+                    name: ins?.username ?? "loading",
+                    email: ins?.email ?? "loading",
+                    drawerItems: drawerItems,
+                  ),
                 ),
               Expanded(
                 flex: 5,

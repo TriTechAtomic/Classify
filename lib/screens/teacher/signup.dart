@@ -100,7 +100,8 @@ class _TeacherSignupState extends State<TeacherSignup> {
                               Navigator.pushNamed(
                                   context, TeacherHome.routeName);
                             }
-                          : null,
+                          : () => Navigator.pushNamed(
+                              context, TeacherHome.routeName),
                     )
                   ],
                 ),

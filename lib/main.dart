@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import './screens/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'screens/admin/features/announcemet.dart';
 
 void main() => runApp(const MyApp());
@@ -41,9 +40,17 @@ class MyApp extends StatelessWidget {
           // role selection Screen
           RoleSelection.routeName: (context) => const RoleSelection(),
 
-          //For admin Home
+          //For admin
           ManageCourses.routeName: (context) => const ManageCourses(),
           Announcement.routeName: (context) => const Announcement(),
+
+          //For teachers
+          TeacherInstitutionPage.routeName: (context) =>
+              const TeacherInstitutionPage(),
+          StudentsAttendence.routeName: (context) => const StudentsAttendence(),
+
+          // For students
+          StudentStatus.routeName: (context) => const StudentStatus(),
         },
       ),
     );
@@ -69,8 +76,12 @@ class AuthValidator extends StatelessWidget {
               return StudentHome();
             } else if (role == "Parent") {
               return const ParentHome();
-            } else {
+            } else if (role == "Teacher") {
               return TeacherHome();
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(color: Colors.deepPurple),
+              );
             }
           } else {
             return const Signin();

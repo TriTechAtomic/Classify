@@ -1,9 +1,9 @@
 import 'package:classify/provider/authprovider.dart';
 import 'package:provider/provider.dart';
-
 import 'student_home_content.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/customdrawer.dart';
+import '../../../models/route_meta.dart';
 
 class StudentHome extends StatelessWidget {
   StudentHome({Key? key}) : super(key: key);
@@ -11,11 +11,11 @@ class StudentHome extends StatelessWidget {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
-  final List<String> drawerWidgets = [
-    "Rate us",
-    "Share",
-    "Contact us",
-    "Credits",
+  final List<RouteMeta> drawerWidgets = [
+    RouteMeta("Rate us", ''),
+    RouteMeta("Share", ''),
+    RouteMeta("Contact us", ''),
+    RouteMeta("Credits", ''),
   ];
 
   final String name = "Dummy Name",

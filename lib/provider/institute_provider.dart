@@ -46,7 +46,8 @@ class InstituteProvider with ChangeNotifier {
     return null;
   }
 
-  Future<String?> createTeacherInvite(String accessToken, int teacherId) async {
+  Future<String?> createTeacherInvite(
+      String accessToken, String username) async {
     var data = jsonDecode((await http.post(
       Uri.parse("${baseUrl}createTeacherInvite"),
       headers: {

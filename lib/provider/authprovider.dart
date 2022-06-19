@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:classify/utils/auth/consts.dart';
 import 'package:classify/utils/auth/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -12,7 +13,7 @@ class Auth with ChangeNotifier {
   String? role;
   SharedPreferences? prefs;
   var user;
-  String base = 'http://localhost:8000';
+  String base = baseUrl;
   Auth() {
     init();
   }
@@ -26,7 +27,7 @@ class Auth with ChangeNotifier {
   startRefreshingTheAccessToken() async {
     Timer.periodic(const Duration(seconds: 100), (t) async {
       http.Response res =
-          await http.get(Uri.parse(base + "/newaccesstoken"), headers: {
+          await http.get(Uri.parse(base + "newaccesstoken"), headers: {
         "token": refreshToken!,
       });
       var data = jsonDecode(res.body);
@@ -55,8 +56,8 @@ class Auth with ChangeNotifier {
   }
 
   getuserDetails() async {
-    http.Response res = await http.get(Uri.parse(base + "/userdetails"),
-        headers: {'token': accessToken!});
+    http.Response res = await http
+        .get(Uri.parse(base + "userdetails"), headers: {'token': accessToken!});
     if (res.statusCode == 200 && role != null) {
       if (role == 'Institute') {
         user = Institute.fromJson(jsonDecode(res.body));
@@ -70,7 +71,7 @@ class Auth with ChangeNotifier {
 
       notifyListeners();
     } else if (res.statusCode == 400) {
-      res = await http.get(Uri.parse(base + "/newaccesstoken"),
+      res = await http.get(Uri.parse(base + "newaccesstoken"),
           headers: {'token': refreshToken!});
       var newtokens = jsonDecode(res.body);
       prefs!.setString("accessToken", newtokens["access_token"]);

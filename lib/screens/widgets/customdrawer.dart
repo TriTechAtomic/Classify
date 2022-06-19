@@ -1,7 +1,7 @@
 import 'package:classify/screens/common/widgets.dart';
 import 'package:flutter/material.dart';
-
 import '../../assets/asset_register.dart';
+import '../../models/route_meta.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer(
@@ -10,8 +10,9 @@ class CustomDrawer extends StatefulWidget {
       required this.email,
       required this.drawerItems})
       : super(key: key);
+
   final String name, email;
-  final List<String> drawerItems;
+  final List<RouteMeta> drawerItems;
 
   @override
   State<CustomDrawer> createState() => CustomDrawerState();
@@ -27,37 +28,7 @@ class CustomDrawerState extends State<CustomDrawer> {
     return Drawer(
       child: Column(
         children: [
-          DrawerHeader(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 134,
-                        width: 134,
-                        child: Image.asset(AssetRegister.logoImg),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text(widget.name),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0, bottom: 10, top: 5),
-                  child: Text(
-                    widget.email,
-                    style: const TextStyle(fontSize: 12),
-                  ),
-                )
-              ],
-            ),
-          ),
+          CustomDrawerHeader(name: widget.name, email: widget.email),
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: ListTile(
@@ -98,60 +69,63 @@ class CustomDrawerState extends State<CustomDrawer> {
   }
 }
 
-class Draweritems extends StatelessWidget {
-  const Draweritems({Key? key, required this.listwidgets}) : super(key: key);
+class CustomDrawerHeader extends StatelessWidget {
+  const CustomDrawerHeader({Key? key, required this.name, required this.email})
+      : super(key: key);
 
-  final List<String> listwidgets;
+  final String name, email;
 
   @override
   Widget build(BuildContext context) {
-    void rateus() {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("RateUs"),
-        ),
-      );
-    }
+    return DrawerHeader(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 3,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 134,
+                  width: 134,
+                  child: Image.asset(AssetRegister.logoImg),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(name),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, bottom: 10, top: 5),
+            child: Text(
+              email,
+              style: const TextStyle(fontSize: 12),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
 
-    void share() {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Share"),
-        ),
-      );
-    }
+class Draweritems extends StatelessWidget {
+  const Draweritems({Key? key, required this.listwidgets}) : super(key: key);
 
-    void contactus() {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("ContactUs"),
-        ),
-      );
-    }
+  final List<RouteMeta> listwidgets;
 
-    void credits() {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Credits"),
-        ),
-      );
-    }
-
-    final List<VoidCallback> functions = [
-      rateus,
-      share,
-      contactus,
-      credits,
-    ];
-
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
-        for (int i = 0; i < 4; i++)
+        for (RouteMeta e in listwidgets)
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: ListTile(
-              title: Text(listwidgets[i]),
-              onTap: functions[i],
+              title: Text(e.MetaName),
+              onTap: () => Navigator.pushNamed(context, e.routeName),
             ),
           ),
         logoutButton(context)
