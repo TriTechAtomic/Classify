@@ -75,12 +75,18 @@ class DbController:
         return self.teacher.validate_user(data)
         
    
-
+    # get teacter with keysubjects
+    def get_teacher_with_keysubjects(self, teacher_id: int):
+        return self.teacher.get_teacher_with_keysubjects(teacher_id)
+    
 
     # institute ka sub teacher
     def get_all_teachers_in_institute(self,institute_id):
         return self.teacher.get_all_teachers_in_institute(institute_id)
     
+    def get_teacher_with_email(self, email: str):
+        return self.teacher.get_teacher_with_email(email)
+
     # teacher ka sub institute
     def get_all_teachers_institute(self,teacher_id): 
         return self.teacher.get_all_teachers_institute(teacher_id)

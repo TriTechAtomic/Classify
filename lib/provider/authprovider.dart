@@ -19,15 +19,12 @@ class Auth with ChangeNotifier {
 
   init() async {
     await getuserDataFromLocalStorage();
-    print(accessToken);
     startRefreshingTheAccessToken();
     notifyListeners();
   }
 
   startRefreshingTheAccessToken() async {
     Timer.periodic(const Duration(seconds: 100), (t) async {
-      print(t.tick);
-
       http.Response res =
           await http.get(Uri.parse(base + "/newaccesstoken"), headers: {
         "token": refreshToken!,
@@ -36,9 +33,14 @@ class Auth with ChangeNotifier {
       if (res.statusCode == 200) {
         accessToken = data['access_token'];
         refreshToken = data['refresh_token'];
-        prefs!.setString("accessToken", accessToken!);
-        prefs!.setString("refreshToken", refreshToken!);
-        print("access token refreshed");
+
+        for (var element in [
+          prefs!.setString("accessToken", accessToken!),
+          prefs!.setString("refreshToken", refreshToken!)
+        ]) {
+          await element;
+        }
+
         notifyListeners();
       }
     });
@@ -78,7 +80,8 @@ class Auth with ChangeNotifier {
     }
   }
 
-  logout() {
+  logout() async {
+    await prefs!.clear();
     accessToken = null;
     refreshToken = null;
     role = null;

@@ -22,8 +22,8 @@ class TeacherHome extends StatelessWidget {
     return Scaffold(
       drawer: MediaQuery.of(context).size.width < 1100
           ? CustomDrawer(
-              name: teach!.username,
-              email: teach.email,
+              name: teach?.username ?? "loading",
+              email: teach?.email ?? "loading",
               drawerItems: drawerWidgets,
             )
           : null,
@@ -46,13 +46,12 @@ class TeacherHome extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  flex: 1,
-                  child: CustomDrawer(
-                    name: "Dummy Name",
-                    email: "dummyemail@gmail.com",
-                    drawerItems: drawerWidgets,
-                  ),
-                ),
+                    flex: 1,
+                    child: CustomDrawer(
+                      name: teach?.username ?? "loading",
+                      email: teach?.email ?? "loading",
+                      drawerItems: drawerWidgets,
+                    )),
                 const Expanded(
                   flex: 5,
                   child: TeacherHomeContents(),

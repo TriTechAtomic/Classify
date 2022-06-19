@@ -1,17 +1,16 @@
 import 'dart:convert';
 
 import 'package:classify/provider/authprovider.dart';
+import 'package:classify/utils/auth/consts.dart';
 import 'package:http/http.dart' show post, Response;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ClassifyAuth<T> {
-  final String base = 'http://localhost:8000/';
-
   ClassifyAuth();
 
   Future<bool> signUp(T user) async {
-    String req = base + "signup" + user.runtimeType.toString();
+    String req = baseUrl + "signup" + user.runtimeType.toString();
     var response = await post(Uri.parse(req),
         headers: {'Content-Type': 'application/json'}, body: user.toString());
     if (response.statusCode == 200) {
@@ -28,7 +27,7 @@ class ClassifyAuth<T> {
       'password': password,
     });
 
-    var response = await post(Uri.parse(base + instance),
+    var response = await post(Uri.parse(baseUrl + instance),
         headers: {'Content-Type': 'application/json'}, body: body);
 
     if (response.statusCode == 200) {

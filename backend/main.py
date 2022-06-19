@@ -35,7 +35,7 @@ async def refresh_token(token: str = Header(None)):
  [X] Get User Details 
  [X] Enroll Teacher
  
- [] Create Course
+ [X] Create Course
  [] Enroll Student
 '''
 
@@ -137,6 +137,25 @@ async def create_teacher_invite(institute_id: int = Header(None), teacher_id: in
     else:
         raise HTTPException(status_code=400, detail="You are not an institute")
 
+@app.get("/get_teacher_with_keysubject",dependencies=[Depends(access_required)])
+async def get_teacher_with_keysubject(subject_name:str,token: str = Header(None)):
+    userdetails = access_required(token)
+    role = userdetails['role']
+    username = userdetails['username']
+    if role == "institute":
+        return dbCon.get_teacher_with_keysubject(subject_name)
+    else:
+        raise HTTPException(status_code=400, detail="You are not an institute")
+
+@app.get("/teacherWithEmail",dependencies=[Depends(access_required)])
+async def get_teacher_with_email(email:str,token: str = Header(None)):
+    userdetails = access_required(token)
+    role = userdetails['role']
+    username = userdetails['username']
+    if role == "institute":
+        return dbCon.get_teacher_with_email(email)
+    else:
+        raise HTTPException(status_code=400, detail="You are not an institute")
 
 
 @app.post("/joinInstitueAsTeacher",dependencies=[Depends(verify_invite_token) ,Depends(access_required)])

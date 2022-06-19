@@ -1,6 +1,5 @@
 import 'package:classify/provider/authprovider.dart';
 import 'package:classify/utils/auth/models/user.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../utils/colors.dart';

@@ -332,6 +332,21 @@ class TeacherData:
     def drop_all_tables(self):
         print("Dropping all tables")
         self.meta.drop_all(self.engine)
+    
+    #get teacher with key subject
+    def get_teacher_by_key_subject(self, key_subject:str):
+        print(f"Getting teacher by key subject {key_subject}")
+        # Select query using username
+        print(f"Validating user Data key subject {key_subject}")
+        #selecting where username is equal to the username in the data
+        sel = self.table.query().filter(self.table.c.key_subject.like(key_subject)).limit(20)
+        result = self.engine.execute(sel)
+        #fetching all the results
+        teachers = result.fetchall()
+        print(f"teachers {teachers}")
+        if teachers is None:
+            return "Teacher not found"
+        return teachers
 
 
     def validate_user(self, data:Signin):
@@ -354,6 +369,7 @@ class TeacherData:
             return True
         else:
             return False
+    
 
     def get_user_by_username(self, username:str):
         print(f"Getting user by username {username}")
