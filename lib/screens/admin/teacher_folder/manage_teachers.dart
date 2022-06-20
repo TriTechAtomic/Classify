@@ -1,3 +1,4 @@
+import 'package:classify/screens/admin/teacher_folder/invite_teacher.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,7 @@ class _ManageTeachersState extends State<ManageTeachers> {
             ),
             body: const TabBarView(children: [
               Scaffold(
-                backgroundColor: adminBackground,
+                body: InviteTeacher(),
               ),
               Scaffold(
                 backgroundColor: Colors.red,
