@@ -22,66 +22,71 @@ class _InviteTeacherState extends State<InviteTeacher> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: adminBackground,
+        backgroundColor: adminBackground,
         body: SizedBox(
-      height: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+          height: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.35,
-                    child: const TextField(
-                      decoration: InputDecoration(
-                        
-                        hintText: "Search By UserName",
-                        suffixIcon: Icon(Icons.search),
-                        
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.35,
+                        child: const TextField(
+                          decoration: InputDecoration(
+                            hintText: "Search By UserName",
+                            suffixIcon: Icon(Icons.search),
+                          ),
+                        ),
                       ),
-                    ),
+                      const SizedBox(
+                        width: 30,
+                      ),
+                      DropdownButton<String>(
+                        value: seletedSubject,
+                        hint: const Text("Search By Key Subject"),
+                        items: subjects
+                            .map((item) => DropdownMenuItem(
+                                  value: item,
+                                  child: Text(
+                                    item,
+                                    style: const TextStyle(),
+                                  ),
+                                ))
+                            .toList(),
+                        onChanged: (item) => setState(() {
+                          seletedSubject = item;
+                        }),
+                      ),
+                    ],
                   ),
                   const SizedBox(
-                    width: 30,
+                    height: 50,
                   ),
-                  DropdownButton<String>(
-                    value: seletedSubject,
-                    hint: const Text("Search By Key Subject"),
-                    items: subjects
-                        .map((item) => DropdownMenuItem(
-                              value: item,
-                              child: Text(
-                                item,
-                                style: const TextStyle(),
-                              ),
-                            ))
-                        .toList(),
-                    onChanged: (item) => setState(() {
-                      seletedSubject = item;
-                    }),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 100,
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkWell(
+                          hoverColor: accentColor,
+                          onTap: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    backgroundColor: Colors.green,
+                                    content: Text("opening profile")));
+                          },
+                          child: results("Akash", "25", "Phd", "Hindi"));
+                    },
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 50,
-              ),
-              
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: 100,
-                itemBuilder: (BuildContext context, int index) {
-                  return results("Akas", "25", "Phd", "Hindi");
-                },
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 
   Container results(String username, String experiance, String qualification,
@@ -90,7 +95,7 @@ class _InviteTeacherState extends State<InviteTeacher> {
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.white,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(5),
             border: Border.all(color: primaryColor)),
         child: Column(
@@ -130,10 +135,10 @@ class _InviteTeacherState extends State<InviteTeacher> {
               width: 130,
               color: primaryColor,
               textcolor: Colors.white,
-              callback: (){
+              callback: () {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          backgroundColor: Colors.green,
-          content: Text("Invite Sent Successfully")));
+                    backgroundColor: Colors.green,
+                    content: Text("Invite Sent Successfully")));
               },
             )
           ],
