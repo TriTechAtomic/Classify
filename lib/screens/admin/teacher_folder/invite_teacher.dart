@@ -22,6 +22,7 @@ class _InviteTeacherState extends State<InviteTeacher> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: adminBackground,
         body: SizedBox(
       height: double.infinity,
       child: Padding(
@@ -37,14 +38,10 @@ class _InviteTeacherState extends State<InviteTeacher> {
                     width: MediaQuery.of(context).size.width * 0.35,
                     child: const TextField(
                       decoration: InputDecoration(
-                        // fillColor: Colors.white,
-                        // filled: true,
+                        
                         hintText: "Search By UserName",
                         suffixIcon: Icon(Icons.search),
-                        // border: OutlineInputBorder(
-                        //     borderRadius: BorderRadius.circular(10),
-                        //     borderSide:
-                        //         const BorderSide(color: adminBackground)),
+                        
                       ),
                     ),
                   ),
@@ -69,16 +66,17 @@ class _InviteTeacherState extends State<InviteTeacher> {
                   ),
                 ],
               ),
-              // const TeacherSearchResult(
-              //     username: "Akash",
-              //     experiance: "25",
-              //     qualification: "P.Hd",
-              //     keySubject: "Quatum Physics")
               const SizedBox(
                 height: 50,
               ),
-              for (int i = 0; i <= 100; i++)
-                results("Akash", "25", "Phd", "Hindi")
+              
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: 100,
+                itemBuilder: (BuildContext context, int index) {
+                  return results("Akas", "25", "Phd", "Hindi");
+                },
+              ),
             ],
           ),
         ),
@@ -92,6 +90,7 @@ class _InviteTeacherState extends State<InviteTeacher> {
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
+          color: Colors.white,
             borderRadius: BorderRadius.circular(5),
             border: Border.all(color: primaryColor)),
         child: Column(
