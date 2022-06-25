@@ -1,3 +1,4 @@
+import 'package:classify/screens/admin/teacher_folder/teacher_profile.dart';
 import 'package:classify/utils/buttons.dart';
 import 'package:classify/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -74,12 +75,10 @@ class _InviteTeacherState extends State<InviteTeacher> {
                       return InkWell(
                           hoverColor: accentColor,
                           onTap: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    backgroundColor: Colors.green,
-                                    content: Text("opening profile")));
+                            Navigator.pushNamed(
+                                context, TeacherProfile.routeName);
                           },
-                          child: results("Akash", "25", "Phd", "Hindi"));
+                          child: results("Akash", "25", "Phd", "Quatum Physics"));
                     },
                   ),
                 ],

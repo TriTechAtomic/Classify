@@ -1,5 +1,6 @@
 import 'package:classify/provider/authprovider.dart';
 import 'package:classify/screens/admin/admission/student_account.dart';
+import 'package:classify/screens/admin/teacher_folder/teacher_profile.dart';
 import 'package:classify/screens/admin/timetable/create_TimeTable.dart';
 import 'package:classify/screens/admin/features/manage_students.dart';
 import 'package:classify/screens/admin/teacher_folder/manage_teachers.dart';
@@ -56,8 +57,9 @@ class MyApp extends StatelessWidget {
           ManageTeachers.routeName: (context) => const ManageTeachers(),
           TeacherAttendence.routeName: (context) => const TeacherAttendence(),
           StudentAccount.routeName: (context) => const StudentAccount(),
-          TimeTables.routeName:(context) => const TimeTables(),
-          CreateTimeTable.routeName:(context) =>  const CreateTimeTable(),
+          TimeTables.routeName: (context) => const TimeTables(),
+          CreateTimeTable.routeName: (context) => const CreateTimeTable(),
+          TeacherProfile.routeName: (context) => const TeacherProfile(),
         },
       ),
     );
